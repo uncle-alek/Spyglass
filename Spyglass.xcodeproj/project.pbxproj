@@ -16,6 +16,7 @@
 		3C81E6C6288E777C003B9836 /* SpyglassUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6C5288E777C003B9836 /* SpyglassUITestsLaunchTests.swift */; };
 		3C81E6D4288E9411003B9836 /* LensInterfaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6D3288E9411003B9836 /* LensInterfaceView.swift */; };
 		3C81E6D7288E95A1003B9836 /* TAGAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6D6288E95A1003B9836 /* TAGAView.swift */; };
+		3C81E6DA288E9D2C003B9836 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 3C81E6D9288E9D2C003B9836 /* Vapor */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C81E6DA288E9D2C003B9836 /* Vapor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +169,9 @@
 			dependencies = (
 			);
 			name = Spyglass;
+			packageProductDependencies = (
+				3C81E6D9288E9D2C003B9836 /* Vapor */,
+			);
 			productName = Spyglass;
 			productReference = 3C81E6A4288E777B003B9836 /* Spyglass.app */;
 			productType = "com.apple.product-type.application";
@@ -239,6 +244,9 @@
 				Base,
 			);
 			mainGroup = 3C81E69B288E777B003B9836;
+			packageReferences = (
+				3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */,
+			);
 			productRefGroup = 3C81E6A5288E777B003B9836 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -594,6 +602,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/vapor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C81E6D9288E9D2C003B9836 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */;
+			productName = Vapor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3C81E69C288E777B003B9836 /* Project object */;
 }
