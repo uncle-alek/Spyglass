@@ -20,6 +20,8 @@
 		3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DB288E9E97003B9836 /* LensLoader.swift */; };
 		3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DD288E9EED003B9836 /* LensBuilder.swift */; };
 		3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DF288E9F4B003B9836 /* Lens.swift */; };
+		3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6E1288EA42F003B9836 /* Spyglass.swift */; };
+		3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6E3288EA520003B9836 /* WebsocketServer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		3C81E6DB288E9E97003B9836 /* LensLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensLoader.swift; sourceTree = "<group>"; };
 		3C81E6DD288E9EED003B9836 /* LensBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensBuilder.swift; sourceTree = "<group>"; };
 		3C81E6DF288E9F4B003B9836 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
+		3C81E6E1288EA42F003B9836 /* Spyglass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spyglass.swift; sourceTree = "<group>"; };
+		3C81E6E3288EA520003B9836 /* WebsocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsocketServer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 		3C81E6A6288E777B003B9836 /* Spyglass */ = {
 			isa = PBXGroup;
 			children = (
+				3C81E6E1288EA42F003B9836 /* Spyglass.swift */,
+				3C81E6E3288EA520003B9836 /* WebsocketServer.swift */,
 				3C81E6DB288E9E97003B9836 /* LensLoader.swift */,
 				3C81E6A7288E777B003B9836 /* SpyglassApp.swift */,
 				3C81E6A9288E777B003B9836 /* ContentView.swift */,
@@ -301,10 +307,12 @@
 				3C81E6D7288E95A1003B9836 /* TAGAView.swift in Sources */,
 				3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */,
 				3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */,
+				3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */,
 				3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
+				3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

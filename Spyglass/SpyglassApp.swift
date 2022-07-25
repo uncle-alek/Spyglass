@@ -12,6 +12,7 @@ struct SpyglassApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear(perform: Spyglass.run)
         }
     }
 }
