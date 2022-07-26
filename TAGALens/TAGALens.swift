@@ -23,8 +23,6 @@ final class TAGALens: Lens {
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
             column3: .init(name: "Payload"),
-            column4: .init(name: "State Before"),
-            column5: .init(name: "State After"),
             rows: []
         )
         tableSubject.send(table)
@@ -43,15 +41,11 @@ final class TAGALens: Lens {
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
             column3: .init(name: "Payload"),
-            column4: .init(name: "State Before"),
-            column5: .init(name: "State After"),
             rows: values.map {
                 .init(
                     info1: $0.1.name,
                     info2: $0.1.timestamp.toString(),
                     info3: $0.1.payload,
-                    info4: "stateBefore",
-                    info5: "stateAfter",
                     id: $0.0
                 )
             }
