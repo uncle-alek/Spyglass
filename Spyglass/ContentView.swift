@@ -51,14 +51,24 @@ struct JSONView: View {
                 ForEach(items) { item in
                     DisclosureGroup(item.name) {
                         OutlineGroup(item, children:\.childrens) { child in
-                            if child.data.isEmpty {
-                                NavigationLink(
-                                    destination: TextView(text: child.name)
-                                ) {
-                                    Text(child.name)
+                            if let value = child.value {
+                                switch value {
+                                case .primitive(let data):
+                                    NavigationLink(
+                                        destination: PrimitiveView(text: data)
+                                    ) {
+                                        Text(child.name)
+                                    }
+                                case .array(let array):
+                                    NavigationLink(
+                                        destination: ArrayView(text: array)
+                                    ) {
+                                        Text(child.name)
+                                    }
                                 }
+                            } else {
+                                Text(child.name)
                             }
-                            Text(child.name)
                         }
                     }
                 }
@@ -67,11 +77,20 @@ struct JSONView: View {
     }
 }
 
-struct TextView: View {
+struct PrimitiveView: View {
     
     @State var text: String
     
     var body: some View {
         TextEditor(text: $text)
+    }
+}
+
+struct ArrayView: View {
+    
+    @State var text: [String]
+    
+    var body: some View {
+        PrimitiveView(text: text.reduce("", { $0 + "\n" + $1}))
     }
 }

@@ -43,12 +43,18 @@ enum LensView {
 
     struct TabView {
         
+        enum Value {
+            case primitive(String)
+            case array([String])
+        }
+        
         struct Content: Identifiable {
             let id = UUID()
             let name: String
-            let data: [String]
+            let value: Value?
             let childrens: [Content]?
         }
+
         
         struct Tab {
             let name: String
@@ -68,57 +74,101 @@ enum LensView {
 
 var recursiveContent = [LensView.TabView.Content(
     name: "appState",
-    data: [],
+    value: nil,
     childrens: [
         .init(
             name: "bookingCriteria",
-            data: [
-                "roomName: My favorite room",
-                "hotelName: Gooood hotel"
-            ],
-            childrens: nil
+            value: nil,
+            childrens: [
+                .init(
+                    name: "roomName",
+                    value: .primitive("My favorite room"),
+                    childrens: nil
+                ),
+                .init(
+                    name: "hotelName",
+                    value: .primitive("Gooood hotel"),
+                    childrens: nil
+                )
+            ]
         ),
         .init(
             name: "appMetadata",
-            data: [
-                "languageId: 1234",
-                "device: iPhone",
-                "currency: USD"
-            ],
-            childrens: nil
+            value: nil,
+            childrens: [
+                .init(
+                    name: "languageId",
+                    value: .primitive("1234"),
+                    childrens: nil
+                ),
+                .init(
+                    name: "device",
+                    value: .primitive("iPhone"),
+                    childrens: nil
+                ),
+                .init(
+                    name: "currency",
+                    value: .primitive("USD"),
+                    childrens: nil
+                )
+            ]
         ),
         .init(
             name: "cartState",
-            data: [],
+            value: nil,
             childrens: [
                 .init(
                     name: "cartAddItemsResult",
-                    data: [],
+                    value: nil,
                     childrens: [
                         .init(
                             name: "cartSummary",
-                            data: [
-                                "totalItems: 0",
-                                "activeItems: 2",
-                                "bookedItems: 3",
-                                "inactiveItems: 2"
-                            ],
-                            childrens: nil
+                            value: nil,
+                            childrens: [
+                                .init(
+                                    name: "totalItems",
+                                    value: .primitive("0"),
+                                    childrens: nil
+                                ),
+                                .init(
+                                    name: "activeItems",
+                                    value: .primitive("2"),
+                                    childrens: nil
+                                ),
+                                .init(
+                                    name: "bookedItems",
+                                    value: .primitive("3"),
+                                    childrens: nil
+                                ),
+                                .init(
+                                    name: "langinactiveItemsuageId",
+                                    value: .primitive("2"),
+                                    childrens: nil
+                                )
+                            ]
                         )
                     ]
                 ),
                 .init(
                     name: "selectedRoom",
-                    data: [
-                        "masterRoomName: Masterrr room",
-                        "masterRoomNameEnglish: English name masterrrr room"
-                    ],
-                    childrens: nil
+                    value: nil,
+                    childrens: [
+                        .init(
+                            name: "masterRoomName",
+                            value: .primitive("Masterrr room"),
+                            childrens: nil
+                        ),
+                        .init(
+                            name: "masterRoomNameEnglish",
+                            value: .primitive("English name masterrrr room"),
+                            childrens: nil
+                        )
+                    ]
                 ),
                 .init(
                     name: "searchResult",
-                    data: [],
-                    childrens: []
+                    value: .array(["Moscow", "Bangkok", "London"]),
+                    childrens: nil
                 )
             ]
         )
