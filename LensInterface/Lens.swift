@@ -11,8 +11,10 @@ import Foundation
 protocol Lens {
     
     var connectionPath: String { get }
-    var viewPublisher: AnyPublisher<TableView4, Never> { get }
+    var tablePublisher: AnyPublisher<LensView.TableView, Never> { get }
+    var tabPublisher: AnyPublisher<LensView.TabView, Never> { get }
     
     func setup()
-    func loop(with value: String)
+    func receive(_ value: String)
+    func selectItem(with id: UUID)
 }

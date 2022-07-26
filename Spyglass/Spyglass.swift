@@ -12,21 +12,28 @@ final class Spyglass {
         
     static let lens = TAGALensBuilder().build()
     static let viewStore = ViewStore()
-    static var cancellable: AnyCancellable?
-        
+    static var tableCancellable: AnyCancellable?
+    static var tabCancellable: AnyCancellable?
+
     static func run() {
                 
-        cancellable = lens.viewPublisher.sink { tableView in
+        tableCancellable = lens.tablePublisher.sink { tableView in
             DispatchQueue.main.async {
                 viewStore.tableView = tableView
             }
         }
+        tabCancellable = lens.tabPublisher.sink { tabView in
+            DispatchQueue.main.async {
+                viewStore.tabView = tabView
+            }
+        }
+        viewStore.select = { $0.map(lens.selectItem(with:)) } 
         
         lens.setup()
         
         let webSocket = WebSocketServer(
             sockets: [
-                (lens.connectionPath, lens.loop(with:))
+                (lens.connectionPath, lens.receive(_:))
             ]
         )
         
@@ -38,5 +45,7 @@ final class Spyglass {
 
 final class ViewStore: ObservableObject {
     
-    @Published var tableView: TableView4 = .default
+    @Published var tableView: LensView.TableView = .default
+    @Published var tabView: LensView.TabView = .default
+    var select: (UUID?) -> Void = {_ in }
 }
