@@ -47,26 +47,24 @@ struct JSONView: View {
         NavigationView{
             List{
                 ForEach(items) { item in
-                    DisclosureGroup(item.name) {
-                        OutlineGroup(item, children:\.childrens) { child in
-                            if let value = child.value {
-                                switch value {
-                                case .primitive(let data):
-                                    NavigationLink(
-                                        destination: PrimitiveView(text: data)
-                                    ) {
-                                        Text(child.name)
-                                    }
-                                case .array(let array):
-                                    NavigationLink(
-                                        destination: ArrayView(text: array)
-                                    ) {
-                                        Text(child.name)
-                                    }
+                    OutlineGroup(item, children:\.childrens) { child in
+                        if let value = child.value {
+                            switch value {
+                            case .primitive(let data):
+                                NavigationLink(
+                                    destination: PrimitiveView(text: data)
+                                ) {
+                                    Text(child.name)
                                 }
-                            } else {
-                                Text(child.name)
+                            case .array(let array):
+                                NavigationLink(
+                                    destination: ArrayView(text: array)
+                                ) {
+                                    Text(child.name)
+                                }
                             }
+                        } else {
+                            Text(child.name)
                         }
                     }
                 }
@@ -89,6 +87,10 @@ struct ArrayView: View {
     @State var text: [String]
     
     var body: some View {
-        PrimitiveView(text: text.reduce("", { $0 + "\n" + $1}))
+        if text.isEmpty {
+            Text("empty list....")
+        } else {
+            PrimitiveView(text: text.reduce("", { $0 + "\n" + $1}))
+        }
     }
 }
