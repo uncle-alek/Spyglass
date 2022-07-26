@@ -28,15 +28,50 @@ struct ContentView: View {
             }
             
             TabView {
-                Text(viewStore.tabView.tab1.content)
+                JSONView()
                     .tabItem { Text(viewStore.tabView.tab1.name) }
 
-                Text(viewStore.tabView.tab2.content)
+                JSONView()
                     .tabItem { Text(viewStore.tabView.tab2.name) }
 
-                Text(viewStore.tabView.tab3.content)
+                JSONView()
                     .tabItem { Text(viewStore.tabView.tab3.name) }
             }
         }
+    }
+}
+
+struct JSONView: View {
+    
+    let items = recursiveContent
+
+    var body: some View {
+        NavigationView{
+            List{
+                ForEach(items) { item in
+                    DisclosureGroup(item.name) {
+                        OutlineGroup(item, children:\.childrens) { child in
+                            if child.data.isEmpty {
+                                NavigationLink(
+                                    destination: TextView(text: child.name)
+                                ) {
+                                    Text(child.name)
+                                }
+                            }
+                            Text(child.name)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct TextView: View {
+    
+    @State var text: String
+    
+    var body: some View {
+        TextEditor(text: $text)
     }
 }

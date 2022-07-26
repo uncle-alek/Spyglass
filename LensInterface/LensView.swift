@@ -42,6 +42,14 @@ enum LensView {
     }
 
     struct TabView {
+        
+        struct Content: Identifiable {
+            let id = UUID()
+            let name: String
+            let data: [String]
+            let childrens: [Content]?
+        }
+        
         struct Tab {
             let name: String
             let content: String
@@ -57,3 +65,62 @@ enum LensView {
         )
     }
 }
+
+var recursiveContent = [LensView.TabView.Content(
+    name: "appState",
+    data: [],
+    childrens: [
+        .init(
+            name: "bookingCriteria",
+            data: [
+                "roomName: My favorite room",
+                "hotelName: Gooood hotel"
+            ],
+            childrens: nil
+        ),
+        .init(
+            name: "appMetadata",
+            data: [
+                "languageId: 1234",
+                "device: iPhone",
+                "currency: USD"
+            ],
+            childrens: nil
+        ),
+        .init(
+            name: "cartState",
+            data: [],
+            childrens: [
+                .init(
+                    name: "cartAddItemsResult",
+                    data: [],
+                    childrens: [
+                        .init(
+                            name: "cartSummary",
+                            data: [
+                                "totalItems: 0",
+                                "activeItems: 2",
+                                "bookedItems: 3",
+                                "inactiveItems: 2"
+                            ],
+                            childrens: nil
+                        )
+                    ]
+                ),
+                .init(
+                    name: "selectedRoom",
+                    data: [
+                        "masterRoomName: Masterrr room",
+                        "masterRoomNameEnglish: English name masterrrr room"
+                    ],
+                    childrens: nil
+                ),
+                .init(
+                    name: "searchResult",
+                    data: [],
+                    childrens: []
+                )
+            ]
+        )
+    ]
+)]
