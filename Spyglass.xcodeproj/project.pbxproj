@@ -15,13 +15,14 @@
 		3C81E6C4288E777C003B9836 /* SpyglassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6C3288E777C003B9836 /* SpyglassUITests.swift */; };
 		3C81E6C6288E777C003B9836 /* SpyglassUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6C5288E777C003B9836 /* SpyglassUITestsLaunchTests.swift */; };
 		3C81E6D4288E9411003B9836 /* LensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6D3288E9411003B9836 /* LensView.swift */; };
-		3C81E6D7288E95A1003B9836 /* TAGAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6D6288E95A1003B9836 /* TAGAView.swift */; };
 		3C81E6DA288E9D2C003B9836 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 3C81E6D9288E9D2C003B9836 /* Vapor */; };
 		3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DB288E9E97003B9836 /* LensLoader.swift */; };
 		3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DD288E9EED003B9836 /* LensBuilder.swift */; };
 		3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DF288E9F4B003B9836 /* Lens.swift */; };
 		3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6E1288EA42F003B9836 /* Spyglass.swift */; };
 		3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6E3288EA520003B9836 /* WebsocketServer.swift */; };
+		3CD39FAD288EDB5C008A6E7B /* TAGALensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */; };
+		3CD39FAF288EDB78008A6E7B /* TAGALens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAE288EDB78008A6E7B /* TAGALens.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,12 +55,13 @@
 		3C81E6C3288E777C003B9836 /* SpyglassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassUITests.swift; sourceTree = "<group>"; };
 		3C81E6C5288E777C003B9836 /* SpyglassUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3C81E6D3288E9411003B9836 /* LensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensView.swift; sourceTree = "<group>"; };
-		3C81E6D6288E95A1003B9836 /* TAGAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAGAView.swift; sourceTree = "<group>"; };
 		3C81E6DB288E9E97003B9836 /* LensLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensLoader.swift; sourceTree = "<group>"; };
 		3C81E6DD288E9EED003B9836 /* LensBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensBuilder.swift; sourceTree = "<group>"; };
 		3C81E6DF288E9F4B003B9836 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
 		3C81E6E1288EA42F003B9836 /* Spyglass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spyglass.swift; sourceTree = "<group>"; };
 		3C81E6E3288EA520003B9836 /* WebsocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsocketServer.swift; sourceTree = "<group>"; };
+		3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAGALensBuilder.swift; sourceTree = "<group>"; };
+		3CD39FAE288EDB78008A6E7B /* TAGALens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAGALens.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +165,8 @@
 		3C81E6D5288E958D003B9836 /* TAGALens */ = {
 			isa = PBXGroup;
 			children = (
-				3C81E6D6288E95A1003B9836 /* TAGAView.swift */,
+				3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */,
+				3CD39FAE288EDB78008A6E7B /* TAGALens.swift */,
 			);
 			path = TAGALens;
 			sourceTree = "<group>";
@@ -304,11 +307,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C81E6D7288E95A1003B9836 /* TAGAView.swift in Sources */,
+				3CD39FAD288EDB5C008A6E7B /* TAGALensBuilder.swift in Sources */,
 				3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */,
 				3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */,
 				3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */,
 				3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */,
+				3CD39FAF288EDB78008A6E7B /* TAGALens.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,

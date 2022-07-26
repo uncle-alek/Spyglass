@@ -22,7 +22,7 @@ final class WebSocketServer {
         var env = try! Environment.detect()
         try! LoggingSystem.bootstrap(from: &env)
         let app = Application(env)
-        app.http.server.configuration.hostname = getIPAddress()!
+//        app.http.server.configuration.hostname = getIPAddress()!
         app.http.server.configuration.port = 3001
         defer { app.shutdown() }
         sockets.forEach { (socketName: String, callback: @escaping (String) -> Void) in
@@ -30,7 +30,9 @@ final class WebSocketServer {
                 ws.onText { ws, text in
                     callback(text)
                 }
-                
+                ws.onClose.whenComplete { _ in
+                    print("Web socket disconnected from server")
+                }
                 print("Web socket connected to server")
             }
         }

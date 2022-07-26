@@ -26,4 +26,12 @@ struct TableView4 {
     let column3: Column
     let column4: Column
     let rows: [Row]
+    
+    static let `default` = TableView4(
+        column1: .init(name: ""),
+        column2: .init(name: ""),
+        column3: .init(name: ""),
+        column4: .init(name: ""),
+        rows: []
+    )
 }
