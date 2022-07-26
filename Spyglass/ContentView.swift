@@ -28,13 +28,13 @@ struct ContentView: View {
             }
             
             TabView {
-                JSONView()
+                JSONView(items: viewStore.tabView.tab1.content)
                     .tabItem { Text(viewStore.tabView.tab1.name) }
 
-                JSONView()
+                JSONView(items: viewStore.tabView.tab2.content)
                     .tabItem { Text(viewStore.tabView.tab2.name) }
 
-                JSONView()
+                JSONView(items: viewStore.tabView.tab3.content)
                     .tabItem { Text(viewStore.tabView.tab3.name) }
             }
         }
@@ -43,7 +43,7 @@ struct ContentView: View {
 
 struct JSONView: View {
     
-    let items = recursiveContent
+    let items: [LensView.TabView.Content]
 
     var body: some View {
         NavigationView{

@@ -29,9 +29,9 @@ final class TAGALens: Lens {
         )
         tableSubject.send(table)
         let tab = LensView.TabView(
-            tab1: .init(name: "State Before", content: ""),
-            tab2: .init(name: "State After", content: ""),
-            tab3: .init(name: "Diff", content: "")
+            tab1: .init(name: "State Before", content: []),
+            tab2: .init(name: "State After", content: []),
+            tab3: .init(name: "Diff", content: [])
         )
         tabSubject.send(tab)
     }
@@ -50,8 +50,8 @@ final class TAGALens: Lens {
                     info1: $0.1.name,
                     info2: $0.1.timestamp.toString(),
                     info3: $0.1.payload,
-                    info4: $0.1.stateBefore,
-                    info5: $0.1.stateAfter,
+                    info4: "stateBefore",
+                    info5: "stateAfter",
                     id: $0.0
                 )
             }
@@ -62,9 +62,9 @@ final class TAGALens: Lens {
     func selectItem(with id: UUID) {
         guard let value = values.first(where: { $0.0 == id }) else { return }
         let tab = LensView.TabView(
-            tab1: .init(name: "State Before", content: value.1.stateBefore),
-            tab2: .init(name: "State After", content: value.1.stateAfter),
-            tab3: .init(name: "Diff", content: "Here will be diff")
+            tab1: .init(name: "State Before", content: map(value.1.stateBefore)),
+            tab2: .init(name: "State After", content: map(value.1.stateAfter)),
+            tab3: .init(name: "Diff", content: [])
         )
         tabSubject.send(tab)
     }
@@ -75,6 +75,40 @@ extension TAGALens {
     func parse(_ value: String) -> TAGAAction {
         let data = value.data(using: .utf8)!
         return try! JSONDecoder().decode(TAGAAction.self, from: data)
+    }
+    
+    func map(_ dict: [String: Any]) -> [LensView.TabView.Content] {
+        var contents: [LensView.TabView.Content] = []
+        for (key, value) in dict {
+            var childrens: [LensView.TabView.Content]? = nil
+            var contentValue: LensView.TabView.Value? = nil
+            if let value = value as? [String: Any] {
+                childrens = map(value)
+            } else if let value = value as? [Any] {
+                contentValue = .array(value.compactMap(map(primitive:)))
+            } else {
+                contentValue = .primitive(map(primitive:value))
+            }
+            contents.append(
+                LensView.TabView.Content(
+                    name: key,
+                    value: contentValue,
+                    childrens: childrens
+                )
+            )
+        }
+        return contents
+    }
+    
+    func map(primitive: Any) -> String {
+        if let value = primitive as? Int {
+           return String(value)
+        } else if let value = primitive as? String {
+           return String(value)
+        } else if let value = primitive as? Bool {
+           return String(value)
+        }
+        fatalError()
     }
 }
 

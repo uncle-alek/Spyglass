@@ -53,124 +53,26 @@ enum LensView {
             let name: String
             let value: Value?
             let childrens: [Content]?
+            
+            static let `default` = Content(
+                name: "",
+                value: nil,
+                childrens: nil
+            )
         }
-
         
         struct Tab {
             let name: String
-            let content: String
+            let content: [Content]
         }
         let tab1: Tab
         let tab2: Tab
         let tab3: Tab
         
         static let `default` = TabView(
-            tab1: .init(name: "", content: ""),
-            tab2: .init(name: "", content: ""),
-            tab3: .init(name: "", content: "")
+            tab1: .init(name: "", content: []),
+            tab2: .init(name: "", content: []),
+            tab3: .init(name: "", content: [])
         )
     }
 }
-
-var recursiveContent = [LensView.TabView.Content(
-    name: "appState",
-    value: nil,
-    childrens: [
-        .init(
-            name: "bookingCriteria",
-            value: nil,
-            childrens: [
-                .init(
-                    name: "roomName",
-                    value: .primitive("My favorite room"),
-                    childrens: nil
-                ),
-                .init(
-                    name: "hotelName",
-                    value: .primitive("Gooood hotel"),
-                    childrens: nil
-                )
-            ]
-        ),
-        .init(
-            name: "appMetadata",
-            value: nil,
-            childrens: [
-                .init(
-                    name: "languageId",
-                    value: .primitive("1234"),
-                    childrens: nil
-                ),
-                .init(
-                    name: "device",
-                    value: .primitive("iPhone"),
-                    childrens: nil
-                ),
-                .init(
-                    name: "currency",
-                    value: .primitive("USD"),
-                    childrens: nil
-                )
-            ]
-        ),
-        .init(
-            name: "cartState",
-            value: nil,
-            childrens: [
-                .init(
-                    name: "cartAddItemsResult",
-                    value: nil,
-                    childrens: [
-                        .init(
-                            name: "cartSummary",
-                            value: nil,
-                            childrens: [
-                                .init(
-                                    name: "totalItems",
-                                    value: .primitive("0"),
-                                    childrens: nil
-                                ),
-                                .init(
-                                    name: "activeItems",
-                                    value: .primitive("2"),
-                                    childrens: nil
-                                ),
-                                .init(
-                                    name: "bookedItems",
-                                    value: .primitive("3"),
-                                    childrens: nil
-                                ),
-                                .init(
-                                    name: "langinactiveItemsuageId",
-                                    value: .primitive("2"),
-                                    childrens: nil
-                                )
-                            ]
-                        )
-                    ]
-                ),
-                .init(
-                    name: "selectedRoom",
-                    value: nil,
-                    childrens: [
-                        .init(
-                            name: "masterRoomName",
-                            value: .primitive("Masterrr room"),
-                            childrens: nil
-                        ),
-                        .init(
-                            name: "masterRoomNameEnglish",
-                            value: .primitive("English name masterrrr room"),
-                            childrens: nil
-                        )
-                    ]
-                ),
-                .init(
-                    name: "searchResult",
-                    value: .array(["Moscow", "Bangkok", "London"]),
-                    childrens: nil
-                )
-            ]
-        )
-    ]
-)]
