@@ -42,31 +42,34 @@ enum LensView {
             case array([String])
         }
         
-        struct Content: Identifiable {
+        struct TreeNode: Identifiable {
             let id = UUID()
             let name: String
             let value: Value?
-            let childrens: [Content]?
+            let childrens: [TreeNode]?
             
-            static let `default` = Content(
+            static let `default` = TreeNode(
                 name: "",
                 value: nil,
                 childrens: nil
             )
         }
         
-        struct Tab {
-            let name: String
-            let content: [Content]
+        enum Content {
+            case string(String)
+            case tree([TreeNode])
         }
-        let tab1: Tab
-        let tab2: Tab
-        let tab3: Tab
+        
+        struct Tab: Identifiable {
+            let id = UUID()
+            let name: String
+            let content: Content
+        }
+        
+        let tabs: [Tab]
         
         static let `default` = TabView(
-            tab1: .init(name: "", content: []),
-            tab2: .init(name: "", content: []),
-            tab3: .init(name: "", content: [])
+            tabs: []
         )
     }
 }

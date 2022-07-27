@@ -26,14 +26,17 @@ struct ContentView: View {
             }
             
             TabView {
-                JSONView(items: viewStore.tabView.tab1.content)
-                    .tabItem { Text(viewStore.tabView.tab1.name) }
-
-                JSONView(items: viewStore.tabView.tab2.content)
-                    .tabItem { Text(viewStore.tabView.tab2.name) }
-
-                JSONView(items: viewStore.tabView.tab3.content)
-                    .tabItem { Text(viewStore.tabView.tab3.name) }
+                ForEach(viewStore.tabView.tabs) { tab in
+                    Group {
+                        switch tab.content {
+                        case .string(let text):
+                            PrimitiveView(text: text)
+                        case .tree(let tree):
+                            JSONView(items: tree)
+                        }
+                    }
+                    .tabItem { Text(tab.name) }
+                }
             }
         }
     }
@@ -41,7 +44,7 @@ struct ContentView: View {
 
 struct JSONView: View {
     
-    let items: [LensView.TabView.Content]
+    let items: [LensView.TabView.TreeNode]
 
     var body: some View {
         NavigationView{

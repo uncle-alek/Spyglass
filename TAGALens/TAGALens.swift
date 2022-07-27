@@ -27,9 +27,11 @@ final class TAGALens: Lens {
         )
         tableSubject.send(table)
         let tab = LensView.TabView(
-            tab1: .init(name: "State Before", content: []),
-            tab2: .init(name: "State After", content: []),
-            tab3: .init(name: "Diff", content: [])
+            tabs: [
+                .init(name: "State Before", content: .string("")),
+                .init(name: "State After", content: .string("")),
+                .init(name: "Diff", content: .string(""))
+            ]
         )
         tabSubject.send(tab)
     }
@@ -56,9 +58,11 @@ final class TAGALens: Lens {
     func selectItem(with id: UUID) {
         guard let value = values.first(where: { $0.0 == id }) else { return }
         let tab = LensView.TabView(
-            tab1: .init(name: "State Before", content: map(value.1.stateBefore)),
-            tab2: .init(name: "State After", content: map(value.1.stateAfter)),
-            tab3: .init(name: "Diff", content: [])
+            tabs: [
+                .init(name: "State Before", content: .tree(map(value.1.stateBefore))),
+                .init(name: "State After", content: .tree(map(value.1.stateAfter))),
+                .init(name: "Diff", content: .string(""))
+            ]
         )
         tabSubject.send(tab)
     }
@@ -71,10 +75,10 @@ extension TAGALens {
         return try! JSONDecoder().decode(TAGAAction.self, from: data)
     }
     
-    func map(_ dict: [String: Any]) -> [LensView.TabView.Content] {
-        var contents: [LensView.TabView.Content] = []
+    func map(_ dict: [String: Any]) -> [LensView.TabView.TreeNode] {
+        var contents: [LensView.TabView.TreeNode] = []
         for (key, value) in dict {
-            var childrens: [LensView.TabView.Content]? = nil
+            var childrens: [LensView.TabView.TreeNode]? = nil
             var contentValue: LensView.TabView.Value? = nil
             if let value = value as? [String: Any] {
                 childrens = map(value)
@@ -84,7 +88,7 @@ extension TAGALens {
                 contentValue = .primitive(map(primitive:value))
             }
             contents.append(
-                LensView.TabView.Content(
+                LensView.TabView.TreeNode(
                     name: key,
                     value: contentValue,
                     childrens: childrens
