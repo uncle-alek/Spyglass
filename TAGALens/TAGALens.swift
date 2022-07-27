@@ -15,7 +15,7 @@ final class TAGALens: Lens {
     var tabPublisher: AnyPublisher<LensView.TabView, Never> { tabSubject.eraseToAnyPublisher() }
     var connectionPath: String { "taga" }
     
-    private var values: [(UUID, TAGAAction)] = []
+    private var actions: [(UUID, TAGAAction)] = []
     private let tableSubject = PassthroughSubject<LensView.TableView, Never>()
     private let tabSubject = PassthroughSubject<LensView.TabView, Never>()
 
@@ -39,30 +39,23 @@ final class TAGALens: Lens {
     
     func receive(_ value: String) {
         let action = parse(value)
-        values.append((UUID(), action))
+        actions.append((UUID(), action))
         let table = LensView.TableView(
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
             column3: .init(name: "Payload"),
-            rows: values.map {
-                .init(
-                    info1: $0.1.name,
-                    info2: $0.1.timestamp.toString(),
-                    info3: $0.1.payload,
-                    id: $0.0
-                )
-            }
+            rows: map(actions: actions)
         )
         tableSubject.send(table)
     }
     
     func selectItem(with id: UUID) {
-        guard let value = values.first(where: { $0.0 == id }) else { return }
+        guard let action = actions.first(where: { $0.0 == id }) else { return }
         let tab = LensView.TabView(
             tabs: [
-                .init(name: "State Before", content: .tree(map(value.1.stateBefore))),
-                .init(name: "State After", content: .tree(map(value.1.stateAfter))),
-                .init(name: "Diff", content: .string(diff(value.1.stateBefore, value.1.stateAfter)!))
+                .init(name: "State Before", content: .tree(map(action.1.stateBefore))),
+                .init(name: "State After", content: .tree(map(action.1.stateAfter))),
+                .init(name: "Diff", content: .string(diff(action.1.stateBefore, action.1.stateAfter)!))
             ]
         )
         tabSubject.send(tab)
@@ -109,11 +102,40 @@ extension TAGALens {
         }
         fatalError()
     }
+    
+    func map(actions: [(UUID, TAGAAction)]) -> [LensView.TableView.Row] {
+        var rows: [LensView.TableView.Row] = []
+        for (index, action) in actions.enumerated() {
+            let timeStamp: TimeInterval
+            if index == 0 {
+                timeStamp = 0
+            } else {
+                let previousAction = actions[index - 1]
+                timeStamp = action.1.timestamp - previousAction.1.timestamp
+            }
+            let row = LensView.TableView.Row.init(
+                info1: action.1.name,
+                info2: timeStamp.toString(),
+                info3: action.1.payload,
+                id: action.0
+            )
+            rows.append(row)
+        }
+        return rows
+    }
 }
 
 extension TimeInterval {
     
     func toString() -> String {
-        String(self)
+        "+ \(second):\(millisecond)"
+    }
+    
+    var second: Int {
+        Int(truncatingRemainder(dividingBy: 60))
+    }
+    
+    var millisecond: Int {
+        Int((self*1000).truncatingRemainder(dividingBy: 1000))
     }
 }
