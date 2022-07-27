@@ -10,14 +10,18 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var viewStore = Spyglass.viewStore
+    @State var selected: UUID?
         
     var body: some View {
         HStack {
             Table(
                 viewStore.tableView.rows,
                 selection: Binding(
-                    get: { nil },
-                    set: { viewStore.select($0) }
+                    get: { selected },
+                    set: {
+                        self.selected = $0
+                        viewStore.select($0)
+                    }
                 )
             ) {
                 TableColumn(viewStore.tableView.column1.name, value: \.info1)
