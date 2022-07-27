@@ -10,6 +10,9 @@ import Vapor
 
 final class WebSocketServer {
     
+    /// Vapor frame size is limited to UInt32.max
+    static let maxFrameSize = WebSocketMaxFrameSize(integerLiteral: Int(UInt32.max))
+    
     let sockets: [(String, (String) -> Void)]
     
     init(
@@ -26,7 +29,7 @@ final class WebSocketServer {
         app.http.server.configuration.port = 3002
         defer { app.shutdown() }
         sockets.forEach { (socketName: String, callback: @escaping (String) -> Void) in
-            app.webSocket(PathComponent(stringLiteral: socketName)) { req, ws in
+            app.webSocket(PathComponent(stringLiteral: socketName), maxFrameSize: WebSocketServer.maxFrameSize) { req, ws in
                 ws.onText { ws, text in
                     callback(text)
                 }
