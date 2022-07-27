@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CustomDump
 import Foundation
 
 final class TAGALens: Lens {
@@ -61,7 +62,7 @@ final class TAGALens: Lens {
             tabs: [
                 .init(name: "State Before", content: .tree(map(value.1.stateBefore))),
                 .init(name: "State After", content: .tree(map(value.1.stateAfter))),
-                .init(name: "Diff", content: .string(""))
+                .init(name: "Diff", content: .string(diff(value.1.stateBefore, value.1.stateAfter)!))
             ]
         )
         tabSubject.send(tab)

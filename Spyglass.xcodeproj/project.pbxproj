@@ -24,6 +24,7 @@
 		3CD39FAD288EDB5C008A6E7B /* TAGALensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */; };
 		3CD39FAF288EDB78008A6E7B /* TAGALens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAE288EDB78008A6E7B /* TAGALens.swift */; };
 		3CD39FB1288FB25A008A6E7B /* TAGAAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FB0288FB25A008A6E7B /* TAGAAction.swift */; };
+		3CD3A02E28910D40008A6E7B /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 3CD3A02D28910D40008A6E7B /* CustomDump */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C81E6DA288E9D2C003B9836 /* Vapor in Frameworks */,
+				3CD3A02E28910D40008A6E7B /* CustomDump in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +194,7 @@
 			name = Spyglass;
 			packageProductDependencies = (
 				3C81E6D9288E9D2C003B9836 /* Vapor */,
+				3CD3A02D28910D40008A6E7B /* CustomDump */,
 			);
 			productName = Spyglass;
 			productReference = 3C81E6A4288E777B003B9836 /* Spyglass.app */;
@@ -267,6 +270,7 @@
 			mainGroup = 3C81E69B288E777B003B9836;
 			packageReferences = (
 				3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */,
+				3CD3A02C28910D40008A6E7B /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 			);
 			productRefGroup = 3C81E6A5288E777B003B9836 /* Products */;
 			projectDirPath = "";
@@ -640,6 +644,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		3CD3A02C28910D40008A6E7B /* XCRemoteSwiftPackageReference "swift-custom-dump" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-custom-dump";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -647,6 +659,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */;
 			productName = Vapor;
+		};
+		3CD3A02D28910D40008A6E7B /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CD3A02C28910D40008A6E7B /* XCRemoteSwiftPackageReference "swift-custom-dump" */;
+			productName = CustomDump;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

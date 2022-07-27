@@ -23,7 +23,7 @@ final class WebSocketServer {
         try! LoggingSystem.bootstrap(from: &env)
         let app = Application(env)
 //        app.http.server.configuration.hostname = getIPAddress()!
-        app.http.server.configuration.port = 3001
+        app.http.server.configuration.port = 3002
         defer { app.shutdown() }
         sockets.forEach { (socketName: String, callback: @escaping (String) -> Void) in
             app.webSocket(PathComponent(stringLiteral: socketName)) { req, ws in
