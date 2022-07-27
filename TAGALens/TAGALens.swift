@@ -76,8 +76,10 @@ extension TAGALens {
             var contentValue: LensView.TabView.Value? = nil
             if let value = value as? [String: Any] {
                 childrens = map(value)
+            } else if let value = value as? [[String: Any]] {
+                childrens = value.flatMap(map)
             } else if let value = value as? [Any] {
-                contentValue = .array(value.compactMap(map(primitive:)))
+                contentValue = .array(value.map(map(primitive:)))
             } else {
                 contentValue = .primitive(map(primitive:value))
             }
@@ -99,7 +101,9 @@ extension TAGALens {
            return String(value)
         } else if let value = primitive as? Bool {
            return String(value)
-        }
+        } else if let value = primitive as? Double {
+            return String(value)
+         }
         fatalError()
     }
     
