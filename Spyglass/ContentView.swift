@@ -26,7 +26,6 @@ struct ContentView: View {
             ) {
                 TableColumn(viewStore.tableView.column1.name, value: \.info1)
                 TableColumn(viewStore.tableView.column2.name, value: \.info2)
-                TableColumn(viewStore.tableView.column3.name, value: \.info3)
             }.animation(.easeInOut, value: viewStore.tableView.rows.count)
             
             TabView {

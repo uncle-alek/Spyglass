@@ -23,7 +23,6 @@ final class TAGALens: Lens {
         let table = LensView.TableView(
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
-            column3: .init(name: "Payload"),
             rows: []
         )
         tableSubject.send(table)
@@ -43,7 +42,6 @@ final class TAGALens: Lens {
         let table = LensView.TableView(
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
-            column3: .init(name: "Payload"),
             rows: map(actions: actions).reversed()
         )
         tableSubject.send(table)
@@ -117,7 +115,6 @@ extension TAGALens {
             let row = LensView.TableView.Row.init(
                 info1: action.1.name,
                 info2: timeStamp.toString(),
-                info3: action.1.payload,
                 id: action.0
             )
             rows.append(row)
