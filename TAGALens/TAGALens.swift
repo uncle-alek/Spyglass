@@ -44,7 +44,7 @@ final class TAGALens: Lens {
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
             column3: .init(name: "Payload"),
-            rows: map(actions: actions)
+            rows: map(actions: actions).reversed()
         )
         tableSubject.send(table)
     }
