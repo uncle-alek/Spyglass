@@ -51,26 +51,19 @@ struct JSONView: View {
     let items: [LensView.TabView.TreeNode]
 
     var body: some View {
-        NavigationView{
-            List{
-                ForEach(items) { item in
-                    OutlineGroup(item, children:\.childrens) { child in
-                        if let value = child.value {
-                            switch value {
-                            case .primitive(let data):
-                                NavigationLink(
-                                    destination: PrimitiveView(text: data)
-                                ) {
-                                    Text(child.name)
-                                }
-                            case .array(let array):
-                                NavigationLink(
-                                    destination: ArrayView(text: array)
-                                ) {
-                                    Text(child.name)
-                                }
-                            }
-                        } else {
+        List{
+            ForEach(items) { item in
+                OutlineGroup(item, children:\.childrens) { child in
+                    if let value = child.value {
+                        HStack {
+                            Text(child.name)
+                            Spacer()
+                            Text(":")
+                            PrimitiveView(text: value)
+                        }
+                    } else {
+                        HStack {
+                            Image(systemName: "folder")
                             Text(child.name)
                         }
                     }
@@ -86,18 +79,5 @@ struct PrimitiveView: View {
     
     var body: some View {
         TextEditor(text: $text)
-    }
-}
-
-struct ArrayView: View {
-    
-    @State var text: [String]
-    
-    var body: some View {
-        if text.isEmpty {
-            Text("empty list....")
-        } else {
-            PrimitiveView(text: text.reduce("", { $0 + "\n" + $1}))
-        }
     }
 }

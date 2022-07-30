@@ -37,15 +37,10 @@ enum LensView {
 
     struct TabView {
         
-        enum Value {
-            case primitive(String)
-            case array([String])
-        }
-        
         struct TreeNode: Identifiable {
             let id = UUID()
             let name: String
-            let value: Value?
+            let value: String?
             let childrens: [TreeNode]?
             
             static let `default` = TreeNode(

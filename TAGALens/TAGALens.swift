@@ -71,17 +71,27 @@ extension TAGALens {
     
     func map(_ dict: [String: Any]) -> [LensView.TabView.TreeNode] {
         var contents: [LensView.TabView.TreeNode] = []
-        for (key, value) in dict {
+        
+        for (key, value) in dict.sorted(by: {
+            return $0.0.localizedStandardCompare($1.0) == .orderedAscending
+        }) {
             var childrens: [LensView.TabView.TreeNode]? = nil
-            var contentValue: LensView.TabView.Value? = nil
+            var contentValue: String? = nil
             if let value = value as? [String: Any] {
-                childrens = map(value)
-            } else if let value = value as? [[String: Any]] {
-                childrens = value.flatMap(map)
+                if value.isEmpty {
+                    childrens = nil
+                } else {
+                    childrens = map(value)
+                }
             } else if let value = value as? [Any] {
-                contentValue = .array(value.map(map(primitive:)))
+                childrens = map(
+                    zip(1..., value).reduce(into: [String: Any]()) { (dict, zippedPair) in
+                        let (index, value) = zippedPair
+                        dict[String(index)] = value
+                    }
+                )
             } else {
-                contentValue = .primitive(map(primitive:value))
+                contentValue = String(reflecting: value)
             }
             contents.append(
                 LensView.TabView.TreeNode(
@@ -93,20 +103,7 @@ extension TAGALens {
         }
         return contents
     }
-    
-    func map(primitive: Any) -> String {
-        if let value = primitive as? Int {
-           return String(value)
-        } else if let value = primitive as? String {
-           return String(value)
-        } else if let value = primitive as? Bool {
-           return String(value)
-        } else if let value = primitive as? Double {
-            return String(value)
-         }
-        fatalError()
-    }
-    
+
     func map(actions: [(UUID, TAGAAction)]) -> [LensView.TableView.Row] {
         var rows: [LensView.TableView.Row] = []
         for (index, action) in actions.enumerated() {
