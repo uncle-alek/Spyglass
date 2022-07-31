@@ -31,16 +31,33 @@ struct ContentView: View {
             TabView {
                 ForEach(viewStore.tabView.tabs) { tab in
                     Group {
-                        switch tab.content {
-                        case .string(let text):
-                            TextView(text: text)
-                        case .tree(let tree):
-                            JSONView(items: tree)
+                        if tab.pages.count == 1 {
+                            TabPageView(page: tab.pages.first!)
+                        } else {
+                            TabView {
+                                ForEach(tab.pages) { page in
+                                    TabPageView(page: page)
+                                        .tabItem { Text(page.name) }
+                                }
+                            }
                         }
-                    }
-                    .tabItem { Text(tab.name) }
+                    }.tabItem { Text(tab.name) }
                 }
             }
+        }
+    }
+}
+
+struct TabPageView: View {
+    
+    let page: LensView.TabView.Tab.ContentPage
+    
+    var body: some View {
+        switch page.type {
+        case .string(let text):
+            TextView(text: text)
+        case .tree(let tree):
+            JSONView(items: tree)
         }
     }
 }

@@ -28,9 +28,9 @@ final class TAGALens: Lens {
         tableSubject.send(table)
         let tab = LensView.TabView(
             tabs: [
-                .init(name: "Diff", content: .string("")),
-                .init(name: "State Before", content: .string("")),
-                .init(name: "State After", content: .string(""))
+                .init(name: "Diff", pages: []),
+                .init(name: "State Before", pages: []),
+                .init(name: "State After", pages: [])
             ]
         )
         tabSubject.send(tab)
@@ -51,9 +51,17 @@ final class TAGALens: Lens {
         guard let action = actions.first(where: { $0.0 == id }) else { return }
         let tab = LensView.TabView(
             tabs: [
-                .init(name: "Diff", content: .string(diff(for: action.1))),
-                .init(name: "State Before", content: .tree(map(action.1.stateBefore))),
-                .init(name: "State After", content: .tree(map(action.1.stateAfter)))
+                .init(name: "Diff", pages: [
+                    .init(name: "", type: .string(diff(for: action.1)))
+                ]),
+                .init(name: "State Before", pages: [
+                    .init(name: "JSON", type: .tree(map(action.1.stateBefore))),
+                    .init(name: "Raw", type: .string(customDump(action.1.formattedStateBefore)))
+                ]),
+                .init(name: "State After", pages: [
+                    .init(name: "JSON", type: .tree(map(action.1.stateAfter))),
+                    .init(name: "Raw", type: .string(customDump(action.1.formattedStateAfter)))
+                ])
             ]
         )
         tabSubject.send(tab)

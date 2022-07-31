@@ -47,15 +47,20 @@ enum LensView {
             )
         }
         
-        enum Content {
-            case string(String)
-            case tree([TreeNode])
-        }
-        
         struct Tab: Identifiable {
+            enum ContentType {
+                case string(String)
+                case tree([TreeNode])
+            }
+            struct ContentPage: Identifiable {
+                let id = UUID()
+                let name: String
+                let type: ContentType
+            }
+            
             let id = UUID()
             let name: String
-            let content: Content
+            let pages: [ContentPage]
         }
         
         let tabs: [Tab]
