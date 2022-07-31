@@ -28,7 +28,7 @@ final class TAGALens: Lens {
         tableSubject.send(table)
         let tab = LensView.TabView(
             tabs: [
-                .init(name: "Diff", pages: []),
+                .init(name: "States Diff", pages: []),
                 .init(name: "State Before", pages: []),
                 .init(name: "State After", pages: [])
             ]
@@ -51,7 +51,7 @@ final class TAGALens: Lens {
         guard let action = actions.first(where: { $0.0 == id }) else { return }
         let tab = LensView.TabView(
             tabs: [
-                .init(name: "Diff", pages: [
+                .init(name: "States Diff", pages: [
                     .init(name: "", type: .string(diff(for: action.1)))
                 ]),
                 .init(name: "State Before", pages: [
@@ -135,7 +135,7 @@ extension TAGALens {
             action.stateBefore,
             action.stateAfter,
             format: .init(first: "\u{274C}", second: "\u{2705}", both: " ")
-        )!
+        ) ?? "no changes..."
     }
     
     func prettyPrinted(state: [String: Any]) -> String {

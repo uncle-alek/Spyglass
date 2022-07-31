@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import HighlightedTextEditor
 
 struct ContentView: View {
     
     @ObservedObject var viewStore = Spyglass.viewStore
     @State var selected: UUID?
+    @State var searchText: String = ""
         
     var body: some View {
         HStack {
@@ -32,11 +34,11 @@ struct ContentView: View {
                 ForEach(viewStore.tabView.tabs) { tab in
                     Group {
                         if tab.pages.count == 1 {
-                            TabPageView(page: tab.pages.first!)
+                            TabPageView(page: tab.pages.first!, searchText: searchText)
                         } else {
                             TabView {
                                 ForEach(tab.pages) { page in
-                                    TabPageView(page: page)
+                                    TabPageView(page: page, searchText: searchText)
                                         .tabItem { Text(page.name) }
                                 }
                             }
@@ -44,6 +46,7 @@ struct ContentView: View {
                     }.tabItem { Text(tab.name) }
                 }
             }
+            .searchable(text: $searchText)
         }
     }
 }
@@ -51,11 +54,12 @@ struct ContentView: View {
 struct TabPageView: View {
     
     let page: LensView.TabView.Tab.ContentPage
+    let searchText: String
     
     var body: some View {
         switch page.type {
         case .string(let text):
-            TextView(text: text)
+            TextEd(text: text, searchText: searchText)
         case .tree(let tree):
             JSONView(items: tree)
         }
@@ -89,11 +93,32 @@ struct JSONView: View {
     }
 }
 
-struct TextView: View {
+struct TextEd: View {
     
     @State var text: String
+    let searchText: String
     
     var body: some View {
-        TextEditor(text: $text)
+        VStack {
+            HighlightedTextEditor(
+                text: $text,
+                highlightRules: highlightRule(for: searchText)
+            )
+        }
+    }
+    
+    func highlightRule(for searchText: String) -> [HighlightRule] {
+        if let regEx = try? NSRegularExpression(pattern: "\(searchText)", options: []) {
+            return [
+                HighlightRule(
+                    pattern: regEx,
+                    formattingRules: [
+                        TextFormattingRule(key: .backgroundColor, value: NSColor.red.withAlphaComponent(0.3))
+                    ]
+                )
+            ]
+        } else {
+            return []
+        }
     }
 }
