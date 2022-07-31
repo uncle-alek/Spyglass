@@ -33,7 +33,7 @@ struct ContentView: View {
                     Group {
                         switch tab.content {
                         case .string(let text):
-                            PrimitiveView(text: text)
+                            TextView(text: text)
                         case .tree(let tree):
                             JSONView(items: tree)
                         }
@@ -55,11 +55,11 @@ struct JSONView: View {
                 OutlineGroup(item, children:\.childrens) { child in
                     if let value = child.value {
                         HStack {
-                            Text(child.name)
-                            Spacer()
-                            Text(":")
-                            PrimitiveView(text: value)
-                        }
+                            Image(systemName: "doc")
+                            Text("\(child.name) :")
+                            Text("\(value)")
+                                .bold()
+                        }.textSelection(.enabled)
                     } else {
                         HStack {
                             Image(systemName: "folder")
@@ -72,7 +72,7 @@ struct JSONView: View {
     }
 }
 
-struct PrimitiveView: View {
+struct TextView: View {
     
     @State var text: String
     
