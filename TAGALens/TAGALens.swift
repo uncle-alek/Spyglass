@@ -56,11 +56,11 @@ final class TAGALens: Lens {
                 ]),
                 .init(name: "State Before", pages: [
                     .init(name: "JSON", type: .tree(map(action.1.stateBefore))),
-                    .init(name: "Raw", type: .string(customDump(action.1.formattedStateBefore)))
+                    .init(name: "Raw", type: .string(prettyPrinted(state: action.1.stateBefore)))
                 ]),
                 .init(name: "State After", pages: [
                     .init(name: "JSON", type: .tree(map(action.1.stateAfter))),
-                    .init(name: "Raw", type: .string(customDump(action.1.formattedStateAfter)))
+                    .init(name: "Raw", type: .string(prettyPrinted(state: action.1.stateAfter)))
                 ])
             ]
         )
@@ -136,6 +136,11 @@ extension TAGALens {
             action.stateAfter,
             format: .init(first: "\u{274C}", second: "\u{2705}", both: " ")
         )!
+    }
+    
+    func prettyPrinted(state: [String: Any]) -> String {
+        let data = try! JSONSerialization.data(withJSONObject: state, options: [.prettyPrinted, .sortedKeys])
+        return String(decoding: data, as: UTF8.self)
     }
 }
 
