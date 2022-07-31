@@ -70,9 +70,9 @@ extension TAGALens {
     func map(_ dict: [String: Any]) -> [LensView.TabView.TreeNode] {
         var contents: [LensView.TabView.TreeNode] = []
         
-        for (key, value) in dict.sorted(by: {
-            return $0.0.localizedStandardCompare($1.0) == .orderedAscending
-        }) {
+        for (key, value) in dict.sorted(
+            by: { $0.0.localizedStandardCompare($1.0) == .orderedAscending }
+        ) {
             var childrens: [LensView.TabView.TreeNode]? = nil
             var contentValue: String? = nil
             if let value = value as? [String: Any] {
@@ -95,7 +95,7 @@ extension TAGALens {
                 LensView.TabView.TreeNode(
                     name: key,
                     value: contentValue,
-                    childrens: childrens
+                    childrens: childrens?.isEmpty == true ? nil : childrens
                 )
             )
         }
@@ -126,14 +126,14 @@ extension TAGALens {
 extension TimeInterval {
     
     func toString() -> String {
-        "+ \(second):\(millisecond)"
+        String(format: "+ %0.1d:%0.3d", seconds, milliseconds)
     }
     
-    var second: Int {
+    var seconds: Int {
         Int(truncatingRemainder(dividingBy: 60))
     }
     
-    var millisecond: Int {
+    var milliseconds: Int {
         Int((self*1000).truncatingRemainder(dividingBy: 1000))
     }
 }
