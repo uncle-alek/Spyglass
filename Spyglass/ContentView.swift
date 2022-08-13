@@ -51,6 +51,12 @@ struct ContentView: View {
         }
         .toolbar {
             Button {
+                viewStore.reset()
+            } label: {
+                Image(systemName: "arrow.clockwise")
+            }
+                        
+            Button {
                 guard let selected = selected else { return }
                 viewStore.navigateTo(selected)
             } label: {

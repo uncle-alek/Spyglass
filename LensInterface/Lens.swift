@@ -15,6 +15,7 @@ protocol Lens {
     var tabPublisher: AnyPublisher<LensView.TabView, Never> { get }
     
     func setup()
+    func reset()
     func receive(_ value: String)
     func selectItem(with id: UUID)
     func navigateToItem(with id: UUID)

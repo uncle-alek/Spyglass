@@ -36,6 +36,24 @@ final class TAGALens: Lens {
         tabSubject.send(tab)
     }
     
+    func reset() {
+        let table = LensView.TableView(
+            column1: .init(name: "Action"),
+            column2: .init(name: "Timestamp"),
+            rows: []
+        )
+        tableSubject.send(table)
+        let tab = LensView.TabView(
+            tabs: [
+                .init(name: "States Diff", pages: []),
+                .init(name: "State Before", pages: []),
+                .init(name: "State After", pages: [])
+            ]
+        )
+        tabSubject.send(tab)
+        actions = []
+    }
+    
     func receive(_ value: String) {
         let action = parse(value)
         actions.append((UUID(), action))
