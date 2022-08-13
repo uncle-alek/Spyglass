@@ -13,6 +13,8 @@ struct TAGAAction: Decodable {
     let payload: String
     let stateBefore: [String: Any]
     let stateAfter: [String: Any]
+    let file: String?
+    let line: UInt?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -20,6 +22,8 @@ struct TAGAAction: Decodable {
         case payload
         case stateBefore
         case stateAfter
+        case file
+        case line
     }
     
     init(from decoder: Decoder) throws {
@@ -27,6 +31,8 @@ struct TAGAAction: Decodable {
         name = try values.decode(String.self, forKey: .name)
         timestamp = try values.decode(TimeInterval.self, forKey: .timestamp)
         payload = try values.decode(String.self, forKey: .payload)
+        file = try values.decodeIfPresent(String.self, forKey: .file)
+        line = try values.decodeIfPresent(UInt.self, forKey: .line)
         
         let _stateBeforeString = try values.decode(String.self, forKey: .stateBefore)
         stateBefore = try JSONSerialization.jsonObject(with: Data(_stateBeforeString.utf8), options: []) as! [String : Any]

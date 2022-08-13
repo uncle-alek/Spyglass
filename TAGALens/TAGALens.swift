@@ -66,6 +66,17 @@ final class TAGALens: Lens {
         )
         tabSubject.send(tab)
     }
+    
+    func navigateToItem(with id: UUID) {
+        guard let action = actions.first(where: { $0.0 == id }) else { return }
+        guard let file = action.1.file else { return }
+        guard let line = action.1.line else { return }
+        
+        DispatchQueue.global().async {
+            shell("xed", "-x", file)
+            shell("xed", "-x", "-l", String(line))
+        }
+    }
 }
 
 extension TAGALens {
@@ -157,4 +168,14 @@ extension TimeInterval {
     var milliseconds: Int {
         Int((self*1000).truncatingRemainder(dividingBy: 1000))
     }
+}
+
+@discardableResult
+func shell(_ args: String...) -> Int32 {
+    let task = Process()
+    task.launchPath = "/usr/bin/env"
+    task.arguments = args
+    task.launch()
+    task.waitUntilExit()
+    return task.terminationStatus
 }

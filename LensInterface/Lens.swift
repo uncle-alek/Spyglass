@@ -17,4 +17,5 @@ protocol Lens {
     func setup()
     func receive(_ value: String)
     func selectItem(with id: UUID)
+    func navigateToItem(with id: UUID)
 }

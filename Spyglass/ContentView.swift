@@ -22,7 +22,8 @@ struct ContentView: View {
                     get: { selected },
                     set: {
                         self.selected = $0
-                        viewStore.select($0)
+                        guard let selected = selected else { return }
+                        viewStore.select(selected)
                     }
                 )
             ) {
@@ -47,6 +48,15 @@ struct ContentView: View {
                 }
             }
             .searchable(text: $searchText)
+        }
+        .toolbar {
+            Button {
+                guard let selected = selected else { return }
+                viewStore.navigateTo(selected)
+            } label: {
+                Image(systemName: "scope")
+            }
+            .disabled(selected == nil)
         }
     }
 }
@@ -97,13 +107,20 @@ struct TextEd: View {
     
     @State var text: String
     let searchText: String
+//    @Binding var goToNext: Bool
+//    @State private var ranges: [Range<String.Index>] = []
+//    @State private var currentIndex: Int = 0
     
     var body: some View {
         VStack {
             HighlightedTextEditor(
                 text: $text,
                 highlightRules: highlightRule(for: searchText)
-            )
+            ).introspect { editor in
+                if let range = text.range(of: searchText) {
+                    editor.textView.scrollRangeToVisible(NSRange(range, in: text))
+                }
+            }
         }
     }
     

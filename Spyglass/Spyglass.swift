@@ -27,7 +27,8 @@ final class Spyglass {
                 viewStore.tabView = tabView
             }
         }
-        viewStore.select = { $0.map(lens.selectItem(with:)) } 
+        viewStore.select = lens.selectItem(with:)
+        viewStore.navigateTo = lens.navigateToItem(with:)
         
         lens.setup()
         
@@ -47,5 +48,6 @@ final class ViewStore: ObservableObject {
     
     @Published var tableView: LensView.TableView = .default
     @Published var tabView: LensView.TabView = .default
-    var select: (UUID?) -> Void = {_ in }
+    var select: (UUID) -> Void = {_ in }
+    var navigateTo: (UUID) -> Void = {_ in }
 }
