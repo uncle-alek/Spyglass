@@ -34,7 +34,7 @@ enum LensView {
 
     struct TabView {
         
-        struct TreeNode: Identifiable {
+        struct TreeNode: Identifiable, Hashable {
             let id = UUID()
             let name: String
             let value: String?
@@ -47,12 +47,12 @@ enum LensView {
             )
         }
         
-        struct Tab: Identifiable {
-            enum ContentType {
+        struct Tab: Identifiable, Hashable {
+            enum ContentType: Hashable {
                 case string(String)
                 case tree([TreeNode])
             }
-            struct ContentPage: Identifiable {
+            struct ContentPage: Identifiable, Hashable {
                 let id = UUID()
                 let name: String
                 let type: ContentType
