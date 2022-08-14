@@ -168,10 +168,10 @@ struct TextEd: View {
                 editor.textView.setTextColor(NSColor.yellow, range: ranges[currentIndex])
             }
             .onChange(of: searchText) {
-                ranges = text._ranges(of: $0)
+                ranges = text.ranges(of: $0)
             }
             .onAppear {
-                ranges = text._ranges(of: searchText)
+                ranges = text.ranges(of: searchText)
             }
         }
     }
@@ -193,18 +193,17 @@ private extension TextEd {
     }
 }
 
-extension NSString {
+extension String {
     
-    func _ranges(of searchString: String) -> [NSRange] {
-        let placeholder = String(repeating: "*", count: searchString.count)
-        var ranges: [NSRange] = []
-        var currentString = self
+    func ranges(of searchString: String) -> [NSRange] {
+        var ranges: [Range<String.Index>] = []
+        var currentString: Substring = self[startIndex...]
         var currentRange = currentString.range(of: searchString)
-        while(currentRange.location != NSNotFound) {
-            ranges.append(currentRange)
-            currentString = currentString.replacingCharacters(in: currentRange, with: placeholder) as NSString
+        while(currentRange != nil) {
+            ranges.append(currentRange!)
+            currentString = currentString[currentRange!.upperBound...]
             currentRange = currentString.range(of: searchString)
         }
-        return ranges
+        return ranges.map { NSRange($0, in: self) }
     }
 }
