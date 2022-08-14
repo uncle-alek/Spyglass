@@ -64,6 +64,10 @@ struct ContentView: View {
                     .tag(index)
                 }
             }
+            .onChange(of: selectedExternalTab) { _ in
+                ranges = []
+                currentIndex = 0
+            }
             .onChange(of: ranges) { _ in
                 currentIndex = 0
             }
@@ -90,14 +94,14 @@ struct ContentView: View {
             } label: {
                 Text("Find")
             }
-            .disabled(searchText.isEmpty)
+            .disabled(ranges.isEmpty)
             Button {
                 currentIndex = (currentIndex - 1) % ranges.count
                 currentIndex = currentIndex < 0 ? ranges.count + currentIndex : currentIndex
             } label: {
                 Text("Find Prev")
             }
-            .disabled(searchText.isEmpty)
+            .disabled(ranges.isEmpty)
         }
     }
 }
