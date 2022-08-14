@@ -15,6 +15,8 @@ struct ContentView: View {
     @State var searchText: String = ""
     @State private var selectedExternalTab = 0
     @State private var selectedInternalTab = 0
+    @State var ranges: [NSRange] = []
+    @State var currentIndex: Int = 0
         
     var body: some View {
         HStack {
@@ -37,13 +39,23 @@ struct ContentView: View {
                 ForEach(Array(viewStore.tabView.tabs.enumerated()), id: \.1) { index, tab in
                     Group {
                         if tab.pages.count == 1 {
-                            TabPageView(page: tab.pages.first!, searchText: searchText)
+                            TabPageView(
+                                page: tab.pages.first!,
+                                searchText: searchText,
+                                ranges: $ranges,
+                                currentIndex: currentIndex
+                            )
                         } else {
                             TabView(selection: $selectedInternalTab) {
                                 ForEach(Array(tab.pages.enumerated()), id: \.1) { index, page in
-                                    TabPageView(page: page, searchText: searchText)
-                                        .tabItem { Text(page.name) }
-                                        .tag(index)
+                                    TabPageView(
+                                        page: page,
+                                        searchText: searchText,
+                                        ranges: $ranges,
+                                        currentIndex: currentIndex
+                                    )
+                                    .tabItem { Text(page.name) }
+                                    .tag(index)
                                 }
                             }
                         }
@@ -51,6 +63,9 @@ struct ContentView: View {
                     .tabItem { Text(tab.name) }
                     .tag(index)
                 }
+            }
+            .onChange(of: ranges) { _ in
+                currentIndex = 0
             }
             .searchable(text: $searchText)
         }
@@ -60,7 +75,6 @@ struct ContentView: View {
             } label: {
                 Image(systemName: "arrow.clockwise")
             }
-
             Button {
                 guard let selected = selected else { return }
                 viewStore.navigateTo(selected)
@@ -68,6 +82,22 @@ struct ContentView: View {
                 Image(systemName: "scope")
             }
             .disabled(selected == nil)
+            
+            Spacer()
+            
+            Button {
+                currentIndex = (currentIndex + 1) % ranges.count
+            } label: {
+                Text("Find")
+            }
+            .disabled(searchText.isEmpty)
+            Button {
+                currentIndex = (currentIndex - 1) % ranges.count
+                currentIndex = currentIndex < 0 ? ranges.count + currentIndex : currentIndex
+            } label: {
+                Text("Find Prev")
+            }
+            .disabled(searchText.isEmpty)
         }
     }
 }
@@ -76,11 +106,17 @@ struct TabPageView: View {
     
     let page: LensView.TabView.Tab.ContentPage
     let searchText: String
+    @Binding var ranges: [NSRange]
+    let currentIndex: Int
     
     var body: some View {
         switch page.type {
         case .string(let text):
-            TextEd(text: text, searchText: searchText)
+            TextEd(
+                text: text,
+                searchText: searchText,
+                ranges: $ranges,
+                currentIndex: currentIndex)
         case .tree(let tree):
             JSONView(items: tree)
         }
@@ -118,35 +154,57 @@ struct TextEd: View {
     
     @State var text: String
     let searchText: String
-//    @Binding var goToNext: Bool
-//    @State private var ranges: [Range<String.Index>] = []
-//    @State private var currentIndex: Int = 0
+    @Binding var ranges: [NSRange]
+    let currentIndex: Int
     
     var body: some View {
         VStack {
             HighlightedTextEditor(
                 text: $text,
-                highlightRules: highlightRule(for: searchText)
+                highlightRules: highlightRules
             ).introspect { editor in
-                if let range = text.range(of: searchText) {
-                    editor.textView.scrollRangeToVisible(NSRange(range, in: text))
-                }
+                guard currentIndex < ranges.count else { return }
+                editor.textView.scrollRangeToVisible(ranges[currentIndex])
+                editor.textView.setTextColor(NSColor.yellow, range: ranges[currentIndex])
+            }
+            .onChange(of: searchText) {
+                ranges = text._ranges(of: $0)
+            }
+            .onAppear {
+                ranges = text._ranges(of: searchText)
             }
         }
     }
+}
+
+private extension TextEd {
     
-    func highlightRule(for searchText: String) -> [HighlightRule] {
-        if let regEx = try? NSRegularExpression(pattern: "\(searchText)", options: []) {
-            return [
-                HighlightRule(
-                    pattern: regEx,
-                    formattingRules: [
-                        TextFormattingRule(key: .backgroundColor, value: NSColor.red.withAlphaComponent(0.3))
-                    ]
-                )
-            ]
-        } else {
-            return []
+    var highlightRules: [HighlightRule] {
+        guard let regEx = try? NSRegularExpression(pattern: "\(searchText)", options: [])
+            else { return [] }
+        return [
+            HighlightRule(
+                pattern: regEx,
+                formattingRules: [
+                    TextFormattingRule(key: .backgroundColor, value: NSColor.red.withAlphaComponent(0.3))
+                ]
+            )
+        ]
+    }
+}
+
+extension NSString {
+    
+    func _ranges(of searchString: String) -> [NSRange] {
+        let placeholder = String(repeating: "*", count: searchString.count)
+        var ranges: [NSRange] = []
+        var currentString = self
+        var currentRange = currentString.range(of: searchString)
+        while(currentRange.location != NSNotFound) {
+            ranges.append(currentRange)
+            currentString = currentString.replacingCharacters(in: currentRange, with: placeholder) as NSString
+            currentRange = currentString.range(of: searchString)
         }
+        return ranges
     }
 }
