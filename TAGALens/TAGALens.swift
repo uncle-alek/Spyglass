@@ -13,7 +13,7 @@ final class TAGALens: Lens {
     
     var tablePublisher: AnyPublisher<LensView.TableView, Never> { tableSubject.eraseToAnyPublisher() }
     var tabPublisher: AnyPublisher<LensView.TabView, Never> { tabSubject.eraseToAnyPublisher() }
-    var connectionPath: String { "taga" }
+    var connectionPath: String { "redux" }
     
     private var actions: [(UUID, TAGAAction)] = []
     private let tableSubject = PassthroughSubject<LensView.TableView, Never>()
