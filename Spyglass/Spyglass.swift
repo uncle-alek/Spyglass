@@ -14,6 +14,7 @@ final class Spyglass {
     static let viewStore = ViewStore()
     static var tableCancellable: AnyCancellable?
     static var tabCancellable: AnyCancellable?
+    static var sharedItemsCancellable: AnyCancellable?
 
     static func run() {
                 
@@ -27,9 +28,15 @@ final class Spyglass {
                 viewStore.tabView = tabView
             }
         }
+        sharedItemsCancellable = lens.sharingData.sink { data in
+            DispatchQueue.main.async {
+                viewStore.sharingData = data
+            }
+        }
         viewStore.select = lens.selectItem(with:)
         viewStore.navigateTo = lens.navigateToItem(with:)
         viewStore.reset = lens.reset
+        viewStore.shareHistory = lens.shareHistory
         
         lens.setup()
         
@@ -49,7 +56,9 @@ final class ViewStore: ObservableObject {
     
     @Published var tableView: LensView.TableView = .default
     @Published var tabView: LensView.TabView = .default
+    @Published var sharingData: String? = nil
     var select: (UUID) -> Void = {_ in }
     var navigateTo: (UUID) -> Void = {_ in }
     var reset: () -> Void = {}
+    var shareHistory: () -> Void = {}
 }

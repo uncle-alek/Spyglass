@@ -5,6 +5,7 @@
 //  Created by Aleksey Yakimenko on 25/7/22.
 //
 
+import AppKit
 import SwiftUI
 import HighlightedTextEditor
 
@@ -71,9 +72,25 @@ struct ContentView: View {
             .onChange(of: ranges) { _ in
                 currentIndex = 0
             }
+            .onChange(of: viewStore.sharingData) { data in
+                guard let data = data else { return }
+                let pasteboard = NSPasteboard.general
+                pasteboard.declareTypes([.string], owner: nil)
+                pasteboard.setString(data, forType: .string)
+            }
             .searchable(text: $searchText)
         }
         .toolbar {
+            Menu {
+                Button{
+                    viewStore.shareHistory()
+                } label: {
+                    Text("copy all actions")
+                }
+                .disabled(viewStore.tableView.rows.isEmpty)
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
             Button {
                 viewStore.reset()
             } label: {

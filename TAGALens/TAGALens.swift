@@ -13,11 +13,13 @@ final class TAGALens: Lens {
     
     var tablePublisher: AnyPublisher<LensView.TableView, Never> { tableSubject.eraseToAnyPublisher() }
     var tabPublisher: AnyPublisher<LensView.TabView, Never> { tabSubject.eraseToAnyPublisher() }
+    var sharingData: AnyPublisher<String?, Never> { sharingDataSubject.eraseToAnyPublisher() }
     var connectionPath: String { "redux" }
     
     private var actions: [(UUID, TAGAAction)] = []
     private let tableSubject = PassthroughSubject<LensView.TableView, Never>()
     private let tabSubject = PassthroughSubject<LensView.TabView, Never>()
+    private let sharingDataSubject = PassthroughSubject<String?, Never>()
 
     func setup() {
         let table = LensView.TableView(
@@ -95,6 +97,16 @@ final class TAGALens: Lens {
             shell("xed", "-x", "-l", String(line))
         }
     }
+    
+    func shareHistory() {
+        let sharingData = zip(
+            actions,
+            timestampDiff(for: actions)
+        )
+        .map { $0.1.name + ", " + $1.toString() }
+        .joined(separator: "\n")
+        sharingDataSubject.send(sharingData)
+    }
 }
 
 extension TAGALens {
@@ -140,23 +152,20 @@ extension TAGALens {
     }
 
     func map(actions: [(UUID, TAGAAction)]) -> [LensView.TableView.Row] {
-        var rows: [LensView.TableView.Row] = []
-        for (index, action) in actions.enumerated() {
-            let timeStamp: TimeInterval
-            if index == 0 {
-                timeStamp = 0
-            } else {
-                let previousAction = actions[index - 1]
-                timeStamp = action.1.timestamp - previousAction.1.timestamp
-            }
-            let row = LensView.TableView.Row.init(
+        zip(
+            timestampDiff(for: actions),
+            actions
+        ).map { timeStamp, action in
+            LensView.TableView.Row.init(
                 info1: action.1.name,
                 info2: timeStamp.toString(),
                 id: action.0
             )
-            rows.append(row)
         }
-        return rows
+    }
+    
+    func timestampDiff(for actions: [(UUID, TAGAAction)]) -> [TimeInterval] {
+        [0] + zip(actions.dropFirst(), actions.dropLast()).map { $0.1.timestamp - $1.1.timestamp }
     }
     
     func diff(for action: TAGAAction) -> String {
@@ -176,7 +185,7 @@ extension TAGALens {
 extension TimeInterval {
     
     func toString() -> String {
-        String(format: "+ %0.1d:%0.3d", seconds, milliseconds)
+        String(format: "+ %0.1d:%0.3d s", seconds, milliseconds)
     }
     
     var seconds: Int {
