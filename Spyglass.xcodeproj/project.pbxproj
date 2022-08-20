@@ -21,9 +21,9 @@
 		3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6DF288E9F4B003B9836 /* Lens.swift */; };
 		3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6E1288EA42F003B9836 /* Spyglass.swift */; };
 		3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6E3288EA520003B9836 /* WebsocketServer.swift */; };
-		3CD39FAD288EDB5C008A6E7B /* TAGALensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */; };
-		3CD39FAF288EDB78008A6E7B /* TAGALens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAE288EDB78008A6E7B /* TAGALens.swift */; };
-		3CD39FB1288FB25A008A6E7B /* TAGAAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FB0288FB25A008A6E7B /* TAGAAction.swift */; };
+		3CD39FAD288EDB5C008A6E7B /* ReduxLensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAC288EDB5C008A6E7B /* ReduxLensBuilder.swift */; };
+		3CD39FAF288EDB78008A6E7B /* ReduxLens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FAE288EDB78008A6E7B /* ReduxLens.swift */; };
+		3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD39FB0288FB25A008A6E7B /* ReduxEvent.swift */; };
 		3CD3A02E28910D40008A6E7B /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 3CD3A02D28910D40008A6E7B /* CustomDump */; };
 		3CD3A0342896BB78008A6E7B /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 3CD3A0332896BB78008A6E7B /* HighlightedTextEditor */; };
 /* End PBXBuildFile section */
@@ -63,9 +63,9 @@
 		3C81E6DF288E9F4B003B9836 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
 		3C81E6E1288EA42F003B9836 /* Spyglass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spyglass.swift; sourceTree = "<group>"; };
 		3C81E6E3288EA520003B9836 /* WebsocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsocketServer.swift; sourceTree = "<group>"; };
-		3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAGALensBuilder.swift; sourceTree = "<group>"; };
-		3CD39FAE288EDB78008A6E7B /* TAGALens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAGALens.swift; sourceTree = "<group>"; };
-		3CD39FB0288FB25A008A6E7B /* TAGAAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAGAAction.swift; sourceTree = "<group>"; };
+		3CD39FAC288EDB5C008A6E7B /* ReduxLensBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxLensBuilder.swift; sourceTree = "<group>"; };
+		3CD39FAE288EDB78008A6E7B /* ReduxLens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxLens.swift; sourceTree = "<group>"; };
+		3CD39FB0288FB25A008A6E7B /* ReduxEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 		3C81E69B288E777B003B9836 = {
 			isa = PBXGroup;
 			children = (
-				3C81E6D5288E958D003B9836 /* TAGALens */,
+				3C81E6D5288E958D003B9836 /* ReduxLens */,
 				3C81E6D2288E93F9003B9836 /* LensInterface */,
 				3C81E6A6288E777B003B9836 /* Spyglass */,
 				3C81E6B8288E777C003B9836 /* SpyglassTests */,
@@ -168,14 +168,14 @@
 			path = LensInterface;
 			sourceTree = "<group>";
 		};
-		3C81E6D5288E958D003B9836 /* TAGALens */ = {
+		3C81E6D5288E958D003B9836 /* ReduxLens */ = {
 			isa = PBXGroup;
 			children = (
-				3CD39FAC288EDB5C008A6E7B /* TAGALensBuilder.swift */,
-				3CD39FAE288EDB78008A6E7B /* TAGALens.swift */,
-				3CD39FB0288FB25A008A6E7B /* TAGAAction.swift */,
+				3CD39FAC288EDB5C008A6E7B /* ReduxLensBuilder.swift */,
+				3CD39FAE288EDB78008A6E7B /* ReduxLens.swift */,
+				3CD39FB0288FB25A008A6E7B /* ReduxEvent.swift */,
 			);
-			path = TAGALens;
+			path = ReduxLens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,17 +318,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CD39FAD288EDB5C008A6E7B /* TAGALensBuilder.swift in Sources */,
+				3CD39FAD288EDB5C008A6E7B /* ReduxLensBuilder.swift in Sources */,
 				3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */,
 				3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */,
 				3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */,
 				3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */,
-				3CD39FAF288EDB78008A6E7B /* TAGALens.swift in Sources */,
+				3CD39FAF288EDB78008A6E7B /* ReduxLens.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
 				3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */,
-				3CD39FB1288FB25A008A6E7B /* TAGAAction.swift in Sources */,
+				3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

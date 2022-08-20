@@ -10,7 +10,7 @@ import Foundation
 
 final class Spyglass {
         
-    static let lens = TAGALensBuilder().build()
+    static let lens = ReduxLensBuilder().build()
     static let viewStore = ViewStore()
     static var tableCancellable: AnyCancellable?
     static var tabCancellable: AnyCancellable?

@@ -1,5 +1,5 @@
 //
-//  TAGAAction.swift
+//  ReduxEvent.swift
 //  Spyglass
 //
 //  Created by Aleksey Yakimenko on 26/7/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TAGAAction: Decodable {
+struct ReduxEvent: Decodable {
     let name: String
     let timestamp: TimeInterval
     let stateBefore: [String: Any]

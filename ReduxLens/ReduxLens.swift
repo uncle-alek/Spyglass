@@ -9,14 +9,14 @@ import Combine
 import CustomDump
 import Foundation
 
-final class TAGALens: Lens {
+final class ReduxLens: Lens {
     
     var tablePublisher: AnyPublisher<LensView.TableView, Never> { tableSubject.eraseToAnyPublisher() }
     var tabPublisher: AnyPublisher<LensView.TabView, Never> { tabSubject.eraseToAnyPublisher() }
     var sharingData: AnyPublisher<String?, Never> { sharingDataSubject.eraseToAnyPublisher() }
     var connectionPath: String { "redux" }
     
-    private var actions: [(UUID, TAGAAction)] = []
+    private var events: [(UUID, ReduxEvent)] = []
     private let tableSubject = PassthroughSubject<LensView.TableView, Never>()
     private let tabSubject = PassthroughSubject<LensView.TabView, Never>()
     private let sharingDataSubject = PassthroughSubject<String?, Never>()
@@ -53,34 +53,34 @@ final class TAGALens: Lens {
             ]
         )
         tabSubject.send(tab)
-        actions = []
+        events = []
     }
     
     func receive(_ value: String) {
         let action = parse(value)
-        actions.append((UUID(), action))
+        events.append((UUID(), action))
         let table = LensView.TableView(
             column1: .init(name: "Action"),
             column2: .init(name: "Timestamp"),
-            rows: map(actions: actions).reversed()
+            rows: map(events)
         )
         tableSubject.send(table)
     }
     
     func selectItem(with id: UUID) {
-        guard let action = actions.first(where: { $0.0 == id }) else { return }
+        guard let event = events.first(where: { $0.0 == id }) else { return }
         let tab = LensView.TabView(
             tabs: [
                 .init(name: "States Diff", pages: [
-                    .init(name: "", type: .string(diff(for: action.1)))
+                    .init(name: "", type: .string(diff(for: event.1)))
                 ]),
                 .init(name: "State Before", pages: [
-                    .init(name: "JSON", type: .tree(map(action.1.stateBefore))),
-                    .init(name: "Raw", type: .string(prettyPrinted(state: action.1.stateBefore)))
+                    .init(name: "JSON", type: .tree(map(event.1.stateBefore))),
+                    .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateBefore)))
                 ]),
                 .init(name: "State After", pages: [
-                    .init(name: "JSON", type: .tree(map(action.1.stateAfter))),
-                    .init(name: "Raw", type: .string(prettyPrinted(state: action.1.stateAfter)))
+                    .init(name: "JSON", type: .tree(map(event.1.stateAfter))),
+                    .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateAfter)))
                 ])
             ]
         )
@@ -88,9 +88,9 @@ final class TAGALens: Lens {
     }
     
     func navigateToItem(with id: UUID) {
-        guard let action = actions.first(where: { $0.0 == id }) else { return }
-        guard let file = action.1.file else { return }
-        guard let line = action.1.line else { return }
+        guard let event = events.first(where: { $0.0 == id }) else { return }
+        guard let file = event.1.file else { return }
+        guard let line = event.1.line else { return }
         
         DispatchQueue.global().async {
             shell("xed", "-x", file)
@@ -99,21 +99,15 @@ final class TAGALens: Lens {
     }
     
     func shareHistory() {
-        let sharingData = zip(
-            actions,
-            timestampDiff(for: actions)
-        )
-        .map { $0.1.name + ", " + $1.toString() }
-        .joined(separator: "\n")
-        sharingDataSubject.send(sharingData)
+        sharingDataSubject.send(sharingData(for: events))
     }
 }
 
-extension TAGALens {
+extension ReduxLens {
     
-    func parse(_ value: String) -> TAGAAction {
+    func parse(_ value: String) -> ReduxEvent {
         let data = value.data(using: .utf8)!
-        return try! JSONDecoder().decode(TAGAAction.self, from: data)
+        return try! JSONDecoder().decode(ReduxEvent.self, from: data)
     }
     
     func map(_ dict: [String: Any]) -> [LensView.TabView.TreeNode] {
@@ -151,27 +145,37 @@ extension TAGALens {
         return contents
     }
 
-    func map(actions: [(UUID, TAGAAction)]) -> [LensView.TableView.Row] {
+    func map(_ events: [(UUID, ReduxEvent)]) -> [LensView.TableView.Row] {
         zip(
-            timestampDiff(for: actions),
-            actions
-        ).map { timeStamp, action in
+            timestampDiff(for: events),
+            events
+        ).map { timeStamp, event in
             LensView.TableView.Row.init(
-                info1: action.1.name,
+                info1: event.1.name,
                 info2: timeStamp.toString(),
-                id: action.0
+                id: event.0
             )
-        }
+        }.reversed()
     }
     
-    func timestampDiff(for actions: [(UUID, TAGAAction)]) -> [TimeInterval] {
-        [0] + zip(actions.dropFirst(), actions.dropLast()).map { $0.1.timestamp - $1.1.timestamp }
+    func sharingData(for events: [(UUID, ReduxEvent)]) -> String {
+        zip(
+            events,
+            timestampDiff(for: events)
+        )
+        .map { $0.1.name + ", " + $1.toString() }
+        .reversed()
+        .joined(separator: "\n")
     }
     
-    func diff(for action: TAGAAction) -> String {
+    func timestampDiff(for events: [(UUID, ReduxEvent)]) -> [TimeInterval] {
+        [0] + zip(events.dropFirst(), events.dropLast()).map { $0.1.timestamp - $1.1.timestamp }
+    }
+    
+    func diff(for event: ReduxEvent) -> String {
         CustomDump.diff(
-            action.stateBefore,
-            action.stateAfter,
+            event.stateBefore,
+            event.stateAfter,
             format: .init(first: "\u{274C}", second: "\u{2705}", both: " ")
         ) ?? "no changes..."
     }

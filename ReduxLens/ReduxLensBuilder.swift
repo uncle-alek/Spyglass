@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class TAGALensBuilder: LensBuilder {
+final class ReduxLensBuilder: LensBuilder {
     
     override init() {}
     
     override func build() -> Lens {
-        TAGALens()
+        ReduxLens()
     }
 }
