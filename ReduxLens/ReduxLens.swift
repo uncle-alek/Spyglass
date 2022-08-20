@@ -146,24 +146,14 @@ extension ReduxLens {
     }
 
     func map(_ events: [(UUID, ReduxEvent)]) -> [LensView.TableView.Row] {
-        zip(
-            timestampDiff(for: events),
-            events
-        ).map { timeStamp, event in
-            LensView.TableView.Row.init(
-                info1: event.1.name,
-                info2: timeStamp.toString(),
-                id: event.0
-            )
-        }.reversed()
+        zip(timestampDiff(for: events), events)
+        .map { t, e in .init(info1: e.1.name, info2: t.toString(), id: e.0)}
+        .reversed()
     }
     
     func sharingData(for events: [(UUID, ReduxEvent)]) -> String {
-        zip(
-            events,
-            timestampDiff(for: events)
-        )
-        .map { $0.1.name + ", " + $1.toString() }
+        zip(events, timestampDiff(for: events))
+        .map { e, t in e.1.name + ", " + t.toString() }
         .reversed()
         .joined(separator: "\n")
     }
