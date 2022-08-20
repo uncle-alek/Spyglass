@@ -11,7 +11,7 @@ enum LensView {
 
     struct TableView {
         
-        struct Row: Identifiable {
+        struct Row: Identifiable, Equatable {
             let info1: String
             let info2: String
             let id: UUID

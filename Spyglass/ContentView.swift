@@ -5,7 +5,7 @@
 //  Created by Aleksey Yakimenko on 25/7/22.
 //
 
-import AppKit
+import AVFoundation
 import SwiftUI
 import HighlightedTextEditor
 
@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var selectedInternalTab = 0
     @State var ranges: [NSRange] = []
     @State var currentIndex: Int = 0
+    @State var isMusicOn: Bool = true
         
     var body: some View {
         HStack {
@@ -34,7 +35,14 @@ struct ContentView: View {
             ) {
                 TableColumn(viewStore.tableView.column1.name, value: \.info1)
                 TableColumn(viewStore.tableView.column2.name, value: \.info2)
-            }.animation(.easeInOut, value: viewStore.tableView.rows.count)
+            }
+            .onChange(of: viewStore.tableView.rows) { rows in
+                guard isMusicOn else { return }
+                guard !rows.isEmpty else { return }
+                AudioServicesPlaySystemSound(1202)
+            }
+            .animation(.easeInOut, value: viewStore.tableView.rows.count)
+            
             
             TabView(selection: $selectedExternalTab) {
                 ForEach(Array(viewStore.tabView.tabs.enumerated()), id: \.1) { index, tab in
@@ -81,6 +89,13 @@ struct ContentView: View {
             .searchable(text: $searchText)
         }
         .toolbar {
+            Button{
+                isMusicOn.toggle()
+            } label: {
+                isMusicOn
+                ? Image(systemName: "speaker")
+                : Image(systemName: "speaker.slash")
+            }
             Menu {
                 Button{
                     viewStore.shareHistory()
