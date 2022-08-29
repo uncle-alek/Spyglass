@@ -86,7 +86,8 @@ struct ContentView: View {
                 pasteboard.declareTypes([.string], owner: nil)
                 pasteboard.setString(data, forType: .string)
             }
-            .searchable(text: $searchText)
+// MARK: Under construction
+//          .searchable(text: $searchText)
         }
         .toolbar {
             Button{
@@ -120,20 +121,20 @@ struct ContentView: View {
             .disabled(selected == nil)
             
             Spacer()
-            
-            Button {
-                currentIndex = (currentIndex + 1) % ranges.count
-            } label: {
-                Text("Find")
-            }
-            .disabled(ranges.isEmpty)
-            Button {
-                currentIndex = (currentIndex - 1) % ranges.count
-                currentIndex = currentIndex < 0 ? ranges.count + currentIndex : currentIndex
-            } label: {
-                Text("Find Prev")
-            }
-            .disabled(ranges.isEmpty)
+// MARK: Under construction
+//            Button {
+//                currentIndex = (currentIndex + 1) % ranges.count
+//            } label: {
+//                Text("Find")
+//            }
+//            .disabled(ranges.isEmpty)
+//            Button {
+//                currentIndex = (currentIndex - 1) % ranges.count
+//                currentIndex = currentIndex < 0 ? ranges.count + currentIndex : currentIndex
+//            } label: {
+//                Text("Find Prev")
+//            }
+//            .disabled(ranges.isEmpty)
         }
     }
 }
