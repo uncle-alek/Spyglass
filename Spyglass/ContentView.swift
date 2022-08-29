@@ -154,31 +154,29 @@ struct TabPageView: View {
                 ranges: $ranges,
                 currentIndex: currentIndex)
         case .tree(let tree):
-            JSONView(items: tree)
+            TreeView(tree: tree)
         }
     }
 }
 
-struct JSONView: View {
+struct TreeView: View {
     
-    let items: [LensView.TabView.TreeNode]
+    let tree: LensView.TabView.TreeNode
 
     var body: some View {
-        List{
-            ForEach(items) { item in
-                OutlineGroup(item, children:\.childrens) { child in
-                    if let value = child.value {
-                        HStack {
-                            Image(systemName: "doc")
-                            Text("\(child.name) :")
-                            Text("\(value)")
-                                .bold()
-                        }.textSelection(.enabled)
-                    } else {
-                        HStack {
-                            Image(systemName: "folder")
-                            Text(child.name)
-                        }
+        List {
+            OutlineGroup(tree, children: \.children) { child in
+                if let value = child.value {
+                    HStack {
+                        Image(systemName: "doc")
+                        Text("\(child.name) :")
+                        Text("\(value)")
+                            .bold()
+                    }.textSelection(.enabled)
+                } else {
+                    HStack {
+                        Image(systemName: "folder")
+                        Text(child.name)
                     }
                 }
             }

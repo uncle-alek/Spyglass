@@ -75,11 +75,11 @@ final class ReduxLens: Lens {
                     .init(name: "", type: .string(diff(for: event.1)))
                 ]),
                 .init(name: "State Before", pages: [
-                    .init(name: "JSON", type: .tree(map(event.1.stateBefore))),
+                    .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateBefore))),
                     .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateBefore)))
                 ]),
                 .init(name: "State After", pages: [
-                    .init(name: "JSON", type: .tree(map(event.1.stateAfter))),
+                    .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateAfter))),
                     .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateAfter)))
                 ])
             ]
@@ -108,41 +108,6 @@ extension ReduxLens {
     func parse(_ value: String) -> ReduxEvent {
         let data = value.data(using: .utf8)!
         return try! JSONDecoder().decode(ReduxEvent.self, from: data)
-    }
-    
-    func map(_ dict: [String: Any]) -> [LensView.TabView.TreeNode] {
-        var contents: [LensView.TabView.TreeNode] = []
-        
-        for (key, value) in dict.sorted(
-            by: { $0.0.localizedStandardCompare($1.0) == .orderedAscending }
-        ) {
-            var childrens: [LensView.TabView.TreeNode]? = nil
-            var contentValue: String? = nil
-            if let value = value as? [String: Any] {
-                if value.isEmpty {
-                    childrens = nil
-                } else {
-                    childrens = map(value)
-                }
-            } else if let value = value as? [Any] {
-                childrens = map(
-                    zip(1..., value).reduce(into: [String: Any]()) { (dict, zippedPair) in
-                        let (index, value) = zippedPair
-                        dict[String(index)] = value
-                    }
-                )
-            } else {
-                contentValue = String(reflecting: value)
-            }
-            contents.append(
-                LensView.TabView.TreeNode(
-                    name: key,
-                    value: contentValue,
-                    childrens: childrens?.isEmpty == true ? nil : childrens
-                )
-            )
-        }
-        return contents
     }
 
     func map(_ events: [(UUID, ReduxEvent)]) -> [LensView.TableView.Row] {
