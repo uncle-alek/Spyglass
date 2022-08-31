@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3328BF43E800627CC1 /* LoadJson.swift */; };
+		3C610F3628BF43E800627CC1 /* big_state.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C610F3428BF43E800627CC1 /* big_state.json */; };
 		3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A7288E777B003B9836 /* SpyglassApp.swift */; };
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C610F3328BF43E800627CC1 /* LoadJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadJson.swift; sourceTree = "<group>"; };
+		3C610F3428BF43E800627CC1 /* big_state.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = big_state.json; sourceTree = "<group>"; };
 		3C81E6A4288E777B003B9836 /* Spyglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spyglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C81E6A7288E777B003B9836 /* SpyglassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassApp.swift; sourceTree = "<group>"; };
 		3C81E6A9288E777B003B9836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C610F3228BF43E800627CC1 /* Fake */ = {
+			isa = PBXGroup;
+			children = (
+				3C610F3328BF43E800627CC1 /* LoadJson.swift */,
+				3C610F3428BF43E800627CC1 /* big_state.json */,
+			);
+			path = Fake;
+			sourceTree = "<group>";
+		};
 		3C81E69B288E777B003B9836 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +184,7 @@
 		3C81E6D5288E958D003B9836 /* ReduxLens */ = {
 			isa = PBXGroup;
 			children = (
+				3C610F3228BF43E800627CC1 /* Fake */,
 				3CD39FAC288EDB5C008A6E7B /* ReduxLensBuilder.swift */,
 				3CD39FAE288EDB78008A6E7B /* ReduxLens.swift */,
 				3CD39FB0288FB25A008A6E7B /* ReduxEvent.swift */,
@@ -293,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C81E6AF288E777C003B9836 /* Preview Assets.xcassets in Resources */,
+				3C610F3628BF43E800627CC1 /* big_state.json in Resources */,
 				3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +344,7 @@
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
 				3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */,
 				3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */,
+				3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,8 @@ import Combine
 import CustomDump
 import Foundation
 
+let TEST = true
+
 final class ReduxLens: Lens {
     
     var tablePublisher: AnyPublisher<LensView.TableView, Never> { tableSubject.eraseToAnyPublisher() }
@@ -22,20 +24,37 @@ final class ReduxLens: Lens {
     private let sharingDataSubject = PassthroughSubject<String?, Never>()
 
     func setup() {
-        let table = LensView.TableView(
-            column1: .init(name: "Action"),
-            column2: .init(name: "Timestamp"),
-            rows: []
-        )
-        tableSubject.send(table)
-        let tab = LensView.TabView(
-            tabs: [
-                .init(name: "States Diff", pages: []),
-                .init(name: "State Before", pages: []),
-                .init(name: "State After", pages: [])
-            ]
-        )
-        tabSubject.send(tab)
+        if TEST {
+            let table = LensView.TableView(
+                column1: .init(name: "Action"),
+                column2: .init(name: "Timestamp"),
+                rows: [.init(info1: "Test", info2: "Test", id: UUID())]
+            )
+            tableSubject.send(table)
+            let tab = LensView.TabView(
+                tabs: [
+                    .init(name: "States Diff", pages: []),
+                    .init(name: "State Before", pages: []),
+                    .init(name: "State After", pages: [])
+                ]
+            )
+            tabSubject.send(tab)
+        } else {
+            let table = LensView.TableView(
+                column1: .init(name: "Action"),
+                column2: .init(name: "Timestamp"),
+                rows: []
+            )
+            tableSubject.send(table)
+            let tab = LensView.TabView(
+                tabs: [
+                    .init(name: "States Diff", pages: []),
+                    .init(name: "State Before", pages: []),
+                    .init(name: "State After", pages: [])
+                ]
+            )
+            tabSubject.send(tab)
+        }
     }
     
     func reset() {
@@ -68,23 +87,34 @@ final class ReduxLens: Lens {
     }
     
     func selectItem(with id: UUID) {
-        guard let event = events.first(where: { $0.0 == id }) else { return }
-        let tab = LensView.TabView(
-            tabs: [
-                .init(name: "States Diff", pages: [
-                    .init(name: "", type: .string(diff(for: event.1)))
-                ]),
-                .init(name: "State Before", pages: [
-                    .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateBefore))),
-                    .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateBefore)))
-                ]),
-                .init(name: "State After", pages: [
-                    .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateAfter))),
-                    .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateAfter)))
-                ])
-            ]
-        )
-        tabSubject.send(tab)
+        if TEST {
+            let tab = LensView.TabView(
+                tabs: [
+                    .init(name: "Test", pages: [
+                        .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", loadJson())))
+                    ])
+                ]
+            )
+            tabSubject.send(tab)
+        } else {
+            guard let event = events.first(where: { $0.0 == id }) else { return }
+            let tab = LensView.TabView(
+                tabs: [
+                    .init(name: "States Diff", pages: [
+                        .init(name: "", type: .string(diff(for: event.1)))
+                    ]),
+                    .init(name: "State Before", pages: [
+                        .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateBefore))),
+                        .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateBefore)))
+                    ]),
+                    .init(name: "State After", pages: [
+                        .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateAfter))),
+                        .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateAfter)))
+                    ])
+                ]
+            )
+            tabSubject.send(tab)
+        }
     }
     
     func navigateToItem(with id: UUID) {
