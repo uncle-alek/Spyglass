@@ -8,6 +8,28 @@
 import CustomDump
 import Foundation
 
+fileprivate enum Strings {
+    enum Column {
+        static let action = "Action"
+        static let timestamp = "Timestamp"
+    }
+    enum Tab {
+        static let diff = "States Diff"
+        static let before = "State Before"
+        static let after = "State After"
+        static let json = "JSON"
+        static let raw = "Raw"
+    }
+    enum Tree {
+        static let head = "AppState"
+    }
+    enum Diff {
+        static let noChanges = "no changes..."
+        static let removed = "\u{274C}"
+        static let added = "\u{2705}"
+    }
+}
+
 struct AppViewState: Equatable {
     var tableView: LensView.TableView
     var tabView: LensView.TabView
@@ -15,30 +37,40 @@ struct AppViewState: Equatable {
     
     init(_ state: AppState) {
         self.tableView = LensView.TableView(
-            column1: .init(name: "Action"),
-            column2: .init(name: "Timestamp"),
+            column1: .init(name: Strings.Column.action),
+            column2: .init(name: Strings.Column.timestamp),
             rows: state.events.rows
         )
         self.tabView = LensView.TabView(
             tabs: [
                 .init(
-                    name: "States Diff",
+                    name: Strings.Tab.diff,
                     pages: [
-                        state.selectedItem.map { .init(name: "", type: .string($0.diff)) }
+                        state.selectedItem.map {
+                            .init(name: "", type: .string($0.diff))
+                        }
                     ].compactMap { $0 }
                 ),
                 .init(
-                    name: "State Before",
+                    name: Strings.Tab.before,
                     pages: [
-                        state.selectedItem.map { .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", $0.stateBefore))) },
-                        state.selectedItem.map { .init(name: "Raw", type: .string($0.stateBefore.prettyPrinted)) }
+                        state.selectedItem.map {
+                            .init(name: Strings.Tab.json, type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateBefore)))
+                        },
+                        state.selectedItem.map {
+                            .init(name: Strings.Tab.raw, type: .string($0.stateBefore.prettyPrinted))
+                        }
                     ].compactMap { $0 }
                 ),
                 .init(
-                    name: "State After",
+                    name: Strings.Tab.after,
                     pages: [
-                        state.selectedItem.map { .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", $0.stateAfter))) },
-                        state.selectedItem.map { .init(name: "Raw", type: .string($0.stateAfter.prettyPrinted)) }
+                        state.selectedItem.map {
+                            .init(name: Strings.Tab.json, type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateAfter)))
+                        },
+                        state.selectedItem.map {
+                            .init(name: Strings.Tab.raw, type: .string($0.stateAfter.prettyPrinted))
+                        }
                     ].compactMap { $0 }
                 )
             ]
@@ -53,8 +85,8 @@ extension ReduxEvent {
         CustomDump.diff(
             self.stateBefore,
             self.stateAfter,
-            format: .init(first: "\u{274C}", second: "\u{2705}", both: " ")
-        ) ?? "no changes..."
+            format: .init(first: Strings.Diff.removed, second: Strings.Diff.added, both: " ")
+        ) ?? Strings.Diff.noChanges
     }
 }
 
