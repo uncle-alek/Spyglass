@@ -15,6 +15,9 @@
 		3C610F4128BF542700627CC1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4028BF542700627CC1 /* State.swift */; };
 		3C610F4328BF54C000627CC1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4228BF54C000627CC1 /* Environment.swift */; };
 		3C610F4528BF5DD200627CC1 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4428BF5DD200627CC1 /* ViewState.swift */; };
+		3C61162828BF6C5400627CC1 /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162728BF6C5400627CC1 /* TreeView.swift */; };
+		3C61162A28BF6C7600627CC1 /* TextEd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162928BF6C7600627CC1 /* TextEd.swift */; };
+		3C61162C28BF6CDC00627CC1 /* TabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162B28BF6CDC00627CC1 /* TabPageView.swift */; };
 		3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A7288E777B003B9836 /* SpyglassApp.swift */; };
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
@@ -61,6 +64,9 @@
 		3C610F4028BF542700627CC1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		3C610F4228BF54C000627CC1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		3C610F4428BF5DD200627CC1 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		3C61162728BF6C5400627CC1 /* TreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
+		3C61162928BF6C7600627CC1 /* TextEd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEd.swift; sourceTree = "<group>"; };
+		3C61162B28BF6CDC00627CC1 /* TabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageView.swift; sourceTree = "<group>"; };
 		3C81E6A4288E777B003B9836 /* Spyglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spyglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C81E6A7288E777B003B9836 /* SpyglassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassApp.swift; sourceTree = "<group>"; };
 		3C81E6A9288E777B003B9836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,6 +139,17 @@
 			path = TCA;
 			sourceTree = "<group>";
 		};
+		3C61162628BF6C1900627CC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3C81E6A9288E777B003B9836 /* ContentView.swift */,
+				3C61162728BF6C5400627CC1 /* TreeView.swift */,
+				3C61162928BF6C7600627CC1 /* TextEd.swift */,
+				3C61162B28BF6CDC00627CC1 /* TabPageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3C81E69B288E777B003B9836 = {
 			isa = PBXGroup;
 			children = (
@@ -158,11 +175,11 @@
 		3C81E6A6288E777B003B9836 /* Spyglass */ = {
 			isa = PBXGroup;
 			children = (
+				3C61162628BF6C1900627CC1 /* View */,
 				3C81E6E1288EA42F003B9836 /* Spyglass.swift */,
 				3C81E6E3288EA520003B9836 /* WebsocketServer.swift */,
 				3C81E6DB288E9E97003B9836 /* LensLoader.swift */,
 				3C81E6A7288E777B003B9836 /* SpyglassApp.swift */,
-				3C81E6A9288E777B003B9836 /* ContentView.swift */,
 				3C81E6AB288E777C003B9836 /* Assets.xcassets */,
 				3C81E6B0288E777C003B9836 /* Spyglass.entitlements */,
 				3C81E6AD288E777C003B9836 /* Preview Content */,
@@ -365,13 +382,16 @@
 				3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */,
 				3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */,
 				3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */,
+				3C61162C28BF6CDC00627CC1 /* TabPageView.swift in Sources */,
 				3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */,
+				3C61162828BF6C5400627CC1 /* TreeView.swift in Sources */,
 				3CD39FAF288EDB78008A6E7B /* ReduxLens.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
 				3C610F4128BF542700627CC1 /* State.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
 				3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */,
+				3C61162A28BF6C7600627CC1 /* TextEd.swift in Sources */,
 				3C610F3D28BF52A200627CC1 /* Reducer.swift in Sources */,
 				3C610F3F28BF52DF00627CC1 /* Action.swift in Sources */,
 				3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */,
