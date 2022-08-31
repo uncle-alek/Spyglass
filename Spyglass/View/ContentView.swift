@@ -38,7 +38,7 @@ struct ContentView: View {
             .onChange(of: viewStore.tableView.rows) { rows in
                 guard isMusicOn else { return }
                 guard !rows.isEmpty else { return }
-                AudioServicesPlaySystemSound(1202)
+                AudioServicesPlaySystemSound(1396)
             }
             .animation(.easeInOut, value: viewStore.tableView.rows.count)
             
