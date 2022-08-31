@@ -31,7 +31,9 @@ final class WebSocketServer {
         sockets.forEach { (socketName: String, callback: @escaping (String) -> Void) in
             app.webSocket(PathComponent(stringLiteral: socketName), maxFrameSize: WebSocketServer.maxFrameSize) { req, ws in
                 ws.onText { ws, text in
-                    callback(text)
+                    DispatchQueue.main.async {
+                        callback(text)
+                    }
                 }
                 ws.onClose.whenComplete { _ in
                     print("Web socket disconnected from server")

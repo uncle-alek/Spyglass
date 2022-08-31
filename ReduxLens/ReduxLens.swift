@@ -36,32 +36,22 @@ final class ReduxLens: Lens {
     }
     
     func setup() {
-        DispatchQueue.main.async {
-            self.viewStore.send(.setup)
-        }
+        viewStore.send(.setup)
     }
     
     func reset() {
-        DispatchQueue.main.async {
-            self.viewStore.send(.reset)
-        }
+        viewStore.send(.reset)
     }
     
     func receive(_ value: String) {
-        DispatchQueue.main.async {
-            self.viewStore.send(.receive(value))
-        }
+        viewStore.send(.receive(value))
     }
     
     func selectItem(with id: UUID) {
-        DispatchQueue.main.async {
-            self.viewStore.send(.selectItem(id: id))
-        }
+        viewStore.send(.selectItem(id: id))
     }
     
     func navigateToItem(with id: UUID) {
-        DispatchQueue.main.async {
-            self.viewStore.send(.navigateToItem(id: id))
-        }
+        viewStore.send(.navigateToItem(id: id))
     }
 }
