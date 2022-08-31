@@ -21,7 +21,7 @@ final class ReduxLens: Lens {
         Store(
             initialState: AppState(),
             reducer: FAKE ? appReducer_fake : appReducer,
-            environment: AppEnvironment(shell: shell)
+            environment: appEnvironment
         )
     }
     private let viewStore: ComposableArchitecture.ViewStore<AppViewState, AppAction> = ComposableArchitecture.ViewStore(

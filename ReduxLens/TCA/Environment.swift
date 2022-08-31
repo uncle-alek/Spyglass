@@ -7,6 +7,8 @@
 
 import Foundation
 
+var appEnvironment = AppEnvironment(shell: shell)
+
 struct AppEnvironment {
     var shell: (String...) -> Int32
 }
