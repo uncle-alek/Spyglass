@@ -77,31 +77,25 @@ extension LensView.TabView.TreeNode {
         self.init(
             name: rootName,
             value: nil,
-            children: LensView.TabView.TreeNode.map(dict)
+            children: dict.treeNodes
         )
     }
+}
+
+extension Dictionary where Key == String, Value: Any {
     
-    static public func map(_ dict: [String: Any]) -> [LensView.TabView.TreeNode] {
+    var treeNodes: [LensView.TabView.TreeNode] {
         var contents: [LensView.TabView.TreeNode] = []
         
-        for (key, value) in dict.sorted(
+        for (key, value) in self.sorted(
             by: { $0.0.localizedStandardCompare($1.0) == .orderedAscending }
         ) {
             var children: [LensView.TabView.TreeNode]? = nil
             var contentValue: String? = nil
             if let value = value as? [String: Any] {
-                if value.isEmpty {
-                    children = nil
-                } else {
-                    children = map(value)
-                }
+                children = value.treeNodes
             } else if let value = value as? [Any] {
-                children = map(
-                    zip(1..., value).reduce(into: [String: Any]()) { (dict, zippedPair) in
-                        let (index, value) = zippedPair
-                        dict[String(index)] = value
-                    }
-                )
+                children = value.numberedDictionary.treeNodes
             } else {
                 contentValue = String(reflecting: value)
             }
@@ -114,5 +108,15 @@ extension LensView.TabView.TreeNode {
             )
         }
         return contents
+    }
+}
+
+extension Array {
+    
+    var numberedDictionary: [String: Element] {
+        zip(1..., self).reduce(into: [String: Element]()) { (result, zippedPair) in
+            let (index, value) = zippedPair
+            result[String(index)] = value
+        }
     }
 }
