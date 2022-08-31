@@ -9,7 +9,7 @@ import Foundation
 
 enum LensView {
 
-    struct TableView {
+    struct TableView: Equatable {
         
         struct Row: Identifiable, Equatable {
             let info1: String
@@ -17,7 +17,7 @@ enum LensView {
             let id: UUID
         }
         
-        struct Column {
+        struct Column: Equatable {
             let name: String
         }
         
@@ -32,7 +32,7 @@ enum LensView {
         )
     }
 
-    struct TabView {
+    struct TabView: Equatable {
         
         struct TreeNode: Identifiable, Hashable {
             let id = UUID()

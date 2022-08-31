@@ -6,192 +6,50 @@
 //
 
 import Combine
-import CustomDump
+import ComposableArchitecture
 import Foundation
 
-let TEST = true
-
 final class ReduxLens: Lens {
-    
-    var tablePublisher: AnyPublisher<LensView.TableView, Never> { tableSubject.eraseToAnyPublisher() }
-    var tabPublisher: AnyPublisher<LensView.TabView, Never> { tabSubject.eraseToAnyPublisher() }
-    var sharingData: AnyPublisher<String?, Never> { sharingDataSubject.eraseToAnyPublisher() }
+    var tablePublisher: AnyPublisher<LensView.TableView, Never>
+    var tabPublisher: AnyPublisher<LensView.TabView, Never>
+    var sharingData: AnyPublisher<String?, Never>
     var connectionPath: String { "redux" }
     
-    private var events: [(UUID, ReduxEvent)] = []
-    private let tableSubject = PassthroughSubject<LensView.TableView, Never>()
-    private let tabSubject = PassthroughSubject<LensView.TabView, Never>()
-    private let sharingDataSubject = PassthroughSubject<String?, Never>()
+    private static func store() -> Store<AppState, AppAction> {
+        Store(initialState: AppState(), reducer: appReducer, environment: AppEnvironment(shell: shell))
+    }
+    private let viewStore: ComposableArchitecture.ViewStore<AppViewState, AppAction> = ComposableArchitecture.ViewStore(
+        store().scope(state: AppViewState.init),
+        removeDuplicates: ==
+    )
+    
+    init() {
+        tablePublisher = viewStore.publisher.tableView.eraseToAnyPublisher()
+        tabPublisher = viewStore.publisher.tabView.eraseToAnyPublisher()
+        sharingData = viewStore.publisher.sharingHistory.eraseToAnyPublisher()
+    }
 
     func setup() {
-        if TEST {
-            let table = LensView.TableView(
-                column1: .init(name: "Action"),
-                column2: .init(name: "Timestamp"),
-                rows: [.init(info1: "Test", info2: "Test", id: UUID())]
-            )
-            tableSubject.send(table)
-            let tab = LensView.TabView(
-                tabs: [
-                    .init(name: "States Diff", pages: []),
-                    .init(name: "State Before", pages: []),
-                    .init(name: "State After", pages: [])
-                ]
-            )
-            tabSubject.send(tab)
-        } else {
-            let table = LensView.TableView(
-                column1: .init(name: "Action"),
-                column2: .init(name: "Timestamp"),
-                rows: []
-            )
-            tableSubject.send(table)
-            let tab = LensView.TabView(
-                tabs: [
-                    .init(name: "States Diff", pages: []),
-                    .init(name: "State Before", pages: []),
-                    .init(name: "State After", pages: [])
-                ]
-            )
-            tabSubject.send(tab)
-        }
+        viewStore.send(.setup)
     }
     
     func reset() {
-        let table = LensView.TableView(
-            column1: .init(name: "Action"),
-            column2: .init(name: "Timestamp"),
-            rows: []
-        )
-        tableSubject.send(table)
-        let tab = LensView.TabView(
-            tabs: [
-                .init(name: "States Diff", pages: []),
-                .init(name: "State Before", pages: []),
-                .init(name: "State After", pages: [])
-            ]
-        )
-        tabSubject.send(tab)
-        events = []
+        viewStore.send(.reset)
     }
     
     func receive(_ value: String) {
-        let action = parse(value)
-        events.append((UUID(), action))
-        let table = LensView.TableView(
-            column1: .init(name: "Action"),
-            column2: .init(name: "Timestamp"),
-            rows: map(events)
-        )
-        tableSubject.send(table)
+        viewStore.send(.receive(value))
     }
     
     func selectItem(with id: UUID) {
-        if TEST {
-            let tab = LensView.TabView(
-                tabs: [
-                    .init(name: "Test", pages: [
-                        .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", loadJson())))
-                    ])
-                ]
-            )
-            tabSubject.send(tab)
-        } else {
-            guard let event = events.first(where: { $0.0 == id }) else { return }
-            let tab = LensView.TabView(
-                tabs: [
-                    .init(name: "States Diff", pages: [
-                        .init(name: "", type: .string(diff(for: event.1)))
-                    ]),
-                    .init(name: "State Before", pages: [
-                        .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateBefore))),
-                        .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateBefore)))
-                    ]),
-                    .init(name: "State After", pages: [
-                        .init(name: "JSON", type: .tree(LensView.TabView.TreeNode("AppState", event.1.stateAfter))),
-                        .init(name: "Raw", type: .string(prettyPrinted(state: event.1.stateAfter)))
-                    ])
-                ]
-            )
-            tabSubject.send(tab)
-        }
+        viewStore.send(.selectItem(id: id))
     }
     
     func navigateToItem(with id: UUID) {
-        guard let event = events.first(where: { $0.0 == id }) else { return }
-        guard let file = event.1.file else { return }
-        guard let line = event.1.line else { return }
-        
-        DispatchQueue.global().async {
-            shell("xed", "-x", file)
-            shell("xed", "-x", "-l", String(line))
-        }
+        viewStore.send(.navigateToItem(id: id))
     }
     
     func shareHistory() {
-        sharingDataSubject.send(sharingData(for: events))
+        viewStore.send(.shareHistory)
     }
-}
-
-extension ReduxLens {
-    
-    func parse(_ value: String) -> ReduxEvent {
-        let data = value.data(using: .utf8)!
-        return try! JSONDecoder().decode(ReduxEvent.self, from: data)
-    }
-
-    func map(_ events: [(UUID, ReduxEvent)]) -> [LensView.TableView.Row] {
-        zip(timestampDiff(for: events), events)
-        .map { t, e in .init(info1: e.1.name, info2: t.toString(), id: e.0)}
-        .reversed()
-    }
-    
-    func sharingData(for events: [(UUID, ReduxEvent)]) -> String {
-        zip(events, timestampDiff(for: events))
-        .map { e, t in e.1.name + ", " + t.toString() }
-        .reversed()
-        .joined(separator: "\n")
-    }
-    
-    func timestampDiff(for events: [(UUID, ReduxEvent)]) -> [TimeInterval] {
-        [0] + zip(events.dropFirst(), events.dropLast()).map { $0.1.timestamp - $1.1.timestamp }
-    }
-    
-    func diff(for event: ReduxEvent) -> String {
-        CustomDump.diff(
-            event.stateBefore,
-            event.stateAfter,
-            format: .init(first: "\u{274C}", second: "\u{2705}", both: " ")
-        ) ?? "no changes..."
-    }
-    
-    func prettyPrinted(state: [String: Any]) -> String {
-        let data = try! JSONSerialization.data(withJSONObject: state, options: [.prettyPrinted, .sortedKeys])
-        return String(decoding: data, as: UTF8.self)
-    }
-}
-
-extension TimeInterval {
-    
-    func toString() -> String {
-        String(format: "+ %0.1d:%0.3d s", seconds, milliseconds)
-    }
-    
-    var seconds: Int {
-        Int(truncatingRemainder(dividingBy: 60))
-    }
-    
-    var milliseconds: Int {
-        Int((self*1000).truncatingRemainder(dividingBy: 1000))
-    }
-}
-
-@discardableResult
-func shell(_ args: String...) -> Int32 {
-    let task = Process()
-    task.launchPath = "/usr/bin/env"
-    task.arguments = args
-    task.launch()
-    task.waitUntilExit()
-    return task.terminationStatus
 }

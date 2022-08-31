@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3328BF43E800627CC1 /* LoadJson.swift */; };
 		3C610F3628BF43E800627CC1 /* big_state.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C610F3428BF43E800627CC1 /* big_state.json */; };
+		3C610F3928BF4ADA00627CC1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 3C610F3828BF4ADA00627CC1 /* ComposableArchitecture */; };
+		3C610F3D28BF52A200627CC1 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3C28BF52A200627CC1 /* Reducer.swift */; };
+		3C610F3F28BF52DF00627CC1 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3E28BF52DF00627CC1 /* Action.swift */; };
+		3C610F4128BF542700627CC1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4028BF542700627CC1 /* State.swift */; };
+		3C610F4328BF54C000627CC1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4228BF54C000627CC1 /* Environment.swift */; };
+		3C610F4528BF5DD200627CC1 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4428BF5DD200627CC1 /* ViewState.swift */; };
 		3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A7288E777B003B9836 /* SpyglassApp.swift */; };
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
@@ -50,6 +56,11 @@
 /* Begin PBXFileReference section */
 		3C610F3328BF43E800627CC1 /* LoadJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadJson.swift; sourceTree = "<group>"; };
 		3C610F3428BF43E800627CC1 /* big_state.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = big_state.json; sourceTree = "<group>"; };
+		3C610F3C28BF52A200627CC1 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		3C610F3E28BF52DF00627CC1 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		3C610F4028BF542700627CC1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		3C610F4228BF54C000627CC1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		3C610F4428BF5DD200627CC1 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		3C81E6A4288E777B003B9836 /* Spyglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spyglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C81E6A7288E777B003B9836 /* SpyglassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassApp.swift; sourceTree = "<group>"; };
 		3C81E6A9288E777B003B9836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +90,7 @@
 			files = (
 				3C81E6DA288E9D2C003B9836 /* Vapor in Frameworks */,
 				3CD3A0342896BB78008A6E7B /* HighlightedTextEditor in Frameworks */,
+				3C610F3928BF4ADA00627CC1 /* ComposableArchitecture in Frameworks */,
 				3CD3A02E28910D40008A6E7B /* CustomDump in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +119,18 @@
 				3C610F3428BF43E800627CC1 /* big_state.json */,
 			);
 			path = Fake;
+			sourceTree = "<group>";
+		};
+		3C610F3B28BF529800627CC1 /* TCA */ = {
+			isa = PBXGroup;
+			children = (
+				3C610F3C28BF52A200627CC1 /* Reducer.swift */,
+				3C610F3E28BF52DF00627CC1 /* Action.swift */,
+				3C610F4028BF542700627CC1 /* State.swift */,
+				3C610F4228BF54C000627CC1 /* Environment.swift */,
+				3C610F4428BF5DD200627CC1 /* ViewState.swift */,
+			);
+			path = TCA;
 			sourceTree = "<group>";
 		};
 		3C81E69B288E777B003B9836 = {
@@ -184,6 +208,7 @@
 		3C81E6D5288E958D003B9836 /* ReduxLens */ = {
 			isa = PBXGroup;
 			children = (
+				3C610F3B28BF529800627CC1 /* TCA */,
 				3C610F3228BF43E800627CC1 /* Fake */,
 				3CD39FAC288EDB5C008A6E7B /* ReduxLensBuilder.swift */,
 				3CD39FAE288EDB78008A6E7B /* ReduxLens.swift */,
@@ -212,6 +237,7 @@
 				3C81E6D9288E9D2C003B9836 /* Vapor */,
 				3CD3A02D28910D40008A6E7B /* CustomDump */,
 				3CD3A0332896BB78008A6E7B /* HighlightedTextEditor */,
+				3C610F3828BF4ADA00627CC1 /* ComposableArchitecture */,
 			);
 			productName = Spyglass;
 			productReference = 3C81E6A4288E777B003B9836 /* Spyglass.app */;
@@ -289,6 +315,7 @@
 				3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */,
 				3CD3A02C28910D40008A6E7B /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 				3CD3A0322896BB78008A6E7B /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
+				3C610F3728BF4ADA00627CC1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 3C81E6A5288E777B003B9836 /* Products */;
 			projectDirPath = "";
@@ -334,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CD39FAD288EDB5C008A6E7B /* ReduxLensBuilder.swift in Sources */,
+				3C610F4328BF54C000627CC1 /* Environment.swift in Sources */,
 				3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */,
 				3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */,
 				3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */,
@@ -341,9 +369,13 @@
 				3CD39FAF288EDB78008A6E7B /* ReduxLens.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
+				3C610F4128BF542700627CC1 /* State.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
 				3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */,
+				3C610F3D28BF52A200627CC1 /* Reducer.swift in Sources */,
+				3C610F3F28BF52DF00627CC1 /* Action.swift in Sources */,
 				3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */,
+				3C610F4528BF5DD200627CC1 /* ViewState.swift in Sources */,
 				3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,6 +688,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3C610F3728BF4ADA00627CC1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
 		3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vapor/vapor.git";
@@ -683,6 +723,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3C610F3828BF4ADA00627CC1 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C610F3728BF4ADA00627CC1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
 		3C81E6D9288E9D2C003B9836 /* Vapor */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */;
