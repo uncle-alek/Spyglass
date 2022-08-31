@@ -9,6 +9,8 @@ import Combine
 import ComposableArchitecture
 import Foundation
 
+let FAKE = false
+
 final class ReduxLens: Lens {
     var tablePublisher: AnyPublisher<LensView.TableView, Never>
     var tabPublisher: AnyPublisher<LensView.TabView, Never>
@@ -16,7 +18,11 @@ final class ReduxLens: Lens {
     var connectionPath: String { "redux" }
     
     private static func store() -> Store<AppState, AppAction> {
-        Store(initialState: AppState(), reducer: appReducer, environment: AppEnvironment(shell: shell))
+        Store(
+            initialState: AppState(),
+            reducer: FAKE ? appReducer_fake : appReducer,
+            environment: AppEnvironment(shell: shell)
+        )
     }
     private let viewStore: ComposableArchitecture.ViewStore<AppViewState, AppAction> = ComposableArchitecture.ViewStore(
         store().scope(state: AppViewState.init),

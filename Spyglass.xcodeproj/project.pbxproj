@@ -18,6 +18,7 @@
 		3C61162828BF6C5400627CC1 /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162728BF6C5400627CC1 /* TreeView.swift */; };
 		3C61162A28BF6C7600627CC1 /* TextEd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162928BF6C7600627CC1 /* TextEd.swift */; };
 		3C61162C28BF6CDC00627CC1 /* TabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162B28BF6CDC00627CC1 /* TabPageView.swift */; };
+		3C61162E28BF7C0400627CC1 /* FakeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162D28BF7C0400627CC1 /* FakeReducer.swift */; };
 		3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A7288E777B003B9836 /* SpyglassApp.swift */; };
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		3C61162728BF6C5400627CC1 /* TreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
 		3C61162928BF6C7600627CC1 /* TextEd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEd.swift; sourceTree = "<group>"; };
 		3C61162B28BF6CDC00627CC1 /* TabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageView.swift; sourceTree = "<group>"; };
+		3C61162D28BF7C0400627CC1 /* FakeReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeReducer.swift; sourceTree = "<group>"; };
 		3C81E6A4288E777B003B9836 /* Spyglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spyglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C81E6A7288E777B003B9836 /* SpyglassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassApp.swift; sourceTree = "<group>"; };
 		3C81E6A9288E777B003B9836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				3C610F3328BF43E800627CC1 /* LoadJson.swift */,
 				3C610F3428BF43E800627CC1 /* big_state.json */,
+				3C61162D28BF7C0400627CC1 /* FakeReducer.swift */,
 			);
 			path = Fake;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				3C610F3D28BF52A200627CC1 /* Reducer.swift in Sources */,
 				3C610F3F28BF52DF00627CC1 /* Action.swift in Sources */,
 				3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */,
+				3C61162E28BF7C0400627CC1 /* FakeReducer.swift in Sources */,
 				3C610F4528BF5DD200627CC1 /* ViewState.swift in Sources */,
 				3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */,
 			);
