@@ -13,5 +13,4 @@ enum AppAction: Equatable {
     case receive(_ value: String)
     case selectItem(id: UUID)
     case navigateToItem(id: UUID)
-    case shareHistory
 }

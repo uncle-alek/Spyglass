@@ -43,7 +43,7 @@ struct AppViewState: Equatable {
                 )
             ]
         )
-        self.sharingHistory = state.events.sharingData
+        self.sharingHistory = state.events.isEmpty ? nil : state.events.sharingData
     }
 }
 

@@ -32,8 +32,6 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
             _ = environment.shell("xed", "-x", file)
             _ = environment.shell("xed", "-x", "-l", String(line))
         }
-    case .shareHistory:
-        return .none
     }
 }
 

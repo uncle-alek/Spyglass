@@ -20,5 +20,4 @@ protocol Lens {
     func receive(_ value: String)
     func selectItem(with id: UUID)
     func navigateToItem(with id: UUID)
-    func shareHistory()
 }

@@ -64,10 +64,4 @@ final class ReduxLens: Lens {
             self.viewStore.send(.navigateToItem(id: id))
         }
     }
-    
-    func shareHistory() {
-        DispatchQueue.main.async {
-            self.viewStore.send(.shareHistory)
-        }
-    }
 }

@@ -20,8 +20,7 @@ let appReducer_fake = Reducer<AppState, AppAction, AppEnvironment> { state, acti
         return .none
     case .reset,
          .receive(_),
-         .navigateToItem(_),
-         .shareHistory:
+         .navigateToItem(_):
         return .none
     }
 }

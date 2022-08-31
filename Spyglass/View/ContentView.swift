@@ -79,12 +79,6 @@ struct ContentView: View {
             .onChange(of: ranges) { _ in
                 currentIndex = 0
             }
-            .onChange(of: viewStore.sharingData) { data in
-                guard let data = data else { return }
-                let pasteboard = NSPasteboard.general
-                pasteboard.declareTypes([.string], owner: nil)
-                pasteboard.setString(data, forType: .string)
-            }
 // MARK: Under construction
 //          .searchable(text: $searchText)
         }
@@ -97,12 +91,15 @@ struct ContentView: View {
                 : Image(systemName: "speaker.slash")
             }
             Menu {
-                Button{
-                    viewStore.shareHistory()
+                Button {
+                    guard let data = viewStore.sharingData else { return }
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.declareTypes([.string], owner: nil)
+                    pasteboard.setString(data, forType: .string)
                 } label: {
                     Text("copy all actions")
                 }
-                .disabled(viewStore.tableView.rows.isEmpty)
+                .disabled(viewStore.sharingData == nil)
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }
