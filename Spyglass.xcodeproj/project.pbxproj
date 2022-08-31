@@ -19,6 +19,7 @@
 		3C61162A28BF6C7600627CC1 /* TextEd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162928BF6C7600627CC1 /* TextEd.swift */; };
 		3C61162C28BF6CDC00627CC1 /* TabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162B28BF6CDC00627CC1 /* TabPageView.swift */; };
 		3C61162E28BF7C0400627CC1 /* FakeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162D28BF7C0400627CC1 /* FakeReducer.swift */; };
+		3C61163128BF8B7400627CC1 /* OutlineView in Frameworks */ = {isa = PBXBuildFile; productRef = 3C61163028BF8B7400627CC1 /* OutlineView */; };
 		3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A7288E777B003B9836 /* SpyglassApp.swift */; };
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
@@ -100,6 +101,7 @@
 				3CD3A0342896BB78008A6E7B /* HighlightedTextEditor in Frameworks */,
 				3C610F3928BF4ADA00627CC1 /* ComposableArchitecture in Frameworks */,
 				3CD3A02E28910D40008A6E7B /* CustomDump in Frameworks */,
+				3C61163128BF8B7400627CC1 /* OutlineView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +260,7 @@
 				3CD3A02D28910D40008A6E7B /* CustomDump */,
 				3CD3A0332896BB78008A6E7B /* HighlightedTextEditor */,
 				3C610F3828BF4ADA00627CC1 /* ComposableArchitecture */,
+				3C61163028BF8B7400627CC1 /* OutlineView */,
 			);
 			productName = Spyglass;
 			productReference = 3C81E6A4288E777B003B9836 /* Spyglass.app */;
@@ -336,6 +339,7 @@
 				3CD3A02C28910D40008A6E7B /* XCRemoteSwiftPackageReference "swift-custom-dump" */,
 				3CD3A0322896BB78008A6E7B /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 				3C610F3728BF4ADA00627CC1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				3C61162F28BF8B7300627CC1 /* XCRemoteSwiftPackageReference "OutlineView" */,
 			);
 			productRefGroup = 3C81E6A5288E777B003B9836 /* Products */;
 			projectDirPath = "";
@@ -720,6 +724,14 @@
 				minimumVersion = 0.9.0;
 			};
 		};
+		3C61162F28BF8B7300627CC1 /* XCRemoteSwiftPackageReference "OutlineView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Sameesunkaria/OutlineView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		3C81E6D8288E9D2C003B9836 /* XCRemoteSwiftPackageReference "vapor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vapor/vapor.git";
@@ -751,6 +763,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3C610F3728BF4ADA00627CC1 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		3C61163028BF8B7400627CC1 /* OutlineView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C61162F28BF8B7300627CC1 /* XCRemoteSwiftPackageReference "OutlineView" */;
+			productName = OutlineView;
 		};
 		3C81E6D9288E9D2C003B9836 /* Vapor */ = {
 			isa = XCSwiftPackageProductDependency;

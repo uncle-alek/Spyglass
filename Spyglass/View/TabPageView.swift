@@ -23,7 +23,7 @@ struct TabPageView: View {
                 ranges: $ranges,
                 currentIndex: currentIndex)
         case .tree(let tree):
-            TreeView(tree: tree)
+            TreeView(tree: [tree])
         }
     }
 }

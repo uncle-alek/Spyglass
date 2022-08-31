@@ -56,6 +56,15 @@
         }
       },
       {
+        "package": "OutlineView",
+        "repositoryURL": "https://github.com/Sameesunkaria/OutlineView.git",
+        "state": {
+          "branch": null,
+          "revision": "f76cb89b90916251fc251997a2235bcbdab04a8a",
+          "version": "1.1.0"
+        }
+      },
+      {
         "package": "routing-kit",
         "repositoryURL": "https://github.com/vapor/routing-kit.git",
         "state": {
