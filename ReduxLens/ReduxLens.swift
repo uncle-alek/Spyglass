@@ -28,28 +28,40 @@ final class ReduxLens: Lens {
         tabPublisher = viewStore.publisher.tabView.eraseToAnyPublisher()
         sharingData = viewStore.publisher.sharingHistory.eraseToAnyPublisher()
     }
-
+    
     func setup() {
-        viewStore.send(.setup)
+        DispatchQueue.main.async {
+            self.viewStore.send(.setup)
+        }
     }
     
     func reset() {
-        viewStore.send(.reset)
+        DispatchQueue.main.async {
+            self.viewStore.send(.reset)
+        }
     }
     
     func receive(_ value: String) {
-        viewStore.send(.receive(value))
+        DispatchQueue.main.async {
+            self.viewStore.send(.receive(value))
+        }
     }
     
     func selectItem(with id: UUID) {
-        viewStore.send(.selectItem(id: id))
+        DispatchQueue.main.async {
+            self.viewStore.send(.selectItem(id: id))
+        }
     }
     
     func navigateToItem(with id: UUID) {
-        viewStore.send(.navigateToItem(id: id))
+        DispatchQueue.main.async {
+            self.viewStore.send(.navigateToItem(id: id))
+        }
     }
     
     func shareHistory() {
-        viewStore.send(.shareHistory)
+        DispatchQueue.main.async {
+            self.viewStore.send(.shareHistory)
+        }
     }
 }
