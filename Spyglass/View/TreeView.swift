@@ -11,7 +11,7 @@ import SwiftUI
 
 struct TreeView: View {
     
-    let tree: [LensView.TabView.TreeNode]
+    @State var tree: [LensView.TabView.TreeNode]
     @State var selection: LensView.TabView.TreeNode?
 
     var body: some View {
