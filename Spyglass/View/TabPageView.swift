@@ -10,14 +10,12 @@ import SwiftUI
 struct TabPageView: View {
     
     @State var page: LensView.TabView.Tab.ContentPage
-    let searchText: String
     
     var body: some View {
         switch page.type {
         case .string(let text):
             TextEditorView(
-                text: text,
-                searchText: searchText
+                text: text
             )
         case .tree(let tree):
             TreeView(tree: [tree])

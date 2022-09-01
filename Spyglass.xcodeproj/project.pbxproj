@@ -23,7 +23,7 @@
 		3C61163328C0968500627CC1 /* TabCabinetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61163228C0968500627CC1 /* TabCabinetView.swift */; };
 		3C61163528C099CE00627CC1 /* CatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61163428C099CE00627CC1 /* CatalogView.swift */; };
 		3C61163728C09B2500627CC1 /* ToolKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61163628C09B2500627CC1 /* ToolKitView.swift */; };
-		3C61163928C0A26F00627CC1 /* TextDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61163828C0A26F00627CC1 /* TextDebouncer.swift */; };
+		3C61163928C0A26F00627CC1 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61163828C0A26F00627CC1 /* SearchField.swift */; };
 		3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A7288E777B003B9836 /* SpyglassApp.swift */; };
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
@@ -77,7 +77,7 @@
 		3C61163228C0968500627CC1 /* TabCabinetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCabinetView.swift; sourceTree = "<group>"; };
 		3C61163428C099CE00627CC1 /* CatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogView.swift; sourceTree = "<group>"; };
 		3C61163628C09B2500627CC1 /* ToolKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolKitView.swift; sourceTree = "<group>"; };
-		3C61163828C0A26F00627CC1 /* TextDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDebouncer.swift; sourceTree = "<group>"; };
+		3C61163828C0A26F00627CC1 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		3C81E6A4288E777B003B9836 /* Spyglass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spyglass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C81E6A7288E777B003B9836 /* SpyglassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassApp.swift; sourceTree = "<group>"; };
 		3C81E6A9288E777B003B9836 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 				3C81E6A9288E777B003B9836 /* ContentView.swift */,
 				3C61162728BF6C5400627CC1 /* TreeView.swift */,
 				3C61162928BF6C7600627CC1 /* TextEditorView.swift */,
-				3C61163828C0A26F00627CC1 /* TextDebouncer.swift */,
+				3C61163828C0A26F00627CC1 /* SearchField.swift */,
 				3C61162B28BF6CDC00627CC1 /* TabPageView.swift */,
 				3C61163228C0968500627CC1 /* TabCabinetView.swift */,
 				3C61163428C099CE00627CC1 /* CatalogView.swift */,
@@ -407,7 +407,7 @@
 				3C61162828BF6C5400627CC1 /* TreeView.swift in Sources */,
 				3CD39FAF288EDB78008A6E7B /* ReduxLens.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
-				3C61163928C0A26F00627CC1 /* TextDebouncer.swift in Sources */,
+				3C61163928C0A26F00627CC1 /* SearchField.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
 				3C610F4128BF542700627CC1 /* State.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
