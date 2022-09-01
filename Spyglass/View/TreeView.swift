@@ -41,6 +41,7 @@ extension NSTextField {
     func setup() -> Self {
         self.isBordered = false
         self.isEditable = false
+        self.backgroundColor = .clear
         return self
     }
 }

@@ -20,7 +20,7 @@ struct ContentView: View {
     @State var isMusicOn: Bool = true
         
     var body: some View {
-        HStack {
+        HSplitView {
             Table(
                 viewStore.tableView.rows,
                 selection: Binding(
