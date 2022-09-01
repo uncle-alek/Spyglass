@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabPageView: View {
     
-    let page: LensView.TabView.Tab.ContentPage
+    @State var page: LensView.TabView.Tab.ContentPage
     let searchText: String
     
     var body: some View {
