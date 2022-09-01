@@ -10,7 +10,7 @@ import SwiftUI
 struct TabCabinetView: View {
     
     @EnvironmentObject var viewStore: ViewStore
-    @State var searchText: String = ""
+    @StateObject var textDebouncer = TextDebouncer(delay: .milliseconds(500))
     @State private var selectedExternalTab = 0
     @State private var selectedInternalTab = 0
     
@@ -21,14 +21,14 @@ struct TabCabinetView: View {
                     if tab.pages.count == 1 {
                         TabPageView(
                             page: tab.pages.first!,
-                            searchText: searchText
+                            searchText: textDebouncer.debouncedText
                         )
                     } else {
                         TabView(selection: $selectedInternalTab) {
                             ForEach(Array(tab.pages.enumerated()), id: \.1) { index, page in
                                 TabPageView(
                                     page: page,
-                                    searchText: searchText
+                                    searchText: textDebouncer.debouncedText
                                 )
                                 .tabItem { Text(page.name) }
                                 .tag(index)
@@ -40,7 +40,6 @@ struct TabCabinetView: View {
                 .tag(index)
             }
         }
-        .searchable(text: $searchText)
+        .searchable(text: $textDebouncer.searchText)
     }
 }
-
