@@ -8,34 +8,22 @@
 import SwiftUI
 import HighlightedTextEditor
 
-struct TextEd: View {
+struct TextEditorView: View {
     
     @State var text: String
     let searchText: String
-    @Binding var ranges: [NSRange]
-    let currentIndex: Int
     
     var body: some View {
         VStack {
             HighlightedTextEditor(
                 text: $text,
                 highlightRules: highlightRules
-            ).introspect { editor in
-                guard currentIndex < ranges.count else { return }
-                editor.textView.scrollRangeToVisible(ranges[currentIndex])
-                editor.textView.setTextColor(NSColor.yellow, range: ranges[currentIndex])
-            }
-            .onChange(of: searchText) {
-                ranges = text.ranges(of: $0)
-            }
-            .onAppear {
-                ranges = text.ranges(of: searchText)
-            }
+            )
         }
     }
 }
 
-private extension TextEd {
+private extension TextEditorView {
     
     var highlightRules: [HighlightRule] {
         guard let regEx = try? NSRegularExpression(pattern: "\(searchText)", options: [])

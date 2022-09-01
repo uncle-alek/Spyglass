@@ -11,17 +11,14 @@ struct TabPageView: View {
     
     let page: LensView.TabView.Tab.ContentPage
     let searchText: String
-    @Binding var ranges: [NSRange]
-    let currentIndex: Int
     
     var body: some View {
         switch page.type {
         case .string(let text):
-            TextEd(
+            TextEditorView(
                 text: text,
-                searchText: searchText,
-                ranges: $ranges,
-                currentIndex: currentIndex)
+                searchText: searchText
+            )
         case .tree(let tree):
             TreeView(tree: [tree])
         }
