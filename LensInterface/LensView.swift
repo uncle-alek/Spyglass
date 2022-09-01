@@ -35,12 +35,13 @@ enum LensView {
     struct TabView: Equatable {
         
         struct TreeNode: Identifiable, Hashable {
-            let id = UUID()
+            let id: String
             let name: String
             let value: String?
             let children: [TreeNode]?
             
             static let `default` = TreeNode(
+                id: "",
                 name: "",
                 value: nil,
                 children: nil
@@ -53,12 +54,12 @@ enum LensView {
                 case tree(TreeNode)
             }
             struct ContentPage: Identifiable, Hashable {
-                let id = UUID()
+                let id: String
                 let name: String
                 let type: ContentType
             }
             
-            let id = UUID()
+            let id: String
             let name: String
             let pages: [ContentPage]
         }
@@ -75,6 +76,7 @@ extension LensView.TabView.TreeNode {
     
     public init(_ rootName: String, _ dict: [String: Any]) {
         self.init(
+            id: rootName,
             name: rootName,
             value: nil,
             children: dict.treeNodes
@@ -101,6 +103,7 @@ extension Dictionary where Key == String, Value: Any {
             }
             contents.append(
                 LensView.TabView.TreeNode(
+                    id: key,
                     name: key,
                     value: contentValue,
                     children: children?.isEmpty == true ? nil : children

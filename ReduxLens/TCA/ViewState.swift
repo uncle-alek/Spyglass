@@ -44,32 +44,55 @@ struct AppViewState: Equatable {
         self.tabView = LensView.TabView(
             tabs: [
                 .init(
+                    id: Strings.Tab.diff,
                     name: Strings.Tab.diff,
                     pages: [
                         state.selectedItem.map {
-                            .init(name: "", type: .string($0.diff))
+                            .init(
+                                id: Strings.Tab.diff + Strings.Tab.raw,
+                                name: "",
+                                type: .string($0.diff)
+                            )
                         }
                     ].compactMap { $0 }
                 ),
                 .init(
+                    id: Strings.Tab.before,
                     name: Strings.Tab.before,
                     pages: [
                         state.selectedItem.map {
-                            .init(name: Strings.Tab.json, type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateBefore)))
+                            .init(
+                                id: Strings.Tab.before + Strings.Tab.json,
+                                name: Strings.Tab.json,
+                                type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateBefore))
+                            )
                         },
                         state.selectedItem.map {
-                            .init(name: Strings.Tab.raw, type: .string($0.stateBefore.prettyPrinted))
+                            .init(
+                                id: Strings.Tab.before + Strings.Tab.raw,
+                                name: Strings.Tab.raw,
+                                type: .string($0.stateBefore.prettyPrinted)
+                            )
                         }
                     ].compactMap { $0 }
                 ),
                 .init(
+                    id: Strings.Tab.after,
                     name: Strings.Tab.after,
                     pages: [
                         state.selectedItem.map {
-                            .init(name: Strings.Tab.json, type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateAfter)))
+                            .init(
+                                id: Strings.Tab.after + Strings.Tab.json,
+                                name: Strings.Tab.json,
+                                type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateAfter))
+                            )
                         },
                         state.selectedItem.map {
-                            .init(name: Strings.Tab.raw, type: .string($0.stateAfter.prettyPrinted))
+                            .init(
+                                id: Strings.Tab.after + Strings.Tab.raw,
+                                name: Strings.Tab.raw,
+                                type: .string($0.stateAfter.prettyPrinted)
+                            )
                         }
                     ].compactMap { $0 }
                 )
