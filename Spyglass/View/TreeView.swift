@@ -22,12 +22,12 @@ struct TreeView: View {
         ) { child in
             if let value = child.value {
                 return NSStackView(views: [
-                    NSImageView(image: NSImage(systemSymbolName: "doc", accessibilityDescription: nil)!),
+                    NSImageView(image: NSImage(systemSymbolName: "doc.fill", accessibilityDescription: nil)!.setup(.systemGray)),
                     NSTextField(string: "\(child.name) : \(value)").setup(),
                 ]).setup()
             } else {
                 return NSStackView(views: [
-                    NSImageView(image: NSImage(systemSymbolName: "folder", accessibilityDescription: nil)!),
+                    NSImageView(image: NSImage(systemSymbolName: "folder.fill", accessibilityDescription: nil)!.setup(.systemYellow)),
                     NSTextField(string: child.name).setup()
                 ]).setup()
             }
@@ -36,9 +36,17 @@ struct TreeView: View {
     }
 }
 
+extension NSImage {
+    
+    func setup(_ color: NSColor) -> NSImage {
+        let config = NSImage.SymbolConfiguration(hierarchicalColor: color)
+        return self.withSymbolConfiguration(config)!
+    }
+}
+
 extension NSTextField {
     
-    func setup() -> Self {
+    func setup() -> NSTextField {
         self.isBordered = false
         self.isEditable = false
         self.backgroundColor = .clear
@@ -48,7 +56,7 @@ extension NSTextField {
 
 extension NSStackView {
     
-    func setup() -> Self {
+    func setup() -> NSStackView {
         self.orientation = .horizontal
         self.heightAnchor.constraint(equalToConstant: 24).isActive = true
         return self
