@@ -28,7 +28,7 @@
 		3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6A9288E777B003B9836 /* ContentView.swift */; };
 		3C81E6AC288E777C003B9836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AB288E777C003B9836 /* Assets.xcassets */; };
 		3C81E6AF288E777C003B9836 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C81E6AE288E777C003B9836 /* Preview Assets.xcassets */; };
-		3C81E6BA288E777C003B9836 /* SpyglassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6B9288E777C003B9836 /* SpyglassTests.swift */; };
+		3C81E6BA288E777C003B9836 /* CircularBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6B9288E777C003B9836 /* CircularBufferTests.swift */; };
 		3C81E6C4288E777C003B9836 /* SpyglassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6C3288E777C003B9836 /* SpyglassUITests.swift */; };
 		3C81E6C6288E777C003B9836 /* SpyglassUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6C5288E777C003B9836 /* SpyglassUITestsLaunchTests.swift */; };
 		3C81E6D4288E9411003B9836 /* LensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C81E6D3288E9411003B9836 /* LensView.swift */; };
@@ -85,7 +85,7 @@
 		3C81E6AE288E777C003B9836 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3C81E6B0288E777C003B9836 /* Spyglass.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Spyglass.entitlements; sourceTree = "<group>"; };
 		3C81E6B5288E777C003B9836 /* SpyglassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpyglassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C81E6B9288E777C003B9836 /* SpyglassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassTests.swift; sourceTree = "<group>"; };
+		3C81E6B9288E777C003B9836 /* CircularBufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBufferTests.swift; sourceTree = "<group>"; };
 		3C81E6BF288E777C003B9836 /* SpyglassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpyglassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C81E6C3288E777C003B9836 /* SpyglassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassUITests.swift; sourceTree = "<group>"; };
 		3C81E6C5288E777C003B9836 /* SpyglassUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 		3C81E6B8288E777C003B9836 /* SpyglassTests */ = {
 			isa = PBXGroup;
 			children = (
-				3C81E6B9288E777C003B9836 /* SpyglassTests.swift */,
+				3C81E6B9288E777C003B9836 /* CircularBufferTests.swift */,
 			);
 			path = SpyglassTests;
 			sourceTree = "<group>";
@@ -428,7 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C81E6BA288E777C003B9836 /* SpyglassTests.swift in Sources */,
+				3C81E6BA288E777C003B9836 /* CircularBufferTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

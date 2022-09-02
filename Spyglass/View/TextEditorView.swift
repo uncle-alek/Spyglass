@@ -18,7 +18,7 @@ struct TextEditorView: View {
     @State var text: String
     @State var searchText: String = ""
     @State var indices: Indices = .init()
-    @State var ranges: CircularBuffer<NSRange> = .init([])
+    @State var ranges: CircularBuffer<NSRange> = []
     @State var textView: NSTextView!
     
     var body: some View {
@@ -52,7 +52,7 @@ struct TextEditorView: View {
             }
             .onChange(of: searchText) { search in
                 if search.isEmpty {
-                    ranges = .init([])
+                    ranges = []
                     indices = .init()
                 } else {
                     ranges = .init(text.ranges(string: search))
@@ -93,12 +93,16 @@ extension String {
     }
 }
 
-struct CircularBuffer<Element>: RandomAccessCollection {
+struct CircularBuffer<Element>: RandomAccessCollection, ExpressibleByArrayLiteral {
     
     private let array: [Element]
     
     init(_ array: [Element]) {
         self.array = array
+    }
+    
+    init(arrayLiteral elements: Element...) {
+        self.array = elements
     }
     
     var indices: Range<Int> {
@@ -114,8 +118,7 @@ struct CircularBuffer<Element>: RandomAccessCollection {
     }
     
     func index(before i: Int) -> Int {
-        let newIndex = (i - 1) % array.count
-        return newIndex < 0 ? array.count + newIndex : newIndex
+        (array.count + i - 1) % array.count
     }
     
     func index(after i: Int) -> Int {
