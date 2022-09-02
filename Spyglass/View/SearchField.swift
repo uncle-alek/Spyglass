@@ -22,9 +22,6 @@ struct SearchField: View {
             .cornerRadius(12)
             .disableAutocorrection(true)
             .padding(.trailing)
-        }.frame(minHeight: 44, idealHeight: 44)
-            .background(Color.black.opacity(0.05))
-            .cornerRadius(12)
-            .padding([.leading, .trailing])
+        }
     }
 }

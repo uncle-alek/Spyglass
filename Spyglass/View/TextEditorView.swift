@@ -24,26 +24,32 @@ struct TextEditorView: View {
     var body: some View {
         VStack {
             HStack {
-                SearchField(searchText: $textDebouncer.searchText)
-                Button {
-                    indices.previous = indices.current
-                    indices.current = ranges.index(after: indices.current)
-                    
-                    updateTextView()
-                } label: {
-                    Text("Find Next")
+                HStack {
+                    SearchField(searchText: $textDebouncer.searchText)
+                    Button {
+                        indices.previous = indices.current
+                        indices.current = ranges.index(after: indices.current)
+                        
+                        updateTextView()
+                    } label: {
+                        Text("Find Next")
+                    }
+                    .disabled(ranges.isEmpty)
+                    Button {
+                        indices.previous = indices.current
+                        indices.current = ranges.index(before: indices.current)
+                        
+                        updateTextView()
+                    } label: {
+                        Text("Find Previous")
+                    }
+                    .disabled(ranges.isEmpty)
+                    .padding(.trailing)
                 }
-                .disabled(ranges.isEmpty)
-                Button {
-                    indices.previous = indices.current
-                    indices.current = ranges.index(before: indices.current)
-                    
-                    updateTextView()
-                } label: {
-                    Text("Find Previous")
-                }
-                .disabled(ranges.isEmpty)
-                .padding(.trailing)
+                .frame(minHeight: 44, idealHeight: 44)
+                    .background(Color.black.opacity(0.05))
+                    .cornerRadius(12)
+                    .padding([.leading, .trailing, .top])
             }
             .onChange(of: textDebouncer.debouncedText) { search in
                 ranges = .init(text.ranges(string: search))
