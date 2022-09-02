@@ -13,10 +13,10 @@ struct SearchField: View {
 
     var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass.circle")
+            Image(systemName: "magnifyingglass")
                 .padding(.leading)
             TextField(
-                "enter...",
+                "Enter a search name...",
                 text: $searchText
             )
             .cornerRadius(12)

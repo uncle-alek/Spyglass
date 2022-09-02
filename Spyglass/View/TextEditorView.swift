@@ -29,10 +29,7 @@ struct TextEditorView: View {
                     indices.previous = indices.current
                     indices.current = ranges.index(after: indices.current)
                     
-                    guard !ranges.isEmpty else { return }
-                    textView.scrollRangeToVisible(ranges[indices.current])
-                    textView.setTextColor(NSColor.yellow, range: ranges[indices.current])
-                    textView.setTextColor(nil, range: ranges[indices.previous])
+                    updateTextView()
                 } label: {
                     Text("Find Next")
                 }
@@ -41,14 +38,12 @@ struct TextEditorView: View {
                     indices.previous = indices.current
                     indices.current = ranges.index(before: indices.current)
                     
-                    guard !ranges.isEmpty else { return }
-                    textView.scrollRangeToVisible(ranges[indices.current])
-                    textView.setTextColor(NSColor.yellow, range: ranges[indices.current])
-                    textView.setTextColor(nil, range: ranges[indices.previous])
+                    updateTextView()
                 } label: {
                     Text("Find Previous")
                 }
                 .disabled(ranges.isEmpty)
+                .padding(.trailing)
             }
             .onChange(of: searchText) { search in
                 if search.isEmpty {
@@ -70,6 +65,16 @@ struct TextEditorView: View {
 
 private extension TextEditorView {
     
+    func updateTextView() {
+        guard !ranges.isEmpty else { return }
+        textView.scrollRangeToVisible(ranges[indices.current])
+        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.lightGray.withAlphaComponent(0.3), range: ranges[indices.current])
+        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.systemGreen.withAlphaComponent(0.3), range: ranges[indices.previous])
+    }
+}
+
+private extension TextEditorView {
+    
     var highlightRules: [HighlightRule] {
         guard let regEx = try? NSRegularExpression(pattern: searchText, options: [])
             else { return [] }
@@ -77,7 +82,7 @@ private extension TextEditorView {
             HighlightRule(
                 pattern: regEx,
                 formattingRules: [
-                    TextFormattingRule(key: .backgroundColor, value: NSColor.red.withAlphaComponent(0.3))
+                    TextFormattingRule(key: .backgroundColor, value: NSColor.systemGreen.withAlphaComponent(0.3))
                 ]
             )
         ]
