@@ -16,15 +16,15 @@ struct TextEditorView: View {
     }
     
     @State var text: String
-    @State var searchText: String = ""
     @State var indices: Indices = .init()
     @State var ranges: CircularBuffer<NSRange> = []
     @State var textView: NSTextView!
+    @StateObject var textDebouncer = TextDebouncer(delay: .milliseconds(500))
     
     var body: some View {
         VStack {
             HStack {
-                SearchField(searchText: $searchText)
+                SearchField(searchText: $textDebouncer.searchText)
                 Button {
                     indices.previous = indices.current
                     indices.current = ranges.index(after: indices.current)
@@ -45,13 +45,10 @@ struct TextEditorView: View {
                 .disabled(ranges.isEmpty)
                 .padding(.trailing)
             }
-            .onChange(of: searchText) { search in
-                if search.isEmpty {
-                    ranges = []
-                    indices = .init()
-                } else {
-                    ranges = .init(text.ranges(string: search))
-                }
+            .onChange(of: textDebouncer.debouncedText) { search in
+                ranges = .init(text.ranges(string: search))
+                indices = .init()
+                updateTextView()
             }
             HighlightedTextEditor(
                 text: $text,
@@ -76,7 +73,7 @@ private extension TextEditorView {
 private extension TextEditorView {
     
     var highlightRules: [HighlightRule] {
-        guard let regEx = try? NSRegularExpression(pattern: searchText, options: [])
+        guard let regEx = try? NSRegularExpression(pattern: textDebouncer.debouncedText, options: [])
             else { return [] }
         return [
             HighlightRule(
@@ -92,7 +89,8 @@ private extension TextEditorView {
 extension String {
     
     func ranges(string: String) -> [NSRange] {
-        try! NSRegularExpression(pattern: string, options: [])
+        guard !string.isEmpty else { return [] }
+        return try! NSRegularExpression(pattern: string, options: [])
             .matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
             .map { $0.range }
     }
@@ -136,5 +134,18 @@ struct CircularBuffer<Element>: RandomAccessCollection, ExpressibleByArrayLitera
 
     subscript(bounds: Range<Int>) -> ArraySlice<Element> {
         array[bounds]
+    }
+}
+
+final class TextDebouncer : ObservableObject {
+
+    @Published var debouncedText = ""
+    @Published var searchText = ""
+
+    init(delay: DispatchQueue.SchedulerTimeType.Stride) {
+        $searchText
+            .debounce(for: delay, scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .assign(to: &$debouncedText)
     }
 }
