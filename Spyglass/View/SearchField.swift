@@ -14,14 +14,13 @@ struct SearchField: View {
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .padding(.leading)
             TextField(
                 "Enter a search name...",
                 text: $searchText
             )
             .cornerRadius(12)
             .disableAutocorrection(true)
-            .padding(.trailing)
         }
+        .padding([.leading, .trailing])
     }
 }

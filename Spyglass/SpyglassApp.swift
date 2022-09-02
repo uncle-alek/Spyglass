@@ -12,6 +12,7 @@ struct SpyglassApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear { NSWindow.allowsAutomaticWindowTabbing = false }
                 .onAppear(perform: Spyglass.run)
         }
     }
