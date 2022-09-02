@@ -23,6 +23,7 @@ struct ToolKitView: View {
                 ? Image(systemName: "speaker")
                 : Image(systemName: "speaker.slash")
             }
+            .help(isMusicOn ? "Turn off sound" : "Turn on sound")
             Menu {
                 Button {
                     guard let data = viewStore.sharingData else { return }
@@ -36,17 +37,20 @@ struct ToolKitView: View {
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }
+            .help("Share events")
             Button {
                 viewStore.reset()
             } label: {
                 Image(systemName: "arrow.clockwise")
             }
+            .help("Reset events")
             Button {
                 guard let selected = selected else { return }
                 viewStore.navigateTo(selected)
             } label: {
                 Image(systemName: "scope")
             }
+            .help("Navigate to IDE")
             .disabled(selected == nil)
         }
         .onChange(of: viewStore.tableView.rows) { rows in
