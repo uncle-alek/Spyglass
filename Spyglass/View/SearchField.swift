@@ -15,7 +15,7 @@ struct SearchField: View {
         HStack {
             Image(systemName: "magnifyingglass")
             TextField(
-                "Enter a search name...",
+                "Search",
                 text: $searchText
             )
             .cornerRadius(12)

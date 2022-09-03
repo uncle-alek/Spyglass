@@ -71,8 +71,8 @@ private extension TextEditorView {
     func updateTextView() {
         guard !ranges.isEmpty else { return }
         textView.scrollRangeToVisible(ranges[indices.current])
-        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.lightGray.withAlphaComponent(0.3), range: ranges[indices.current])
-        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.systemGreen.withAlphaComponent(0.3), range: ranges[indices.previous])
+        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.yellow, range: ranges[indices.current])
+        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.lightGray.withAlphaComponent(0.3), range: ranges[indices.previous])
     }
 }
 
@@ -85,7 +85,7 @@ private extension TextEditorView {
             HighlightRule(
                 pattern: regEx,
                 formattingRules: [
-                    TextFormattingRule(key: .backgroundColor, value: NSColor.systemGreen.withAlphaComponent(0.3))
+                    TextFormattingRule(key: .backgroundColor, value: NSColor.lightGray.withAlphaComponent(0.3))
                 ]
             )
         ]
