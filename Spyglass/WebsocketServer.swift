@@ -13,10 +13,10 @@ final class WebSocketServer {
     /// Vapor frame size is limited to UInt32.max
     static let maxFrameSize = WebSocketMaxFrameSize(integerLiteral: Int(UInt32.max))
     
-    let sockets: [(String, (String) -> Void)]
+    let sockets: [(String, (String) -> Void, (@escaping (String) -> Void) -> Void)]
     
     init(
-        sockets: [(String, (String) -> Void)]
+        sockets: [(String, (String) -> Void, (@escaping (String) -> Void) -> Void)]
     ) {
         self.sockets = sockets
     }
@@ -28,12 +28,15 @@ final class WebSocketServer {
 //        app.http.server.configuration.hostname = getIPAddress()!
         app.http.server.configuration.port = 3002
         defer { app.shutdown() }
-        sockets.forEach { (socketName: String, callback: @escaping (String) -> Void) in
+        sockets.forEach { (socketName: String, callback: @escaping (String) -> Void, connector: @escaping (@escaping (String) -> Void) -> Void) in
             app.webSocket(PathComponent(stringLiteral: socketName), maxFrameSize: WebSocketServer.maxFrameSize) { req, ws in
                 ws.onText { ws, text in
                     DispatchQueue.main.async {
                         callback(text)
                     }
+                }
+                connector { text in
+                    ws.send(text)
                 }
                 ws.onClose.whenComplete { _ in
                     print("Web socket disconnected from server")

@@ -15,11 +15,15 @@ struct TextEditorView: View {
         var previous: Int = 0
     }
     
-    @State var text: String
+    @EnvironmentObject var viewStore: ViewStore
+    
     @State var indices: Indices = .init()
     @State var ranges: CircularBuffer<NSRange> = []
     @State var textView: NSTextView!
     @StateObject var textDebouncer = TextDebouncer(delay: .milliseconds(500))
+    
+    @State var text: String
+    let showRewriteButton: Bool
     
     var body: some View {
         VStack {
@@ -45,6 +49,15 @@ struct TextEditorView: View {
                     }
                     .disabled(ranges.isEmpty)
                     .padding(.trailing)
+                    
+                    if showRewriteButton {
+                        Button {
+                            viewStore.rewrite(text)
+                        } label: {
+                            Image(systemName: "square.and.pencil")
+                        }
+                        .padding(.trailing)
+                    }
                 }
                 .frame(minHeight: 44, idealHeight: 44)
                     .background(Color.black.opacity(0.05))

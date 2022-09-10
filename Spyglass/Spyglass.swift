@@ -36,12 +36,13 @@ final class Spyglass {
         viewStore.select = lens.selectItem(with:)
         viewStore.navigateTo = lens.navigateToItem(with:)
         viewStore.reset = lens.reset
+        viewStore.rewrite = lens.rewrite
         
         lens.setup()
         
         let webSocket = WebSocketServer(
             sockets: [
-                (lens.connectionPath, lens.receive(_:))
+                (lens.connectionPath, lens.receive, lens.send)
             ]
         )
         
@@ -59,4 +60,5 @@ final class ViewStore: ObservableObject {
     var select: (UUID) -> Void = {_ in }
     var navigateTo: (UUID) -> Void = {_ in }
     var reset: () -> Void = {}
+    var rewrite: (String) -> Void = {_ in }
 }

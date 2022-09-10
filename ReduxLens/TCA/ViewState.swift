@@ -51,7 +51,7 @@ struct AppViewState: Equatable {
                             .init(
                                 id: Strings.Tab.diff + Strings.Tab.raw,
                                 name: "",
-                                type: .string($0.diff)
+                                type: .string(text: $0.diff, showRewriteButton: false)
                             )
                         }
                     ].compactMap { $0 }
@@ -71,7 +71,7 @@ struct AppViewState: Equatable {
                             .init(
                                 id: Strings.Tab.before + Strings.Tab.raw,
                                 name: Strings.Tab.raw,
-                                type: .string($0.stateBefore.prettyPrinted)
+                                type: .string(text: $0.stateBefore.prettyPrinted, showRewriteButton: true)
                             )
                         }
                     ].compactMap { $0 }
@@ -91,7 +91,7 @@ struct AppViewState: Equatable {
                             .init(
                                 id: Strings.Tab.after + Strings.Tab.raw,
                                 name: Strings.Tab.raw,
-                                type: .string($0.stateAfter.prettyPrinted)
+                                type: .string(text: $0.stateAfter.prettyPrinted, showRewriteButton: true)
                             )
                         }
                     ].compactMap { $0 }

@@ -18,6 +18,8 @@ protocol Lens {
     func setup()
     func reset()
     func receive(_ value: String)
+    func send(_ completion: @escaping (String) -> Void)
+    func rewrite(_ value: String)
     func selectItem(with id: UUID)
     func navigateToItem(with id: UUID)
 }

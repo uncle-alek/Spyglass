@@ -12,9 +12,11 @@ import Foundation
 let FAKE = false
 
 final class ReduxLens: Lens {
+    
     var tablePublisher: AnyPublisher<LensView.TableView, Never>
     var tabPublisher: AnyPublisher<LensView.TabView, Never>
     var sharingData: AnyPublisher<String?, Never>
+    var send: ((String) -> Void)!
     var connectionPath: String { "redux" }
     
     private static func store() -> Store<AppState, AppAction> {
@@ -53,5 +55,13 @@ final class ReduxLens: Lens {
     
     func navigateToItem(with id: UUID) {
         viewStore.send(.navigateToItem(id: id))
+    }
+    
+    func send(_ completion: @escaping (String) -> Void) {
+        send = completion
+    }
+    
+    func rewrite(_ value: String) {
+        send(value)
     }
 }

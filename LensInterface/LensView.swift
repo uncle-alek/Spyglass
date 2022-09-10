@@ -50,7 +50,7 @@ enum LensView {
         
         struct Tab: Identifiable, Hashable {
             enum ContentType: Hashable {
-                case string(String)
+                case string(text: String, showRewriteButton: Bool)
                 case tree(TreeNode)
             }
             struct ContentPage: Identifiable, Hashable {
