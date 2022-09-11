@@ -61,13 +61,15 @@ struct TextEditorView: View {
                     Text(
                         ranges.isEmpty
                         ? "no matches"
-                        : "\(currentIndex) of \(ranges.count) matches"
+                        : "\(currentIndex + 1) of \(ranges.count) matches"
                     )
                     Spacer()
                 }
                 .padding([.leading, .trailing])
                 .padding([.top], 10)
             }
+            .padding([.leading, .trailing, .top])
+            
             CodeEditor(
                 source: $text,
                 selection: $selection,
@@ -81,7 +83,10 @@ struct TextEditorView: View {
                     selection = Constant.zeroRange
                 }
             }
-            .padding([.leading, .trailing, .top, .bottom])
+            .onChange(of: currentIndex) { currentIndex in
+                guard currentIndex < ranges.count else { return }
+                selection = ranges[currentIndex]
+            }
         }
     }
 }
