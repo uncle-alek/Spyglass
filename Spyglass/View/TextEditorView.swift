@@ -75,7 +75,9 @@ struct TextEditorView: View {
                 text: $text,
                 highlightRules: highlightRules
             ).introspect { editor in
-                textView = editor.textView
+                DispatchQueue.global(qos: .background).async {
+                    textView = editor.textView
+                }
             }
         }
     }
@@ -94,7 +96,7 @@ private extension TextEditorView {
 private extension TextEditorView {
     
     var highlightRules: [HighlightRule] {
-        guard let regEx = try? NSRegularExpression(pattern: textDebouncer.debouncedText, options: [])
+        guard let regEx = try? NSRegularExpression(pattern: textDebouncer.debouncedText, options: [.caseInsensitive])
             else { return [] }
         return [
             HighlightRule(
@@ -111,7 +113,7 @@ extension String {
     
     func ranges(string: String) -> [NSRange] {
         guard !string.isEmpty else { return [] }
-        return try! NSRegularExpression(pattern: string, options: [])
+        return try! NSRegularExpression(pattern: string, options: [.caseInsensitive])
             .matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
             .map { $0.range }
     }
