@@ -5,23 +5,22 @@
 //  Created by Aleksey Yakimenko on 31/8/22.
 //
 
+import CodeEditor
 import Dispatch
 import SwiftUI
-import HighlightedTextEditor
+
+fileprivate enum Constant {
+    static let zeroRange = "".startIndex..<"".startIndex
+}
 
 struct TextEditorView: View {
     
-    struct Indices: Equatable {
-        var current: Int = 0
-        var previous: Int = 0
-    }
-    
     @EnvironmentObject var viewStore: ViewStore
     
-    @State var indices: Indices = .init()
-    @State var ranges: CircularBuffer<NSRange> = []
-    @State var textView: NSTextView!
+    @State var currentIndex: Int = 0
+    @State var ranges: CircularBuffer<Range<String.Index>> = []
     @StateObject var textDebouncer = TextDebouncer(delay: .milliseconds(500))
+    @State private var selection: Range<String.Index> = Constant.zeroRange
     
     @State var text: String
     let showRewriteButton: Bool
@@ -34,20 +33,15 @@ struct TextEditorView: View {
                         searchText: $textDebouncer.searchText
                     )
                     .padding([.leading, .trailing])
+                    
                     Button {
-                        indices.previous = indices.current
-                        indices.current = ranges.index(after: indices.current)
-                        
-                        updateTextView()
+                        currentIndex = ranges.index(after: currentIndex)
                     } label: {
                         Text("Find Next")
                     }
                     .disabled(ranges.isEmpty)
                     Button {
-                        indices.previous = indices.current
-                        indices.current = ranges.index(before: indices.current)
-                        
-                        updateTextView()
+                        currentIndex = ranges.index(before: currentIndex)
                     } label: {
                         Text("Find Previous")
                     }
@@ -67,74 +61,28 @@ struct TextEditorView: View {
                     Text(
                         ranges.isEmpty
                         ? "no matches"
-                        : "\(indices.current) of \(ranges.count) matches"
+                        : "\(currentIndex) of \(ranges.count) matches"
                     )
                     Spacer()
                 }
                 .padding([.leading, .trailing])
                 .padding([.top], 10)
             }
-            .padding([.leading, .trailing, .top, .bottom])
-            
-            HighlightedTextEditor(
-                text: $text,
-                highlightRules: highlightRules
-            ).introspect { editor in
-                DispatchQueue.global(qos: .background).async {
-                    textView = editor.textView
-                }
-            }
+            CodeEditor(
+                source: $text,
+                selection: $selection,
+                language: .json,
+                theme: .pojoaque
+            )
             .onChange(of: textDebouncer.debouncedText) { search in
                 DispatchQueue.global(qos: .background).async {
-                    ranges = .init(text.ranges(string: search))
-                    indices = .init()
+                    ranges = .init(text.ranges(of: search))
+                    currentIndex = 0
+                    selection = Constant.zeroRange
                 }
             }
+            .padding([.leading, .trailing, .top, .bottom])
         }
-    }
-}
-
-private extension TextEditorView {
-    
-    func updateTextView() {
-        guard !ranges.isEmpty else { return }
-        textView.scrollRangeToVisible(
-            ranges[indices.current]
-        )
-        textView.textStorage?.addAttributes(
-            [.backgroundColor : NSColor.yellow, .foregroundColor: NSColor.black],
-            range: ranges[indices.current]
-        )
-        textView.textStorage?.addAttributes(
-            [.backgroundColor : NSColor.lightGray.withAlphaComponent(0.3), .foregroundColor: textView.textColor!],
-            range: ranges[indices.previous]
-        )
-    }
-}
-
-private extension TextEditorView {
-    
-    var highlightRules: [HighlightRule] {
-        guard let regEx = try? NSRegularExpression(pattern: textDebouncer.debouncedText, options: [.caseInsensitive])
-            else { return [] }
-        return [
-            HighlightRule(
-                pattern: regEx,
-                formattingRules: [
-                    TextFormattingRule(key: .backgroundColor, value: NSColor.lightGray.withAlphaComponent(0.3))
-                ]
-            )
-        ]
-    }
-}
-
-extension String {
-    
-    func ranges(string: String) -> [NSRange] {
-        guard !string.isEmpty else { return [] }
-        return try! NSRegularExpression(pattern: string, options: [.caseInsensitive])
-            .matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
-            .map { $0.range }
     }
 }
 
@@ -189,5 +137,23 @@ final class TextDebouncer : ObservableObject {
             .debounce(for: delay, scheduler: DispatchQueue.main)
             .removeDuplicates()
             .assign(to: &$debouncedText)
+    }
+}
+
+extension String {
+    
+    func ranges(of occurrence: String) -> [Range<String.Index>] {
+        var indices = [Range<String.Index>]()
+        var position = startIndex
+        while let range = range(of: occurrence, range: position..<endIndex) {
+            indices.append(range)
+            let offset = occurrence.distance(from: occurrence.startIndex, to: occurrence.endIndex) - 1
+            if let after = index(range.lowerBound, offsetBy: offset, limitedBy: endIndex) {
+                position = index(after: after)
+            } else {
+                break
+            }
+        }
+        return indices
     }
 }

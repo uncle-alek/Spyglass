@@ -41,9 +41,9 @@ struct ToolKitView: View {
             Button {
                 viewStore.reset()
             } label: {
-                Image(systemName: "arrow.clockwise")
+                Image(systemName: "trash")
             }
-            .help("Reset events")
+            .help("Delete event history")
             Button {
                 guard let selected = selected else { return }
                 viewStore.navigateTo(selected)
