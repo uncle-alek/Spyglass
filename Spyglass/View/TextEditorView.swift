@@ -28,9 +28,12 @@ struct TextEditorView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            VStack {
                 HStack {
-                    SearchField(searchText: $textDebouncer.searchText)
+                    SearchField(
+                        searchText: $textDebouncer.searchText
+                    )
+                    .padding([.leading, .trailing])
                     Button {
                         indices.previous = indices.current
                         indices.current = ranges.index(after: indices.current)
@@ -60,23 +63,31 @@ struct TextEditorView: View {
                         .padding(.trailing)
                     }
                 }
-                .frame(minHeight: 44, idealHeight: 44)
-                    .background(Color.black.opacity(0.05))
-                    .cornerRadius(12)
-                    .padding([.leading, .trailing, .top])
-            }
-            .onChange(of: textDebouncer.debouncedText) { search in
-                DispatchQueue.global(qos: .background).async {
-                    ranges = .init(text.ranges(string: search))
-                    indices = .init()
+                HStack {
+                    Text(
+                        ranges.isEmpty
+                        ? "no matches"
+                        : "\(indices.current) of \(ranges.count) matches"
+                    )
+                    Spacer()
                 }
+                .padding([.leading, .trailing])
+                .padding([.top], 10)
             }
+            .padding([.leading, .trailing, .top, .bottom])
+            
             HighlightedTextEditor(
                 text: $text,
                 highlightRules: highlightRules
             ).introspect { editor in
                 DispatchQueue.global(qos: .background).async {
                     textView = editor.textView
+                }
+            }
+            .onChange(of: textDebouncer.debouncedText) { search in
+                DispatchQueue.global(qos: .background).async {
+                    ranges = .init(text.ranges(string: search))
+                    indices = .init()
                 }
             }
         }

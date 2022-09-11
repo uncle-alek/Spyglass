@@ -21,6 +21,5 @@ struct SearchField: View {
             .cornerRadius(12)
             .disableAutocorrection(true)
         }
-        .padding([.leading, .trailing])
     }
 }
