@@ -23,6 +23,5 @@ struct TabPageView: View {
                 TreeView(tree: [tree])
             }
         }
-        .background(.white)
     }
 }

@@ -87,9 +87,17 @@ private extension TextEditorView {
     
     func updateTextView() {
         guard !ranges.isEmpty else { return }
-        textView.scrollRangeToVisible(ranges[indices.current])
-        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.yellow, range: ranges[indices.current])
-        textView.textStorage?.addAttribute(.backgroundColor, value: NSColor.lightGray.withAlphaComponent(0.3), range: ranges[indices.previous])
+        textView.scrollRangeToVisible(
+            ranges[indices.current]
+        )
+        textView.textStorage?.addAttributes(
+            [.backgroundColor : NSColor.yellow, .foregroundColor: NSColor.black],
+            range: ranges[indices.current]
+        )
+        textView.textStorage?.addAttributes(
+            [.backgroundColor : NSColor.lightGray.withAlphaComponent(0.3), .foregroundColor: textView.textColor!],
+            range: ranges[indices.previous]
+        )
     }
 }
 
