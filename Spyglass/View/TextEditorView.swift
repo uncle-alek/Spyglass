@@ -27,11 +27,13 @@ struct TextEditorView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            VStack {
                 HStack {
                     SearchField(
                         searchText: $textDebouncer.searchText
                     )
+                    .padding([.leading, .trailing])
+                    
                     Button {
                         currentIndex = ranges.index(after: currentIndex)
                     } label: {
@@ -55,11 +57,25 @@ struct TextEditorView: View {
                         .padding(.trailing)
                     }
                 }
-                .frame(minHeight: 44, idealHeight: 44)
-                .background(Color.black.opacity(0.05))
-                .cornerRadius(12)
-                .padding([.leading, .trailing, .top])
+                HStack {
+                    Text(
+                        ranges.isEmpty
+                        ? "no matches"
+                        : "\(currentIndex + 1) of \(ranges.count) matches"
+                    )
+                    Spacer()
+                }
+                .padding([.leading, .trailing])
+                .padding([.top], 10)
             }
+            .padding([.leading, .trailing, .top])
+            
+            CodeEditor(
+                source: $text,
+                selection: $selection,
+                language: .json,
+                theme: .pojoaque
+            )
             .onChange(of: textDebouncer.debouncedText) { search in
                 DispatchQueue.global(qos: .background).async {
                     ranges = .init(text.ranges(of: search))
@@ -71,12 +87,6 @@ struct TextEditorView: View {
                 guard currentIndex < ranges.count else { return }
                 selection = ranges[currentIndex]
             }
-            CodeEditor(
-                source: $text,
-                selection: $selection,
-                language: .json,
-                theme: .pojoaque
-            )
         }
     }
 }
