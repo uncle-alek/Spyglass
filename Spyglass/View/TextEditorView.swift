@@ -5,6 +5,7 @@
 //  Created by Aleksey Yakimenko on 31/8/22.
 //
 
+import Dispatch
 import SwiftUI
 import HighlightedTextEditor
 
@@ -65,9 +66,10 @@ struct TextEditorView: View {
                     .padding([.leading, .trailing, .top])
             }
             .onChange(of: textDebouncer.debouncedText) { search in
-                ranges = .init(text.ranges(string: search))
-                indices = .init()
-                updateTextView()
+                DispatchQueue.global(qos: .background).async {
+                    ranges = .init(text.ranges(string: search))
+                    indices = .init()
+                }
             }
             HighlightedTextEditor(
                 text: $text,
