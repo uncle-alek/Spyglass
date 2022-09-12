@@ -146,19 +146,12 @@ final class TextDebouncer : ObservableObject {
 }
 
 extension String {
-    
-    func ranges(of occurrence: String) -> [Range<String.Index>] {
-        var indices = [Range<String.Index>]()
-        var position = startIndex
-        while let range = range(of: occurrence, range: position..<endIndex) {
-            indices.append(range)
-            let offset = occurrence.distance(from: occurrence.startIndex, to: occurrence.endIndex) - 1
-            if let after = index(range.lowerBound, offsetBy: offset, limitedBy: endIndex) {
-                position = index(after: after)
-            } else {
-                break
-            }
-        }
-        return indices
+            
+    func ranges(of string: String) -> [Range<String.Index>] {
+        guard !string.isEmpty else { return [] }
+        return try! NSRegularExpression(pattern: string, options: [.caseInsensitive])
+            .matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
+            .map { $0.range }
+            .map { Range($0, in: self)! }
     }
 }
