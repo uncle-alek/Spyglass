@@ -40,12 +40,15 @@ struct TextEditorView: View {
                         Text("Find Next")
                     }
                     .disabled(ranges.isEmpty)
+                    .keyboardShortcut("g", modifiers: [.command])
+                    
                     Button {
                         currentIndex = ranges.index(before: currentIndex)
                     } label: {
                         Text("Find Previous")
                     }
                     .disabled(ranges.isEmpty)
+                    .keyboardShortcut("g", modifiers: [.shift, .command])
                     .padding(.trailing)
                     
                     if showRewriteButton {
