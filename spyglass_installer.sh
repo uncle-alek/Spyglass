@@ -16,7 +16,7 @@ CD=$(pwd)
 trap 'rm -rf $CD/Spyglass' EXIT
 
 echo "${GREEN}Cloning Spyglass...${NC}"
-if ! git clone "git@github.com:uncle-alek/Spyglass.git" > /dev/null 2>&1
+if ! git clone "https://github.com/uncle-alek/Spyglass.git" > /dev/null 2>&1
 then
     echo "${RED}Failed to clone Spyglass!${NC}"
     exit 1
