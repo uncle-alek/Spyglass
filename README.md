@@ -3,5 +3,5 @@
 ### To install the Spyglass application, use the command below
 
 ```
-curl https://github.com/uncle-alek/Spyglass/spyglass_installer.sh | zsh
+curl https://raw.githubusercontent.com/uncle-alek/Spyglass/main/spyglass_installer.sh | sh
 ```
