@@ -14,6 +14,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         return .none
     case .reset:
         state.events = []
+        state.selectedItem = nil
         return .none
     case .receive(let value):
         let action = ReduxEvent(utf8: value)
