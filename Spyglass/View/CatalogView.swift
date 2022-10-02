@@ -24,8 +24,18 @@ struct CatalogView: View {
                 }
             )
         ) {
-            TableColumn(viewStore.tableView.column1.name, value: \.info1)
-            TableColumn(viewStore.tableView.column2.name, value: \.info2)
+            TableColumn(viewStore.tableView.column1.name) {
+                Text($0.info1)
+                    .textSelection(.enabled)
+            }
+            TableColumn(viewStore.tableView.column2.name) {
+                Text($0.info2)
+                    .textSelection(.enabled)
+            }
+            TableColumn(viewStore.tableView.column3.name) {
+                Text($0.info3)
+                    .textSelection(.enabled)
+            }
         }
         .animation(.easeInOut, value: viewStore.tableView.rows.count)
     }

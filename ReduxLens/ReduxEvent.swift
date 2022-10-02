@@ -10,6 +10,7 @@ import Foundation
 struct ReduxEvent: Decodable {
     let name: String
     let timestamp: TimeInterval
+    let leadTime: TimeInterval
     let stateBefore: [String: Any]
     let stateAfter: [String: Any]
     let file: String?
@@ -18,6 +19,7 @@ struct ReduxEvent: Decodable {
     enum CodingKeys: String, CodingKey {
         case name
         case timestamp
+        case leadTime
         case stateBefore
         case stateAfter
         case file
@@ -28,6 +30,7 @@ struct ReduxEvent: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         timestamp = try values.decode(TimeInterval.self, forKey: .timestamp)
+        leadTime = try values.decode(TimeInterval.self, forKey: .leadTime)
         file = try values.decodeIfPresent(String.self, forKey: .file)
         line = try values.decodeIfPresent(UInt.self, forKey: .line)
         
