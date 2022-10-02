@@ -33,6 +33,7 @@ extension ReduxEvent {
     ) {
         self.name = "Test action"
         self.timestamp = Date().timeIntervalSince1970
+        self.leadTime = Date().timeIntervalSince1970
         self.stateBefore = stateBefore
         self.stateAfter = stateAfter
         self.file = nil

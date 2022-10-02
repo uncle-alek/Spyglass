@@ -11,7 +11,8 @@ import Foundation
 fileprivate enum Strings {
     enum Column {
         static let action = "Action"
-        static let timestamp = "Timestamp"
+        static let leadTime = "Lead time"
+        static let file = "File"
     }
     enum Tab {
         static let diff = "States Diff"
@@ -38,7 +39,8 @@ struct AppViewState: Equatable {
     init(_ state: AppState) {
         self.tableView = LensView.TableView(
             column1: .init(name: Strings.Column.action),
-            column2: .init(name: Strings.Column.timestamp),
+            column2: .init(name: Strings.Column.leadTime),
+            column3: .init(name: Strings.Column.file),
             rows: state.events.rows
         )
         self.tabView = LensView.TabView(
@@ -116,20 +118,14 @@ extension ReduxEvent {
 extension Array where Element == (UUID, ReduxEvent) {
     
     var rows: [LensView.TableView.Row] {
-        zip(self.timestampDiff, self)
-        .map { t, e in .init(info1: e.1.name, info2: t.toString(), id: e.0)}
+        map { .init(info1: $0.1.name, info2: $0.1.leadTime.toString(), info3: $0.1.file.toFileName, id: $0.0)}
         .reversed()
     }
     
     var sharingData: String {
-        zip(self, self.timestampDiff)
-        .map { e, t in e.1.name + ", " + t.toString() }
+        map { $0.1.name + ", " + $0.1.leadTime.toString() + ", " + $0.1.file.toFileName }
         .reversed()
         .joined(separator: "\n")
-    }
-    
-    var timestampDiff: [TimeInterval] {
-        [0] + zip(self.dropFirst(), self.dropLast()).map { $0.1.timestamp - $1.1.timestamp }
     }
 }
 
@@ -144,7 +140,7 @@ extension Dictionary where Key == String, Value: Any {
 extension TimeInterval {
     
     func toString() -> String {
-        String(format: "+ %0.1d:%0.3d s", seconds, milliseconds)
+        String(format: "%0.1d:%0.3d s", seconds, milliseconds)
     }
     
     var seconds: Int {
@@ -152,6 +148,16 @@ extension TimeInterval {
     }
     
     var milliseconds: Int {
-        Int((self*1000).truncatingRemainder(dividingBy: 1000))
+        Int((self * 1000).truncatingRemainder(dividingBy: 1000))
+    }
+}
+
+extension Optional where Wrapped == String {
+    
+    var toFileName: String {
+        switch self {
+        case .some(let value): return String(value.split(separator: "/").last!)
+        case .none: return "no file information"
+        }
     }
 }
