@@ -17,7 +17,7 @@ struct TextEditorView: View {
     
     @EnvironmentObject var viewStore: ViewStore
     
-    @State var currentIndex: Int = 0
+    @State var currentIndex: Int?
     @State var ranges: CircularBuffer<Range<String.Index>> = []
     @StateObject var textDebouncer = TextDebouncer(delay: .milliseconds(500))
     @State private var selection: Range<String.Index> = Constant.zeroRange
@@ -35,7 +35,7 @@ struct TextEditorView: View {
                     .padding([.leading, .trailing])
                     
                     Button {
-                        currentIndex = ranges.index(after: currentIndex)
+                        currentIndex = currentIndex.map(ranges.index(after:)) ?? ranges.startIndex
                     } label: {
                         Text("Find Next")
                     }
@@ -43,7 +43,7 @@ struct TextEditorView: View {
                     .keyboardShortcut("g", modifiers: [.command])
                     
                     Button {
-                        currentIndex = ranges.index(before: currentIndex)
+                        currentIndex = currentIndex.map(ranges.index(before:)) ?? ranges.endIndex - 1
                     } label: {
                         Text("Find Previous")
                     }
@@ -64,7 +64,9 @@ struct TextEditorView: View {
                     Text(
                         ranges.isEmpty
                         ? "no matches"
-                        : "\(currentIndex + 1) of \(ranges.count) matches"
+                        : currentIndex != nil
+                        ? "\(currentIndex! + 1) of \(ranges.count) matches"
+                        : "\(ranges.count) matches"
                     )
                     Spacer()
                 }
@@ -82,12 +84,12 @@ struct TextEditorView: View {
             .onChange(of: textDebouncer.debouncedText) { search in
                 DispatchQueue.global(qos: .background).async {
                     ranges = .init(text.ranges(of: search))
-                    currentIndex = 0
+                    currentIndex = nil
                     selection = Constant.zeroRange
                 }
             }
             .onChange(of: currentIndex) { currentIndex in
-                guard currentIndex < ranges.count else { return }
+                guard let currentIndex = currentIndex else { return }
                 selection = ranges[currentIndex]
             }
         }
