@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabCabinetView: View {
     
-    @EnvironmentObject var viewStore: ViewStore
+    @EnvironmentObject var viewStore: LensViewStore
     @State private var selectedExternalTab = 0
     @State private var selectedInternalTab = 0
     

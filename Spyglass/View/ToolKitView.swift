@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ToolKitView: View {
     
-    @EnvironmentObject var viewStore: ViewStore
+    @EnvironmentObject var viewStore: LensViewStore
     @State var isMusicOn: Bool = true
     let selected: UUID?
     

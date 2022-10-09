@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C43781028F2FF5F002B0326 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43780F28F2FF5F002B0326 /* Network.swift */; };
+		3C43781228F302C3002B0326 /* ViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43781128F302C3002B0326 /* ViewStore.swift */; };
 		3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3328BF43E800627CC1 /* LoadJson.swift */; };
 		3C610F3628BF43E800627CC1 /* big_state.json in Resources */ = {isa = PBXBuildFile; fileRef = 3C610F3428BF43E800627CC1 /* big_state.json */; };
 		3C610F3928BF4ADA00627CC1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 3C610F3828BF4ADA00627CC1 /* ComposableArchitecture */; };
@@ -63,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C43780F28F2FF5F002B0326 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		3C43781128F302C3002B0326 /* ViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStore.swift; sourceTree = "<group>"; };
 		3C610F3328BF43E800627CC1 /* LoadJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadJson.swift; sourceTree = "<group>"; };
 		3C610F3428BF43E800627CC1 /* big_state.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = big_state.json; sourceTree = "<group>"; };
 		3C610F3C28BF52A200627CC1 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
@@ -194,7 +198,9 @@
 			children = (
 				3C61162628BF6C1900627CC1 /* View */,
 				3C81E6E1288EA42F003B9836 /* Spyglass.swift */,
+				3C43781128F302C3002B0326 /* ViewStore.swift */,
 				3C81E6E3288EA520003B9836 /* WebsocketServer.swift */,
+				3C43780F28F2FF5F002B0326 /* Network.swift */,
 				3C81E6DB288E9E97003B9836 /* LensLoader.swift */,
 				3C81E6A7288E777B003B9836 /* SpyglassApp.swift */,
 				3C81E6AB288E777C003B9836 /* Assets.xcassets */,
@@ -396,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C43781028F2FF5F002B0326 /* Network.swift in Sources */,
 				3C61163328C0968500627CC1 /* TabCabinetView.swift in Sources */,
 				3CD39FAD288EDB5C008A6E7B /* ReduxLensBuilder.swift in Sources */,
 				3C610F4328BF54C000627CC1 /* Environment.swift in Sources */,
@@ -406,6 +413,7 @@
 				3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */,
 				3C61162828BF6C5400627CC1 /* TreeView.swift in Sources */,
 				3CD39FAF288EDB78008A6E7B /* ReduxLens.swift in Sources */,
+				3C43781228F302C3002B0326 /* ViewStore.swift in Sources */,
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C61163928C0A26F00627CC1 /* SearchField.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,

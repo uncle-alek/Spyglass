@@ -15,7 +15,7 @@ fileprivate enum Constant {
 
 struct TextEditorView: View {
     
-    @EnvironmentObject var viewStore: ViewStore
+    @EnvironmentObject var viewStore: LensViewStore
     
     @State var currentIndex: Int?
     @State var ranges: CircularBuffer<Range<String.Index>> = []

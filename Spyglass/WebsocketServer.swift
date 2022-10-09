@@ -8,27 +8,43 @@
 import Foundation
 import Vapor
 
+typealias Callback = (String) -> Void
+typealias Connector = (@escaping (String) -> Void) -> Void
+
 final class WebSocketServer {
     
     /// Vapor frame size is limited to UInt32.max
-    static let maxFrameSize = WebSocketMaxFrameSize(integerLiteral: Int(UInt32.max))
+    private static let maxFrameSize = WebSocketMaxFrameSize(integerLiteral: Int(UInt32.max))
+    private let app: Application
     
-    let sockets: [(String, (String) -> Void, (@escaping (String) -> Void) -> Void)]
+    static var ipAddress: String = Network.ipAddress!
     
     init(
-        sockets: [(String, (String) -> Void, (@escaping (String) -> Void) -> Void)]
+        isLocalHost: Bool,
+        sockets: [(String, Callback, Connector)]
     ) {
-        self.sockets = sockets
+        self.app = WebSocketServer.application(isLocalHost, sockets)
     }
        
     func run() {
-        var env = try! Environment.detect()
-        try! LoggingSystem.bootstrap(from: &env)
-        let app = Application(env)
-//        app.http.server.configuration.hostname = getIPAddress()!
+        try! app.run()
+    }
+    
+    func shutdown() {
+        app.shutdown()
+    }
+}
+
+extension WebSocketServer {
+    
+    static func application(
+        _ isLocalHost: Bool,
+        _ sockets: [(String, Callback, Connector)]
+    ) -> Application {
+        let app = Application(try! Environment.detect())
         app.http.server.configuration.port = 3002
-        defer { app.shutdown() }
-        sockets.forEach { (socketName: String, callback: @escaping (String) -> Void, connector: @escaping (@escaping (String) -> Void) -> Void) in
+        if !isLocalHost { app.http.server.configuration.hostname = ipAddress }
+        sockets.forEach { (socketName: String, callback: @escaping Callback, connector: @escaping Connector) in
             app.webSocket(PathComponent(stringLiteral: socketName), maxFrameSize: WebSocketServer.maxFrameSize) { req, ws in
                 ws.onText { ws, text in
                     DispatchQueue.main.async {
@@ -44,31 +60,6 @@ final class WebSocketServer {
                 print("Web socket connected to server")
             }
         }
-        try! app.run()
+        return app
     }
-}
-
-
-func getIPAddress() -> String? {
-    var address: String?
-    var ifaddr: UnsafeMutablePointer<ifaddrs>? = nil
-    if getifaddrs(&ifaddr) == 0 {
-        var ptr = ifaddr
-        while ptr != nil {
-            defer { ptr = ptr?.pointee.ifa_next }
-            
-            let interface = ptr?.pointee
-            let addrFamily = interface?.ifa_addr.pointee.sa_family
-            if addrFamily == UInt8(AF_INET) || addrFamily == UInt8(AF_INET6) {
-                let name: String = String(cString: (interface?.ifa_name)!)
-                if name == "en0" {
-                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    getnameinfo(interface?.ifa_addr, socklen_t((interface?.ifa_addr.pointee.sa_len)!), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)
-                    address = String(cString: hostname)
-                }
-            }
-        }
-        freeifaddrs(ifaddr)
-    }
-    return address
 }

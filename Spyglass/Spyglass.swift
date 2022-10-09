@@ -8,57 +8,93 @@
 import Combine
 import Foundation
 
+enum IPAddress {
+    case local
+    case custom
+}
+
 final class Spyglass {
         
     static let lens = ReduxLensBuilder().build()
-    static let viewStore = ViewStore()
+    static let lensViewStore = LensViewStore()
+    static let spyglassViewStore = SpyglassViewStore()
+    static var webSocketServer: WebSocketServer?
     static var tableCancellable: AnyCancellable?
     static var tabCancellable: AnyCancellable?
     static var sharedItemsCancellable: AnyCancellable?
+    
+    static func setup() {
+        setupLensViewStore()
+        setupSpyglassViewStore()
+        setupLens()
+        setupWebSocketServer()
+    }
 
     static func run() {
-                
+        runWebSocketServer()
+    }
+    
+    static func updateIp(_ ipAddress: IPAddress) {
+        spyglassViewStore.isLocalHost = ipAddress == .local
+        
+        shutdownWebSocketServer()
+        setupWebSocketServer(ipAddress == .local)
+        runWebSocketServer()
+    }
+}
+
+private extension Spyglass {
+    
+    static func setupLensViewStore() {
         tableCancellable = lens.tablePublisher.sink { tableView in
             DispatchQueue.main.async {
-                viewStore.tableView = tableView
+                lensViewStore.tableView = tableView
             }
         }
         tabCancellable = lens.tabPublisher.sink { tabView in
             DispatchQueue.main.async {
-                viewStore.tabView = tabView
+                lensViewStore.tabView = tabView
             }
         }
         sharedItemsCancellable = lens.sharingData.sink { data in
             DispatchQueue.main.async {
-                viewStore.sharingData = data
+                lensViewStore.sharingData = data
             }
         }
-        viewStore.select = lens.selectItem(with:)
-        viewStore.navigateTo = lens.navigateToItem(with:)
-        viewStore.reset = lens.reset
-        viewStore.rewrite = lens.rewrite
-        
+        lensViewStore.select = lens.selectItem(with:)
+        lensViewStore.navigateTo = lens.navigateToItem(with:)
+        lensViewStore.reset = lens.reset
+        lensViewStore.rewrite = lens.rewrite
+    }
+    
+    static func setupSpyglassViewStore() {
+        spyglassViewStore.updateIp = updateIp
+        spyglassViewStore.ipAddress = WebSocketServer.ipAddress
+        spyglassViewStore.isLocalHost = true
+    }
+    
+    static func setupLens() {
         lens.setup()
-        
-        let webSocket = WebSocketServer(
+    }
+    
+    static func setupWebSocketServer(_ isLocalHost: Bool = true) {
+        webSocketServer = WebSocketServer(
+            isLocalHost: isLocalHost,
             sockets: [
                 (lens.connectionPath, lens.receive, lens.send)
             ]
         )
-        
+    }
+    
+    static func runWebSocketServer() {
         DispatchQueue.global(qos: .background).async {
-            webSocket.run()
+            webSocketServer?.run()
         }
     }
-}
-
-final class ViewStore: ObservableObject {
     
-    @Published var tableView: LensView.TableView = .default
-    @Published var tabView: LensView.TabView = .default
-    @Published var sharingData: String? = nil
-    var select: (UUID) -> Void = {_ in }
-    var navigateTo: (UUID) -> Void = {_ in }
-    var reset: () -> Void = {}
-    var rewrite: (String) -> Void = {_ in }
+    static func shutdownWebSocketServer() {
+        DispatchQueue.global(qos: .background).async {
+            webSocketServer?.shutdown()
+        }
+    }
 }

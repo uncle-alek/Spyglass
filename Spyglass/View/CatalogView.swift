@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CatalogView: View {
     
-    @EnvironmentObject var viewStore: ViewStore
+    @EnvironmentObject var viewStore: LensViewStore
     @Binding var selected: UUID?
     
     var body: some View {
