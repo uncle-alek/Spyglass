@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var viewStore = Spyglass.viewStore
+    @ObservedObject var viewStore = Spyglass.lensViewStore
     @State var selected: UUID?
         
     var body: some View {
