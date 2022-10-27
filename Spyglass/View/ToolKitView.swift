@@ -11,19 +11,19 @@ import SwiftUI
 struct ToolKitView: View {
     
     @EnvironmentObject var viewStore: LensViewStore
-    @State var isMusicOn: Bool = true
     let selected: UUID?
     
     var body: some View {
         HStack {
             Button {
-                isMusicOn.toggle()
+                viewStore.configuration.isMusicOn.toggle()
             } label: {
-                isMusicOn
+                viewStore.configuration.isMusicOn
                 ? Image(systemName: "speaker")
                 : Image(systemName: "speaker.slash")
             }
-            .help(isMusicOn ? "Turn off sound" : "Turn on sound")
+            .help(viewStore.configuration.isMusicOn ? "Turn off sound" : "Turn on sound")
+            
             Menu {
                 Button {
                     guard let data = viewStore.sharingData else { return }
@@ -38,12 +38,14 @@ struct ToolKitView: View {
                 Image(systemName: "square.and.arrow.up")
             }
             .help("Share events")
+            
             Button {
                 viewStore.reset()
             } label: {
                 Image(systemName: "trash")
             }
             .help("Delete event history")
+            
             Button {
                 guard let selected = selected else { return }
                 viewStore.navigateTo(selected)
@@ -54,7 +56,7 @@ struct ToolKitView: View {
             .disabled(selected == nil)
         }
         .onChange(of: viewStore.tableView.rows) { rows in
-            guard isMusicOn else { return }
+            guard viewStore.configuration.isMusicOn else { return }
             guard !rows.isEmpty else { return }
             AudioServicesPlaySystemSound(1396)
         }

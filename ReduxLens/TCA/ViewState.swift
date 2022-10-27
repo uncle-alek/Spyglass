@@ -11,7 +11,7 @@ import Foundation
 fileprivate enum Strings {
     enum Column {
         static let action = "Action"
-        static let leadTime = "Lead time"
+        static let leadTime = "Lead Time"
         static let file = "File"
     }
     enum Tab {
