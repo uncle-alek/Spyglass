@@ -5,12 +5,6 @@ GREEN='\033[0;32m'
 BGREEN='\033[1;92m'
 NC='\033[0m'
 
-if test -d "/Applications/Spyglass.app"
-then
-    echo "${BGREEN}Spyglass application is already installed on your computer!!!${NC}"
-    exit 0
-fi
-
 CD=$(pwd)
 
 trap 'rm -rf $CD/Spyglass' EXIT
@@ -32,7 +26,7 @@ then
 fi
 
 echo "${GREEN}Moving Spyglass to Application folder...${NC}"
-if ! mv ./build/Build/Products/Release/Spyglass.app /Applications/Spyglass.app  > /dev/null 2>&1
+if ! cp -R ./build/Build/Products/Release/Spyglass.app /Applications > /dev/null 2>&1
 then
     echo "${RED}Failed to move Spyglass to Application folder!${NC}"
     exit 1
