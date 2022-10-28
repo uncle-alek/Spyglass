@@ -5,22 +5,17 @@
 //  Created by Aleksey Yakimenko on 31/8/22.
 //
 
-import CodeEditor
 import Dispatch
 import SwiftUI
-
-fileprivate enum Constant {
-    static let zeroRange = "".startIndex..<"".startIndex
-}
 
 struct TextEditorView: View {
     
     @EnvironmentObject var viewStore: LensViewStore
     
     @State var currentIndex: Int?
-    @State var ranges: CircularBuffer<Range<String.Index>> = []
+    @State var ranges: CircularBuffer<NSRange> = []
     @StateObject var textDebouncer = TextDebouncer(delay: .milliseconds(500))
-    @State private var selection: Range<String.Index> = Constant.zeroRange
+    @State private var selection: NSRange? = nil
     
     @State var text: String
     let showRewriteButton: Bool
@@ -75,17 +70,15 @@ struct TextEditorView: View {
             }
             .padding([.leading, .trailing, .top])
             
-            CodeEditor(
-                source: $text,
-                selection: $selection,
-                language: .json,
-                theme: .pojoaque
+            MacEditorTextView(
+                text: $text,
+                highlight: selection
             )
             .onChange(of: textDebouncer.debouncedText) { search in
                 DispatchQueue.global(qos: .background).async {
                     ranges = .init(text.ranges(of: search))
                     currentIndex = nil
-                    selection = Constant.zeroRange
+                    selection = nil
                 }
             }
             .onChange(of: currentIndex) { currentIndex in
@@ -152,11 +145,10 @@ final class TextDebouncer : ObservableObject {
 
 extension String {
             
-    func ranges(of string: String) -> [Range<String.Index>] {
+    func ranges(of string: String) -> [NSRange] {
         guard !string.isEmpty else { return [] }
         return try! NSRegularExpression(pattern: string, options: [.caseInsensitive])
             .matches(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count))
             .map { $0.range }
-            .map { Range($0, in: self)! }
     }
 }
