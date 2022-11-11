@@ -1,10 +1,3 @@
-//
-//  Network.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 9/10/22.
-//
-
 import Foundation
 
 final class Network {

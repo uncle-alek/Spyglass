@@ -1,10 +1,3 @@
-//
-//  Action.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 31/8/22.
-//
-
 import Foundation
 
 enum AppAction: Equatable {

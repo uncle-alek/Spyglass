@@ -1,10 +1,3 @@
-//
-//  ToolKitView.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 1/9/22.
-//
-
 import AVFoundation
 import SwiftUI
 

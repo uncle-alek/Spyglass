@@ -1,10 +1,3 @@
-//
-//  Environment.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 31/8/22.
-//
-
 import Foundation
 
 var appEnvironment = AppEnvironment(shell: shell)
