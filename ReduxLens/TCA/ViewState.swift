@@ -16,7 +16,6 @@ fileprivate enum Strings {
     }
     enum Tab {
         static let diff = "States Diff"
-        static let before = "State Before"
         static let after = "State After"
         static let json = "JSON"
         static let raw = "Raw"
@@ -55,26 +54,6 @@ struct AppViewState: Equatable {
                                 id: Strings.Tab.diff + Strings.Tab.raw,
                                 name: "",
                                 type: .string(text: $0.diff, showRewriteButton: false)
-                            )
-                        }
-                    ].compactMap { $0 }
-                ),
-                .init(
-                    id: Strings.Tab.before,
-                    name: Strings.Tab.before,
-                    pages: [
-                        state.selectedItem.map {
-                            .init(
-                                id: Strings.Tab.before + Strings.Tab.json,
-                                name: Strings.Tab.json,
-                                type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateBefore))
-                            )
-                        },
-                        state.selectedItem.map {
-                            .init(
-                                id: Strings.Tab.before + Strings.Tab.raw,
-                                name: Strings.Tab.raw,
-                                type: .string(text: $0.stateBefore.prettyPrinted, showRewriteButton: true)
                             )
                         }
                     ].compactMap { $0 }
