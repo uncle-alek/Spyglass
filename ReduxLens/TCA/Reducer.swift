@@ -17,20 +17,23 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         state.selectedItem = nil
         return .none
     case .receive(let value):
-        let action = ReduxEvent(utf8: value)
-        state.events.append((UUID(), action))
+        switch ReduxEvent.event(from: value) {
+            case .success(let event):
+                state.events.append((UUID(), event))
+            case .failure(let decodingError):
+                state.error = .eventNotDeserialiazable(decodingError)
+        }
         return .none
     case .selectItem(id: let id):
         state.selectedItem = state.events.first(where: { $0.0 == id })?.1
         return .none
     case .navigateToItem(id: let id):
-        guard let event = state.events.first(where: { $0.0 == id }),
-              let file = event.1.file,
-              let line = event.1.line
-        else { return .none }
+        guard let event = state.events.first(where: { $0.0 == id }) else { return .none }
+        guard let file = event.1.file else { state.error = .navigationFailedFileNotFound; return .none }
+        guard let line = event.1.line else { state.error = .navigationFailedLineNotFound; return .none }
         
         return .fireAndForget {
-            _ = environment.shell("xed", "-x", file)
+            _ = environment.shell("0xed", "-x", file)
             _ = environment.shell("xed", "-x", "-l", String(line))
         }
     }
@@ -38,8 +41,12 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
 
 extension ReduxEvent {
     
-    init(utf8: String) {
-        let data = utf8.data(using: .utf8)!
-        self = try! JSONDecoder().decode(ReduxEvent.self, from: data)
+    static func event(from string: String) -> Result<ReduxEvent, DecodingError> {
+        let data = string.data(using: .utf8)!
+        do {
+            return .success(try JSONDecoder().decode(ReduxEvent.self, from: data))
+        } catch {
+            return .failure(error as! DecodingError)
+        }
     }
 }

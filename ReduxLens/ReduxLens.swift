@@ -13,9 +13,10 @@ let FAKE = false
 
 final class ReduxLens: Lens {
     
+    var errorPublisher: AnyPublisher<LensError?, Never>
     var tablePublisher: AnyPublisher<LensView.TableView, Never>
     var tabPublisher: AnyPublisher<LensView.TabView, Never>
-    var sharingData: AnyPublisher<String?, Never>
+    var sharingDataPublisher: AnyPublisher<String?, Never>
     var send: ((String) -> Void)!
     var connectionPath: String { "redux" }
     
@@ -32,9 +33,10 @@ final class ReduxLens: Lens {
     )
     
     init() {
+        errorPublisher = viewStore.publisher.error.eraseToAnyPublisher()
         tablePublisher = viewStore.publisher.tableView.eraseToAnyPublisher()
         tabPublisher = viewStore.publisher.tabView.eraseToAnyPublisher()
-        sharingData = viewStore.publisher.sharingHistory.eraseToAnyPublisher()
+        sharingDataPublisher = viewStore.publisher.sharingHistory.eraseToAnyPublisher()
     }
     
     func setup() {

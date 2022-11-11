@@ -22,7 +22,8 @@ final class Spyglass {
     static var tableCancellable: AnyCancellable?
     static var tabCancellable: AnyCancellable?
     static var sharedItemsCancellable: AnyCancellable?
-    
+    static var errorCancellable: AnyCancellable?
+
     static func setup() {
         setupLensViewStore()
         setupSpyglassViewStore()
@@ -56,11 +57,17 @@ private extension Spyglass {
                 lensViewStore.tabView = tabView
             }
         }
-        sharedItemsCancellable = lens.sharingData.sink { data in
+        sharedItemsCancellable = lens.sharingDataPublisher.sink { data in
             DispatchQueue.main.async {
                 lensViewStore.sharingData = data
             }
         }
+        errorCancellable = lens.errorPublisher.sink { error in
+            DispatchQueue.main.async {
+                lensViewStore.error = error
+            }
+        }
+        
         lensViewStore.select = lens.selectItem(with:)
         lensViewStore.navigateTo = lens.navigateToItem(with:)
         lensViewStore.reset = lens.reset

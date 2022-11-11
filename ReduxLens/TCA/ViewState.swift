@@ -35,6 +35,7 @@ struct AppViewState: Equatable {
     var tableView: LensView.TableView
     var tabView: LensView.TabView
     var sharingHistory: String?
+    var error: LensError?
     
     init(_ state: AppState) {
         self.tableView = LensView.TableView(
@@ -101,6 +102,7 @@ struct AppViewState: Equatable {
             ]
         )
         self.sharingHistory = state.events.isEmpty ? nil : state.events.sharingData
+        self.error = state.error.map(LensError.init(reduxError:))
     }
 }
 
@@ -158,6 +160,52 @@ extension Optional where Wrapped == String {
         switch self {
         case .some(let value): return String(value.split(separator: "/").last!)
         case .none: return "no file information"
+        }
+    }
+}
+
+extension LensError {
+    
+    init(
+        reduxError: ReduxError
+    ) {
+        self.errorDescription = reduxError.errorDescription
+        self.failureReason = reduxError.failureReason
+    }
+}
+
+extension ReduxError {
+    
+    var errorDescription: String {
+        switch self {
+        case .navigationFailedFileNotFound:
+            return "Failed to navigate to IDE"
+        case .navigationFailedLineNotFound:
+            return "Failed to navigate to IDE"
+        case .eventNotDeserialiazable:
+            return "Failed to deserialize event"
+        }
+    }
+    
+    var failureReason: String {
+        switch self {
+        case .navigationFailedFileNotFound:
+            return "File name not found"
+        case .navigationFailedLineNotFound:
+            return "File line not found"
+        case .eventNotDeserialiazable(let decodingError):
+            switch decodingError {
+            case let .typeMismatch(type, _):
+                return "Type '\(type)' mismatch"
+            case let .valueNotFound(value, _):
+                return "Value '\(value)' not found"
+            case let .keyNotFound(key, _):
+                return "Key '\(key)' not found"
+            case .dataCorrupted(_):
+                return "Corrupted date"
+            @unknown default:
+                return "Unknown reason"
+            }
         }
     }
 }

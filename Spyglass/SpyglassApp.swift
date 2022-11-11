@@ -28,13 +28,17 @@ struct SpyglassApp: App {
                         set: { _,_ in viewStore.updateIp(.local) }
                     )
                 )
-                Toggle(
-                    viewStore.ipAddress,
-                    isOn: Binding(
-                        get: { !viewStore.isLocalHost },
-                        set: { _,_ in viewStore.updateIp(.custom) }
+                if let ipAddress = viewStore.ipAddress {
+                    Toggle(
+                        ipAddress,
+                        isOn: Binding(
+                            get: { !viewStore.isLocalHost },
+                            set: { _,_ in viewStore.updateIp(.custom) }
+                        )
                     )
-                )
+                } else {
+                    Text("IP addresses not found")
+                }
             }
         }
     }
