@@ -1,9 +1,6 @@
 # Spyglass
-
+Debugging tool for an event-driven application
 <img width="1002" alt="Screen Shot 2022-11-11 at 13 25 06" src="https://user-images.githubusercontent.com/12128692/201277176-7159683f-cdab-4c4a-8f50-d7f3a2936af2.png">
-
-## What?
-Debugging tool for an event-driven application  
   
 ## Why?
 * Can't debug events without IDE 
@@ -22,7 +19,7 @@ Debugging tool for an event-driven application
 * Open application with Spyglass client
 * Enjoy debugging!!!
 
-## How to install
+## How to install?
 * Use the command to build Spyglass from the source code
 ```
 curl https://raw.githubusercontent.com/uncle-alek/Spyglass/main/spyglass_installer.sh | sh
