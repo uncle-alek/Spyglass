@@ -13,6 +13,7 @@ let appReducer_fake = Reducer<AppState, AppAction, AppEnvironment> { state, acti
     case .setup:
         let fakeState = loadBigStateJson()
         state.events = [(UUID(), ReduxEvent(fakeState, fakeState))]
+        state.error = .navigationFailedLineNotFound
         return .none
     case .selectItem(id: let id):
         let fakeState = loadBigStateJson()

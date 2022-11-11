@@ -7,7 +7,14 @@
 
 import Foundation
 
+enum ReduxError: Error {
+    case navigationFailedFileNotFound
+    case navigationFailedLineNotFound
+    case eventNotDeserialiazable(DecodingError)
+}
+
 struct AppState {
     var events: [(UUID, ReduxEvent)] = []
     var selectedItem: ReduxEvent? = nil
+    var error: ReduxError?
 }

@@ -17,7 +17,7 @@ final class WebSocketServer {
     private static let maxFrameSize = WebSocketMaxFrameSize(integerLiteral: Int(UInt32.max))
     private let app: Application
     
-    static var ipAddress: String = Network.ipAddress!
+    static var ipAddress: String? { Network.ipAddress }
     
     init(
         isLocalHost: Bool,
@@ -43,7 +43,7 @@ extension WebSocketServer {
     ) -> Application {
         let app = Application(try! Environment.detect())
         app.http.server.configuration.port = 3002
-        if !isLocalHost { app.http.server.configuration.hostname = ipAddress }
+        if !isLocalHost, let ipAddress = ipAddress { app.http.server.configuration.hostname = ipAddress }
         sockets.forEach { (socketName: String, callback: @escaping Callback, connector: @escaping Connector) in
             app.webSocket(PathComponent(stringLiteral: socketName), maxFrameSize: WebSocketServer.maxFrameSize) { req, ws in
                 ws.onText { ws, text in

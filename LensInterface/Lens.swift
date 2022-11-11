@@ -11,9 +11,10 @@ import Foundation
 protocol Lens {
     
     var connectionPath: String { get }
+    var errorPublisher: AnyPublisher<LensError?, Never> { get }
     var tablePublisher: AnyPublisher<LensView.TableView, Never> { get }
     var tabPublisher: AnyPublisher<LensView.TabView, Never> { get }
-    var sharingData: AnyPublisher<String?, Never> { get }
+    var sharingDataPublisher: AnyPublisher<String?, Never> { get }
     
     func setup()
     func reset()
