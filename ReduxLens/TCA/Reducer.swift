@@ -33,7 +33,7 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         guard let line = event.1.line else { state.error = .navigationFailedLineNotFound; return .none }
         
         return .fireAndForget {
-            _ = environment.shell("0xed", "-x", file)
+            _ = environment.shell("xed", "-x", file)
             _ = environment.shell("xed", "-x", "-l", String(line))
         }
     }
