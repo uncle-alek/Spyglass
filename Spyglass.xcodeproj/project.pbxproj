@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C364C8A291E921600F4B749 /* ReduxError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C89291E921600F4B749 /* ReduxError.swift */; };
+		3C364C8D291E9AEA00F4B749 /* ToDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C8C291E9AEA00F4B749 /* ToDiff.swift */; };
+		3C364C8F291E9B1800F4B749 /* ToRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C8E291E9B1800F4B749 /* ToRows.swift */; };
+		3C364C91291E9BD900F4B749 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C90291E9BD900F4B749 /* Resources.swift */; };
+		3C364C93291E9C2E00F4B749 /* ToPrettyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C92291E9C2E00F4B749 /* ToPrettyState.swift */; };
+		3C364C97291E9CE200F4B749 /* ToDescriptiveError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C96291E9CE200F4B749 /* ToDescriptiveError.swift */; };
+		3C364C9A291E9ED200F4B749 /* LensError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C364C99291E9ED200F4B749 /* LensError.swift */; };
 		3C43781028F2FF5F002B0326 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43780F28F2FF5F002B0326 /* Network.swift */; };
 		3C43781228F302C3002B0326 /* ViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C43781128F302C3002B0326 /* ViewStore.swift */; };
 		3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3328BF43E800627CC1 /* LoadJson.swift */; };
@@ -14,9 +21,9 @@
 		3C610F3928BF4ADA00627CC1 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 3C610F3828BF4ADA00627CC1 /* ComposableArchitecture */; };
 		3C610F3D28BF52A200627CC1 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3C28BF52A200627CC1 /* Reducer.swift */; };
 		3C610F3F28BF52DF00627CC1 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F3E28BF52DF00627CC1 /* Action.swift */; };
-		3C610F4128BF542700627CC1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4028BF542700627CC1 /* State.swift */; };
+		3C610F4128BF542700627CC1 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4028BF542700627CC1 /* AppState.swift */; };
 		3C610F4328BF54C000627CC1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4228BF54C000627CC1 /* Environment.swift */; };
-		3C610F4528BF5DD200627CC1 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4428BF5DD200627CC1 /* ViewState.swift */; };
+		3C610F4528BF5DD200627CC1 /* AppViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C610F4428BF5DD200627CC1 /* AppViewState.swift */; };
 		3C61162828BF6C5400627CC1 /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162728BF6C5400627CC1 /* TreeView.swift */; };
 		3C61162A28BF6C7600627CC1 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162928BF6C7600627CC1 /* TextEditorView.swift */; };
 		3C61162C28BF6CDC00627CC1 /* TabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C61162B28BF6CDC00627CC1 /* TabPageView.swift */; };
@@ -65,15 +72,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C364C89291E921600F4B749 /* ReduxError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxError.swift; sourceTree = "<group>"; };
+		3C364C8C291E9AEA00F4B749 /* ToDiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDiff.swift; sourceTree = "<group>"; };
+		3C364C8E291E9B1800F4B749 /* ToRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToRows.swift; sourceTree = "<group>"; };
+		3C364C90291E9BD900F4B749 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		3C364C92291E9C2E00F4B749 /* ToPrettyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPrettyState.swift; sourceTree = "<group>"; };
+		3C364C96291E9CE200F4B749 /* ToDescriptiveError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDescriptiveError.swift; sourceTree = "<group>"; };
+		3C364C99291E9ED200F4B749 /* LensError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensError.swift; sourceTree = "<group>"; };
 		3C43780F28F2FF5F002B0326 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3C43781128F302C3002B0326 /* ViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStore.swift; sourceTree = "<group>"; };
 		3C610F3328BF43E800627CC1 /* LoadJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadJson.swift; sourceTree = "<group>"; };
 		3C610F3428BF43E800627CC1 /* big_state.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = big_state.json; sourceTree = "<group>"; };
 		3C610F3C28BF52A200627CC1 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		3C610F3E28BF52DF00627CC1 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		3C610F4028BF542700627CC1 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		3C610F4028BF542700627CC1 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		3C610F4228BF54C000627CC1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		3C610F4428BF5DD200627CC1 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		3C610F4428BF5DD200627CC1 /* AppViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewState.swift; sourceTree = "<group>"; };
 		3C61162728BF6C5400627CC1 /* TreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
 		3C61162928BF6C7600627CC1 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		3C61162B28BF6CDC00627CC1 /* TabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageView.swift; sourceTree = "<group>"; };
@@ -134,6 +148,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C364C88291E91F400F4B749 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				3CD39FB0288FB25A008A6E7B /* ReduxEvent.swift */,
+				3C610F4028BF542700627CC1 /* AppState.swift */,
+				3C364C89291E921600F4B749 /* ReduxError.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		3C364C8B291E9AC500F4B749 /* ViewState */ = {
+			isa = PBXGroup;
+			children = (
+				3C364C98291E9DA000F4B749 /* Conversion */,
+				3C610F4428BF5DD200627CC1 /* AppViewState.swift */,
+				3C364C90291E9BD900F4B749 /* Resources.swift */,
+			);
+			path = ViewState;
+			sourceTree = "<group>";
+		};
+		3C364C98291E9DA000F4B749 /* Conversion */ = {
+			isa = PBXGroup;
+			children = (
+				3C364C8C291E9AEA00F4B749 /* ToDiff.swift */,
+				3C364C8E291E9B1800F4B749 /* ToRows.swift */,
+				3C364C96291E9CE200F4B749 /* ToDescriptiveError.swift */,
+				3C364C92291E9C2E00F4B749 /* ToPrettyState.swift */,
+			);
+			path = Conversion;
+			sourceTree = "<group>";
+		};
 		3C610F3228BF43E800627CC1 /* Fake */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,11 +192,11 @@
 		3C610F3B28BF529800627CC1 /* TCA */ = {
 			isa = PBXGroup;
 			children = (
-				3C610F3C28BF52A200627CC1 /* Reducer.swift */,
 				3C610F3E28BF52DF00627CC1 /* Action.swift */,
-				3C610F4028BF542700627CC1 /* State.swift */,
 				3C610F4228BF54C000627CC1 /* Environment.swift */,
-				3C610F4428BF5DD200627CC1 /* ViewState.swift */,
+				3C610F3C28BF52A200627CC1 /* Reducer.swift */,
+				3C364C88291E91F400F4B749 /* State */,
+				3C364C8B291E9AC500F4B749 /* ViewState */,
 			);
 			path = TCA;
 			sourceTree = "<group>";
@@ -242,6 +287,7 @@
 				3C81E6D3288E9411003B9836 /* LensView.swift */,
 				3C81E6DD288E9EED003B9836 /* LensBuilder.swift */,
 				3C81E6DF288E9F4B003B9836 /* Lens.swift */,
+				3C364C99291E9ED200F4B749 /* LensError.swift */,
 			);
 			path = LensInterface;
 			sourceTree = "<group>";
@@ -253,7 +299,6 @@
 				3C610F3228BF43E800627CC1 /* Fake */,
 				3CD39FAC288EDB5C008A6E7B /* ReduxLensBuilder.swift */,
 				3CD39FAE288EDB78008A6E7B /* ReduxLens.swift */,
-				3CD39FB0288FB25A008A6E7B /* ReduxEvent.swift */,
 			);
 			path = ReduxLens;
 			sourceTree = "<group>";
@@ -410,12 +455,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C43781028F2FF5F002B0326 /* Network.swift in Sources */,
+				3C364C9A291E9ED200F4B749 /* LensError.swift in Sources */,
 				3C61163328C0968500627CC1 /* TabCabinetView.swift in Sources */,
 				3CD39FAD288EDB5C008A6E7B /* ReduxLensBuilder.swift in Sources */,
 				3C610F4328BF54C000627CC1 /* Environment.swift in Sources */,
 				3C81E6AA288E777B003B9836 /* ContentView.swift in Sources */,
+				3C364C91291E9BD900F4B749 /* Resources.swift in Sources */,
 				3C81E6E0288E9F4B003B9836 /* Lens.swift in Sources */,
+				3C364C8D291E9AEA00F4B749 /* ToDiff.swift in Sources */,
 				3C81E6E4288EA520003B9836 /* WebsocketServer.swift in Sources */,
+				3C364C8F291E9B1800F4B749 /* ToRows.swift in Sources */,
 				3C61162C28BF6CDC00627CC1 /* TabPageView.swift in Sources */,
 				3C81E6A8288E777B003B9836 /* SpyglassApp.swift in Sources */,
 				3CE36F9F290AD20A0049E59B /* MacEditorTextView.swift in Sources */,
@@ -425,17 +474,20 @@
 				3C81E6DE288E9EED003B9836 /* LensBuilder.swift in Sources */,
 				3C61163928C0A26F00627CC1 /* SearchField.swift in Sources */,
 				3C81E6D4288E9411003B9836 /* LensView.swift in Sources */,
-				3C610F4128BF542700627CC1 /* State.swift in Sources */,
+				3C610F4128BF542700627CC1 /* AppState.swift in Sources */,
 				3C81E6DC288E9E97003B9836 /* LensLoader.swift in Sources */,
 				3C81E6E2288EA42F003B9836 /* Spyglass.swift in Sources */,
 				3C61162A28BF6C7600627CC1 /* TextEditorView.swift in Sources */,
+				3C364C8A291E921600F4B749 /* ReduxError.swift in Sources */,
 				3C610F3D28BF52A200627CC1 /* Reducer.swift in Sources */,
 				3C61163528C099CE00627CC1 /* CatalogView.swift in Sources */,
 				3C610F3F28BF52DF00627CC1 /* Action.swift in Sources */,
 				3CD39FB1288FB25A008A6E7B /* ReduxEvent.swift in Sources */,
 				3C61162E28BF7C0400627CC1 /* FakeReducer.swift in Sources */,
 				3C61163728C09B2500627CC1 /* ToolKitView.swift in Sources */,
-				3C610F4528BF5DD200627CC1 /* ViewState.swift in Sources */,
+				3C364C97291E9CE200F4B749 /* ToDescriptiveError.swift in Sources */,
+				3C610F4528BF5DD200627CC1 /* AppViewState.swift in Sources */,
+				3C364C93291E9C2E00F4B749 /* ToPrettyState.swift in Sources */,
 				3C610F3528BF43E800627CC1 /* LoadJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

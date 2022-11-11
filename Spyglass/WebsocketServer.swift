@@ -1,10 +1,3 @@
-//
-//  WebsocketServer.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 25/7/22.
-//
-
 import Foundation
 import Vapor
 

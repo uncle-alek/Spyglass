@@ -1,10 +1,3 @@
-//
-//  TextEd.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 31/8/22.
-//
-
 import Dispatch
 import SwiftUI
 

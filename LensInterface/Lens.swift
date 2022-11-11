@@ -1,10 +1,3 @@
-//
-//  LensInterface.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 25/7/22.
-//
-
 import Combine
 import Foundation
 

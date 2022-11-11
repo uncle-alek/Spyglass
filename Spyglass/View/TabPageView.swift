@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 31/8/22.
-//
-
 import SwiftUI
 
 struct TabPageView: View {

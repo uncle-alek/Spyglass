@@ -1,10 +1,3 @@
-//
-//  TabView.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 1/9/22.
-//
-
 import SwiftUI
 
 struct TabCabinetView: View {

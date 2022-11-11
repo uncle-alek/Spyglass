@@ -1,17 +1,4 @@
-//
-//  View.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 25/7/22.
-//
-
 import Foundation
-
-struct LensError: LocalizedError, Equatable {
-    
-    let errorDescription: String?
-    let failureReason: String?
-}
 
 enum LensView {
 

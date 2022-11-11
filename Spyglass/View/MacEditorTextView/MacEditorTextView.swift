@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 27/10/22.
-//
-
 // https://gist.github.com/unnamedd/6e8c3fbc806b8deb60fa65d6b9affab0
 
 import Combine

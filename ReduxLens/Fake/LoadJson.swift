@@ -1,10 +1,3 @@
-//
-//  LoadJson.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 31/8/22.
-//
-
 import Foundation
 
 func loadBigStateJson() -> [String: Any] {

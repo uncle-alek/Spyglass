@@ -1,10 +1,3 @@
-//
-//  TAGALens.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 25/7/22.
-//
-
 import Combine
 import ComposableArchitecture
 import Foundation
@@ -27,6 +20,7 @@ final class ReduxLens: Lens {
             environment: appEnvironment
         )
     }
+    
     private let viewStore: ComposableArchitecture.ViewStore<AppViewState, AppAction> = ComposableArchitecture.ViewStore(
         store().scope(state: AppViewState.init),
         removeDuplicates: ==

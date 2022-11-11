@@ -1,10 +1,3 @@
-//
-//  ViewStore.swift
-//  Spyglass
-//
-//  Created by Aleksey Yakimenko on 9/10/22.
-//
-
 import Combine
 import Foundation
 
