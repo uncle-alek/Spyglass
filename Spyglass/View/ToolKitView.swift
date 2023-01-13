@@ -4,7 +4,7 @@ import SwiftUI
 struct ToolKitView: View {
     
     @EnvironmentObject var viewStore: LensViewStore
-    let selected: UUID?
+    let selected: String?
     
     var body: some View {
         HStack {

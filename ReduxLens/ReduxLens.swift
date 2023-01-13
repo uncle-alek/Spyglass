@@ -45,11 +45,11 @@ final class ReduxLens: Lens {
         viewStore.send(.receive(value))
     }
     
-    func selectItem(with id: UUID) {
+    func selectItem(with id: String) {
         viewStore.send(.selectItem(id: id))
     }
     
-    func navigateToItem(with id: UUID) {
+    func navigateToItem(with id: String) {
         viewStore.send(.navigateToItem(id: id))
     }
     
