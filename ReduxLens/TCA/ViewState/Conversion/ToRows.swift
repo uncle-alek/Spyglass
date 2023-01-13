@@ -1,15 +1,15 @@
 import Foundation
 import OrderedCollections
 
-extension OrderedDictionary where Key == UUID, Value == ReduxEvent {
+extension Array where Element == ReduxEvent {
     
     var rows: [LensView.TableView.Row] {
-        map { k, v in .init(info1: v.name, info2: v.leadTime.toString(), info3: v.file.toFileName, id: k)}
+        map { item in .init(info1: item.name, info2: item.leadTime.toString(), info3: item.file.toFileName, id: item.id) }
         .reversed()
     }
     
     var sharingData: String {
-        map { _, v in v.name + ", " + v.leadTime.toString() + ", " + v.file.toFileName }
+        map { item in item.name + ", " + item.leadTime.toString() + ", " + item.file.toFileName }
         .reversed()
         .joined(separator: "\n")
     }

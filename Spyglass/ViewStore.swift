@@ -14,8 +14,8 @@ final class LensViewStore: ObservableObject {
     @Published var sharingData: String? = nil
     @Published var configuration: LensConfiguration = .default
     @Published var error: LensError? = nil
-    var select: (UUID) -> Void = {_ in }
-    var navigateTo: (UUID) -> Void = {_ in }
+    var select: (String) -> Void = {_ in }
+    var navigateTo: (String) -> Void = {_ in }
     var reset: () -> Void = {}
     var rewrite: (String) -> Void = {_ in }
 }

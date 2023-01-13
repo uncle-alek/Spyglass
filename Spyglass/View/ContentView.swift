@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var viewStore = Spyglass.lensViewStore
-    @State var selected: UUID?
+    @State var selected: String?
     @State var error: LensError?
     
     var body: some View {

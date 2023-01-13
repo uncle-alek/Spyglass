@@ -8,7 +8,7 @@ enum LensView {
             let info1: String
             let info2: String
             let info3: String
-            let id: UUID
+            let id: String
         }
         
         struct Column: Equatable {

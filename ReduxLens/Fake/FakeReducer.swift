@@ -5,7 +5,7 @@ let appReducer_fake = Reducer<AppState, AppAction, AppEnvironment> { state, acti
     switch action {
     case .setup:
         let fakeState = loadBigStateJson()
-        state.events = [UUID(): ReduxEvent(fakeState, fakeState)]
+        state.events = [ReduxEvent(fakeState, fakeState)]
         state.error = .navigationFailedLineNotFound
         return .none
     case .selectItem(id: let id):
@@ -25,7 +25,9 @@ extension ReduxEvent {
         _ stateBefore: [String: Any],
         _ stateAfter: [String: Any]
     ) {
+        self.id = UUID().uuidString
         self.name = "Test action"
+        self.timeStamp = Date().timeIntervalSince1970
         self.leadTime = Date().timeIntervalSince1970
         self.stateBefore = stateBefore
         self.stateAfter = stateAfter

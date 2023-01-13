@@ -3,7 +3,7 @@ import SwiftUI
 struct CatalogView: View {
     
     @EnvironmentObject var viewStore: LensViewStore
-    @Binding var selected: UUID?
+    @Binding var selected: String?
     
     var body: some View {
         Table(

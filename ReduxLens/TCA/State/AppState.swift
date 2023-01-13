@@ -1,8 +1,13 @@
 import Foundation
-import OrderedCollections
 
 struct AppState {
-    var events: OrderedDictionary<UUID, ReduxEvent> = [:]
+    var events: [ReduxEvent] = []
     var selectedItem: ReduxEvent? = nil
     var error: ReduxError?
+}
+
+extension AppState {
+    func event(id: String) -> ReduxEvent? {
+        events.first { $0.id == id }
+    }
 }
