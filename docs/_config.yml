@@ -1,4 +1,5 @@
 title: Spyglass documentation
+description: A starter template for a Jeykll site using the Just the Docs theme!
 remote_theme: just-the-docs
 
 url: ""
