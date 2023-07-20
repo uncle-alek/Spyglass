@@ -37,8 +37,12 @@ let project = Project(
             infoPlist: .default,
             sources: ["Source/**"],
             resources: ["Source/Resources/**"],
+            entitlements: "Source/\(name)/\(name).entitlements",
             dependencies: dependencies,
             settings: .settings(
+                base: [
+                    "DEVELOPMENT_ASSET_PATHS": ["Source/Resources"]
+                ],
                 configurations: [
                     .debug(name: "Debug", xcconfig: Path("Config/Spyglass.xcconfig")),
                     .release(name: "Release", xcconfig: Path("Config/Spyglass.xcconfig"))
