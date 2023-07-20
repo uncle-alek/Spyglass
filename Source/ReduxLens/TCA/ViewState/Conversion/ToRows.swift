@@ -7,9 +7,8 @@ extension Array where Element == ReduxEvent {
         map { item in
             .init(
                 info1: item.name,
-                info2: item.leadTime.toString(),
-                info3: item.file.toFileName,
-                info4: item.line.toLineName,
+                info2: item.leadTime.toString,
+                info3: item.toFileAndLine,
                 id: item.id
             )
         }
@@ -17,7 +16,7 @@ extension Array where Element == ReduxEvent {
     }
     
     var sharingData: String {
-        map { item in item.name + ", " + item.leadTime.toString() + ", " + item.file.toFileName }
+        map { item in item.name + ", " + item.leadTime.toString + ", " + item.file.toFileName }
         .reversed()
         .joined(separator: "\n")
     }
@@ -25,7 +24,7 @@ extension Array where Element == ReduxEvent {
 
 extension TimeInterval {
     
-    func toString() -> String {
+    var toString: String {
         String(format: "%0.1d:%0.3d s", seconds, milliseconds)
     }
     
@@ -35,6 +34,13 @@ extension TimeInterval {
     
     var milliseconds: Int {
         Int((self * 1000).truncatingRemainder(dividingBy: 1000))
+    }
+}
+
+extension ReduxEvent {
+    
+    var toFileAndLine: String {
+        file.toFileName + ":" + line.toLineName
     }
 }
 

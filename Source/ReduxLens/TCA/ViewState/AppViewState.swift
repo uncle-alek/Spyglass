@@ -13,7 +13,6 @@ struct AppViewState: Equatable {
             column1: .init(name: Strings.Column.action),
             column2: .init(name: Strings.Column.leadTime),
             column3: .init(name: Strings.Column.file),
-            column4: .init(name: Strings.Column.line),
             rows: state.events.rows
         )
         self.tabView = LensView.TabView(

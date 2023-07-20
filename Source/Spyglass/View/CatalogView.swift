@@ -29,10 +29,6 @@ struct CatalogView: View {
                 Text($0.info3)
                     .textSelection(.enabled)
             }
-            TableColumn(viewStore.tableView.column4.name) {
-                Text($0.info4)
-                    .textSelection(.enabled)
-            }
         }
         .animation(.easeInOut, value: viewStore.tableView.rows.count)
     }

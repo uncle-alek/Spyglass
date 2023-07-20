@@ -5,7 +5,6 @@ enum Strings {
         static let action = "Action"
         static let leadTime = "Lead Time"
         static let file = "File"
-        static let line = "Line"
     }
     enum Tab {
         static let diff = "Diff"
