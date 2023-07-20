@@ -14,22 +14,22 @@
 		0DF48F9E2A2D0DFA9B3B95F2 /* SpyglassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED899CA134981A681D26260B /* SpyglassApp.swift */; };
 		1B5475DAD7E73260D272A54F /* WebsocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58D3DDC1770B52A3D537EC6 /* WebsocketServer.swift */; };
 		1BD8DF273C655014F811AA35 /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = E421047267A96AB08B94F0D4 /* Lens.swift */; };
-		1D07EAECD92F9F5B99BF927E /* TuistAssets+Spyglass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86583FC8E778F7B2F16106CC /* TuistAssets+Spyglass.swift */; };
 		21C82FE64DA658921C1860BB /* ReduxLensBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B721154BADD174C80169A /* ReduxLensBuilder.swift */; };
 		22F789D3E3392E8348466A9B /* CircularBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D557831BE70DAA3C5B489C /* CircularBufferTests.swift */; };
+		28F5D815657B88CD53C452A4 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = BFA95B964322BBA8F21A4B1D /* CustomDump */; };
 		2AFBA9C9F7BF47A196650A83 /* ReduxError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF37280AD4778AA5E0E99B5 /* ReduxError.swift */; };
-		306397F00BD15BD90E22BF9D /* TuistBundle+SpyglassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A416875177231A5DA774F /* TuistBundle+SpyglassUITests.swift */; };
 		32BCC6E20720C18899D87CA2 /* ToolKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF35A8BCFED2696BEFC94C5 /* ToolKitView.swift */; };
 		337884F6A68A26FFF0A16122 /* LensView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8FE67D749681199984668 /* LensView.swift */; };
-		3424F97AE43DBD7523E4EF92 /* TuistBundle+Spyglass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7477ACB07FD2D3E40C9E52 /* TuistBundle+Spyglass.swift */; };
 		3CE237C3A6EEDED1C73A8293 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = BC6F0EA96219971507E8B040 /* ComposableArchitecture */; };
 		3D5DADE67AB88A5A693F66A0 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9F5B2B242D7FBF09E2C7BF /* Action.swift */; };
 		4123D35A3893DA79ADB6657A /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B08F4FA0F15A40F2173961 /* Reducer.swift */; };
 		493E1E343E06C9AD83B9BBF5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B762E5510CEE60C75E43C461 /* ContentView.swift */; };
 		4B606110A2D6D6AB414BD3B3 /* FakeReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C30B4D09BF5CBEEAD3C19BF /* FakeReducer.swift */; };
+		5C9B4ED779497C39EFC7093A /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 7DCC7B7793A7EA97B5209EC6 /* Vapor */; };
 		65B2731CDECEA8EC65181C6D /* LoadJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24A74EC79603A8C34689F11 /* LoadJson.swift */; };
 		6623FCA12AC9DBB6B1C060AE /* ToDiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03168CFB2CA430BCAA8818CA /* ToDiff.swift */; };
-		6EE3DD8D330893A262E08568 /* TuistBundle+SpyglassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACD829A24FC65C3B71D61A6 /* TuistBundle+SpyglassTests.swift */; };
+		6B4B986C7EA19ED3BD8E8568 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = E43D27C728442B64A2296D1F /* Vapor */; };
+		743657EEE5AF98E6BD73600E /* OutlineView in Frameworks */ = {isa = PBXBuildFile; productRef = B00E8E199D6F801A0D6A728D /* OutlineView */; };
 		8C67D81011209E855C9BD9CF /* TabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72B43C77FEEF9BD75208109 /* TabPageView.swift */; };
 		8CB4DCAE5D8DBCB11BAA5698 /* ReduxLens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C96F1314DB145770E0B3ACB /* ReduxLens.swift */; };
 		8DCBFCC02D4C58B5D7EFBF7D /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB32813CF4335FB7AF25C077 /* Resources.swift */; };
@@ -39,10 +39,12 @@
 		9AF0EAB74DF0571A5754B561 /* ViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C025B51BE6E0C5501A4A9400 /* ViewStore.swift */; };
 		9F912348219C93EC9BE00557 /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E663175D76ECB793210C328 /* TextEditorView.swift */; };
 		AA5079424870A38CEF580DDC /* TreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5341CED410702EB05A34AE1 /* TreeView.swift */; };
+		B07AF91B8B69C1B54F6BFA4A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 0A650C435A1FBF684B34DD7B /* ComposableArchitecture */; };
 		B5F5832412257B4E67AB4926 /* SpyglassUITestsLaunchTests.swift in Resources */ = {isa = PBXBuildFile; fileRef = 3556E6554BF928DD92E474AF /* SpyglassUITestsLaunchTests.swift */; };
 		B9F1045C1C95F97851994866 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 8ECE0DF10FE6B6DC7D6E2AE1 /* Vapor */; };
 		BDAF58338D757BDCE9D3DD40 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BBE7B61C4B22761FAF695A /* AppState.swift */; };
 		BF6E0C4645228CDE15268299 /* Spyglass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE88DF3026243AA7ACA44EC2 /* Spyglass.swift */; };
+		C052D5DB22DEA3C81B9F5C29 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = F1426BEC21FEB7A359D1B7D5 /* ComposableArchitecture */; };
 		C23808AD8FB72D9C3A2ADF95 /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 852DC7AD6934B1E3D392A9DC /* CustomDump */; };
 		C48A5A0FF8FDF3F59FE977C4 /* CircularBufferTests.swift in Resources */ = {isa = PBXBuildFile; fileRef = 73D557831BE70DAA3C5B489C /* CircularBufferTests.swift */; };
 		CE1E2FA286FDFCEB7D88E803 /* SpyglassUITests.swift in Resources */ = {isa = PBXBuildFile; fileRef = 32595D2EF73627CF015961FB /* SpyglassUITests.swift */; };
@@ -52,11 +54,13 @@
 		D574D80D42A88E6810DCAF63 /* TabCabinetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4824E2C0959199E9EC8E6773 /* TabCabinetView.swift */; };
 		D57A6DF2456373EDAF4FB4F1 /* ToRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AC9355C78A2D2DA108AB9A /* ToRows.swift */; };
 		D7412E35F5C8BE8C82DD1717 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB163C32D45126C38B2F8CC1 /* SearchField.swift */; };
+		DAB670294016E6CBEF540DCE /* CustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 89F9D046BF6242A9232FDE73 /* CustomDump */; };
 		EB80334AD920B3E0DE3E8D6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AAED71BE4EA974A0083841C /* Assets.xcassets */; };
 		F220AAD12402F275E9AC866A /* OutlineView in Frameworks */ = {isa = PBXBuildFile; productRef = 52B951F4DC7E693F0BADA503 /* OutlineView */; };
 		F3311D0D53A872348AA1E7B9 /* AppViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2AC948395B1E3F12441B35 /* AppViewState.swift */; };
 		F42CD13159105E553BE8A5D9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A08468B9CD9C10E8D25FA2C /* Network.swift */; };
 		FA414FDA864330180FB8B64C /* CatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93F4527E725EECE03769753 /* CatalogView.swift */; };
+		FF9F781BE88E09E129EDA2EE /* OutlineView in Frameworks */ = {isa = PBXBuildFile; productRef = 8905AB9CC4414CB0AD09928E /* OutlineView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +122,7 @@
 		1C96F1314DB145770E0B3ACB /* ReduxLens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReduxLens.swift; sourceTree = "<group>"; };
 		1E663175D76ECB793210C328 /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		22EA2422EBE0ABBD9280CD46 /* SpyglassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpyglassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		315ECF5AD5776F4DE36BFF20 /* Spyglass.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Spyglass.xcconfig; sourceTree = "<group>"; };
 		32595D2EF73627CF015961FB /* SpyglassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassUITests.swift; sourceTree = "<group>"; };
 		3556E6554BF928DD92E474AF /* SpyglassUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyglassUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		36B08F4FA0F15A40F2173961 /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
@@ -129,20 +134,19 @@
 		4824E2C0959199E9EC8E6773 /* TabCabinetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCabinetView.swift; sourceTree = "<group>"; };
 		49E8FE67D749681199984668 /* LensView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensView.swift; sourceTree = "<group>"; };
 		592A1C0997744469B48293FF /* LensBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensBuilder.swift; sourceTree = "<group>"; };
+		5F1D579DF37297FDB664F594 /* SpyglassTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SpyglassTests.xcconfig; sourceTree = "<group>"; };
 		66AC54CFBA25969E321C637F /* ToDescriptiveError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDescriptiveError.swift; sourceTree = "<group>"; };
+		66D49C2DF8AAB50C9F253404 /* SpyglassProject.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SpyglassProject.xcconfig; sourceTree = "<group>"; };
 		6CF35A8BCFED2696BEFC94C5 /* ToolKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolKitView.swift; sourceTree = "<group>"; };
 		73D557831BE70DAA3C5B489C /* CircularBufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularBufferTests.swift; sourceTree = "<group>"; };
 		74F18F3E112EBAF3DAD1744B /* Spyglass-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Spyglass-Info.plist"; sourceTree = "<group>"; };
 		7D71D1CAA9382378F92B61EF /* LensLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensLoader.swift; sourceTree = "<group>"; };
 		8215C65436560B3494E550D9 /* SpyglassTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SpyglassTests-Info.plist"; sourceTree = "<group>"; };
-		86583FC8E778F7B2F16106CC /* TuistAssets+Spyglass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Spyglass.swift"; sourceTree = "<group>"; };
-		8B7477ACB07FD2D3E40C9E52 /* TuistBundle+Spyglass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Spyglass.swift"; sourceTree = "<group>"; };
-		927A416875177231A5DA774F /* TuistBundle+SpyglassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+SpyglassUITests.swift"; sourceTree = "<group>"; };
-		9ACD829A24FC65C3B71D61A6 /* TuistBundle+SpyglassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+SpyglassTests.swift"; sourceTree = "<group>"; };
 		9C30B4D09BF5CBEEAD3C19BF /* FakeReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeReducer.swift; sourceTree = "<group>"; };
 		A9AC9355C78A2D2DA108AB9A /* ToRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToRows.swift; sourceTree = "<group>"; };
 		AB32813CF4335FB7AF25C077 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		AF2AC948395B1E3F12441B35 /* AppViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewState.swift; sourceTree = "<group>"; };
+		B0E92C4E470901E5C13C0103 /* SpyglassUITests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SpyglassUITests.xcconfig; sourceTree = "<group>"; };
 		B5341CED410702EB05A34AE1 /* TreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
 		B762E5510CEE60C75E43C461 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB163C32D45126C38B2F8CC1 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
@@ -177,6 +181,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C9B4ED779497C39EFC7093A /* Vapor in Frameworks */,
+				DAB670294016E6CBEF540DCE /* CustomDump in Frameworks */,
+				B07AF91B8B69C1B54F6BFA4A /* ComposableArchitecture in Frameworks */,
+				FF9F781BE88E09E129EDA2EE /* OutlineView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +192,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B4B986C7EA19ED3BD8E8568 /* Vapor in Frameworks */,
+				28F5D815657B88CD53C452A4 /* CustomDump in Frameworks */,
+				C052D5DB22DEA3C81B9F5C29 /* ComposableArchitecture in Frameworks */,
+				743657EEE5AF98E6BD73600E /* OutlineView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,24 +326,23 @@
 			path = ViewState;
 			sourceTree = "<group>";
 		};
+		C09E89DA40A054A31B1AA3D8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				315ECF5AD5776F4DE36BFF20 /* Spyglass.xcconfig */,
+				66D49C2DF8AAB50C9F253404 /* SpyglassProject.xcconfig */,
+				5F1D579DF37297FDB664F594 /* SpyglassTests.xcconfig */,
+				B0E92C4E470901E5C13C0103 /* SpyglassUITests.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		C6552D5C7E3281DC8657DCB5 /* Derived */ = {
 			isa = PBXGroup;
 			children = (
 				4CDB634EC746A0A61E5BD25A /* InfoPlists */,
-				D665993F943B013D6CF50347 /* Sources */,
 			);
 			path = Derived;
-			sourceTree = "<group>";
-		};
-		D665993F943B013D6CF50347 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				86583FC8E778F7B2F16106CC /* TuistAssets+Spyglass.swift */,
-				8B7477ACB07FD2D3E40C9E52 /* TuistBundle+Spyglass.swift */,
-				9ACD829A24FC65C3B71D61A6 /* TuistBundle+SpyglassTests.swift */,
-				927A416875177231A5DA774F /* TuistBundle+SpyglassUITests.swift */,
-			);
-			path = Sources;
 			sourceTree = "<group>";
 		};
 		E498210D225E28A994BB6D9F /* ReduxLens */ = {
@@ -356,6 +367,7 @@
 		E605B3DA0936581857397389 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				C09E89DA40A054A31B1AA3D8 /* Config */,
 				C6552D5C7E3281DC8657DCB5 /* Derived */,
 				EC2A7358A1DE070E4B5A0074 /* Source */,
 				E5291B04EF5A2464C9996937 /* SpyglassTests */,
@@ -447,6 +459,12 @@
 				9A701202B78E03EFC70395DD /* PBXTargetDependency */,
 			);
 			name = SpyglassTests;
+			packageProductDependencies = (
+				7DCC7B7793A7EA97B5209EC6 /* Vapor */,
+				89F9D046BF6242A9232FDE73 /* CustomDump */,
+				0A650C435A1FBF684B34DD7B /* ComposableArchitecture */,
+				8905AB9CC4414CB0AD09928E /* OutlineView */,
+			);
 			productName = SpyglassTests;
 			productReference = 22EA2422EBE0ABBD9280CD46 /* SpyglassTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -466,6 +484,12 @@
 				29E10B4BBC639A6373941C06 /* PBXTargetDependency */,
 			);
 			name = SpyglassUITests;
+			packageProductDependencies = (
+				E43D27C728442B64A2296D1F /* Vapor */,
+				BFA95B964322BBA8F21A4B1D /* CustomDump */,
+				F1426BEC21FEB7A359D1B7D5 /* ComposableArchitecture */,
+				B00E8E199D6F801A0D6A728D /* OutlineView */,
+			);
 			productName = SpyglassUITests;
 			productReference = 41C0E44716B33C3345586CB6 /* SpyglassUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -544,7 +568,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				306397F00BD15BD90E22BF9D /* TuistBundle+SpyglassUITests.swift in Sources */,
 				D0D0B555AE26EF06E8E0B105 /* SpyglassUITests.swift in Sources */,
 				9492918EE8C6C760E99739CC /* SpyglassUITestsLaunchTests.swift in Sources */,
 			);
@@ -554,8 +577,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D07EAECD92F9F5B99BF927E /* TuistAssets+Spyglass.swift in Sources */,
-				3424F97AE43DBD7523E4EF92 /* TuistBundle+Spyglass.swift in Sources */,
 				1BD8DF273C655014F811AA35 /* Lens.swift in Sources */,
 				0259535D0F31B6E3E1A934FD /* LensBuilder.swift in Sources */,
 				CF62E7E61B556017CC75C596 /* LensError.swift in Sources */,
@@ -598,7 +619,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EE3DD8D330893A262E08568 /* TuistBundle+SpyglassTests.swift in Sources */,
 				22F789D3E3392E8348466A9B /* CircularBufferTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +643,7 @@
 /* Begin XCBuildConfiguration section */
 		33DF8FB638A652711DBB1143 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 315ECF5AD5776F4DE36BFF20 /* Spyglass.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -634,7 +655,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.Spyglass;
+				PRODUCT_BUNDLE_IDENTIFIER = no.org.Spyglass;
 				PRODUCT_NAME = Spyglass;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -645,6 +666,7 @@
 		};
 		51A26B8477421F4CAA52F0C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66D49C2DF8AAB50C9F253404 /* SpyglassProject.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -698,6 +720,7 @@
 		};
 		87C5623FBF76BE0B2CB0B0AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66D49C2DF8AAB50C9F253404 /* SpyglassProject.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -757,6 +780,7 @@
 		};
 		A254B923C77B083F5AD3DE8C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 315ECF5AD5776F4DE36BFF20 /* Spyglass.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
@@ -768,7 +792,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.Spyglass;
+				PRODUCT_BUNDLE_IDENTIFIER = no.org.Spyglass;
 				PRODUCT_NAME = Spyglass;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -780,6 +804,7 @@
 		};
 		A5270809BD0A00155A51D692 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0E92C4E470901E5C13C0103 /* SpyglassUITests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				INFOPLIST_FILE = "Derived/InfoPlists/SpyglassUITests-Info.plist";
@@ -789,7 +814,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.SpyglassUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = no.org.SpyglassUITests;
 				PRODUCT_NAME = SpyglassUITests;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -801,6 +826,7 @@
 		};
 		B01322876C8748DB7E108966 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F1D579DF37297FDB664F594 /* SpyglassTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "-";
@@ -811,7 +837,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.SpyglassTests;
+				PRODUCT_BUNDLE_IDENTIFIER = no.org.SpyglassTests;
 				PRODUCT_NAME = SpyglassTests;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -824,6 +850,7 @@
 		};
 		B04D9DE55A8CF74CFED16FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0E92C4E470901E5C13C0103 /* SpyglassUITests.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				INFOPLIST_FILE = "Derived/InfoPlists/SpyglassUITests-Info.plist";
@@ -833,7 +860,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.SpyglassUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = no.org.SpyglassUITests;
 				PRODUCT_NAME = SpyglassUITests;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -846,6 +873,7 @@
 		};
 		B8FF29617CC8F1767E7CB440 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F1D579DF37297FDB664F594 /* SpyglassTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "-";
@@ -856,7 +884,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.SpyglassTests;
+				PRODUCT_BUNDLE_IDENTIFIER = no.org.SpyglassTests;
 				PRODUCT_NAME = SpyglassTests;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -945,11 +973,27 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A650C435A1FBF684B34DD7B /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableArchitecture;
+		};
 		52B951F4DC7E693F0BADA503 /* OutlineView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OutlineView;
 		};
+		7DCC7B7793A7EA97B5209EC6 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Vapor;
+		};
 		852DC7AD6934B1E3D392A9DC /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CustomDump;
+		};
+		8905AB9CC4414CB0AD09928E /* OutlineView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OutlineView;
+		};
+		89F9D046BF6242A9232FDE73 /* CustomDump */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CustomDump;
 		};
@@ -957,7 +1001,23 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Vapor;
 		};
+		B00E8E199D6F801A0D6A728D /* OutlineView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OutlineView;
+		};
 		BC6F0EA96219971507E8B040 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableArchitecture;
+		};
+		BFA95B964322BBA8F21A4B1D /* CustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CustomDump;
+		};
+		E43D27C728442B64A2296D1F /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Vapor;
+		};
+		F1426BEC21FEB7A359D1B7D5 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
 		};
