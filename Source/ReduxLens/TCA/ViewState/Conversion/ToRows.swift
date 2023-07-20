@@ -4,7 +4,15 @@ import OrderedCollections
 extension Array where Element == ReduxEvent {
     
     var rows: [LensView.TableView.Row] {
-        map { item in .init(info1: item.name, info2: item.leadTime.toString(), info3: item.file.toFileName, id: item.id) }
+        map { item in
+            .init(
+                info1: item.name,
+                info2: item.leadTime.toString(),
+                info3: item.file.toFileName,
+                info4: item.line.toLineName,
+                id: item.id
+            )
+        }
         .reversed()
     }
     
@@ -36,6 +44,16 @@ extension Optional where Wrapped == String {
         switch self {
         case .some(let value): return String(value.split(separator: "/").last!)
         case .none: return "no file information"
+        }
+    }
+}
+
+extension Optional where Wrapped == UInt {
+    
+    var toLineName: String {
+        switch self {
+        case .some(let value): return "\(value)"
+        case .none: return "no line information"
         }
     }
 }

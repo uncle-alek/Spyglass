@@ -13,6 +13,7 @@ struct AppViewState: Equatable {
             column1: .init(name: Strings.Column.action),
             column2: .init(name: Strings.Column.leadTime),
             column3: .init(name: Strings.Column.file),
+            column4: .init(name: Strings.Column.line),
             rows: state.events.rows
         )
         self.tabView = LensView.TabView(
@@ -31,19 +32,19 @@ struct AppViewState: Equatable {
                     ].compactMap { $0 }
                 ),
                 .init(
-                    id: Strings.Tab.after,
-                    name: Strings.Tab.after,
+                    id: Strings.Tab.state,
+                    name: Strings.Tab.state,
                     pages: [
                         state.selectedItem.map {
                             .init(
-                                id: Strings.Tab.after + Strings.Tab.json,
+                                id: Strings.Tab.state + Strings.Tab.json,
                                 name: Strings.Tab.json,
                                 type: .tree(LensView.TabView.TreeNode(Strings.Tree.head, $0.stateAfter))
                             )
                         },
                         state.selectedItem.map {
                             .init(
-                                id: Strings.Tab.after + Strings.Tab.raw,
+                                id: Strings.Tab.state + Strings.Tab.raw,
                                 name: Strings.Tab.raw,
                                 type: .string(text: $0.stateAfter.prettyPrinted, showRewriteButton: true)
                             )
