@@ -4,12 +4,19 @@ import OrderedCollections
 extension Array where Element == ReduxEvent {
     
     var rows: [LensView.TableView.Row] {
-        map { item in .init(info1: item.name, info2: item.leadTime.toString(), info3: item.file.toFileName, id: item.id) }
+        map { item in
+            .init(
+                info1: item.name,
+                info2: item.leadTime.toString,
+                info3: item.toFileAndLine,
+                id: item.id
+            )
+        }
         .reversed()
     }
     
     var sharingData: String {
-        map { item in item.name + ", " + item.leadTime.toString() + ", " + item.file.toFileName }
+        map { item in item.name + ", " + item.leadTime.toString + ", " + item.file.toFileName }
         .reversed()
         .joined(separator: "\n")
     }
@@ -17,7 +24,7 @@ extension Array where Element == ReduxEvent {
 
 extension TimeInterval {
     
-    func toString() -> String {
+    var toString: String {
         String(format: "%0.1d:%0.3d s", seconds, milliseconds)
     }
     
@@ -30,12 +37,29 @@ extension TimeInterval {
     }
 }
 
+extension ReduxEvent {
+    
+    var toFileAndLine: String {
+        file.toFileName + ":" + line.toLineName
+    }
+}
+
 extension Optional where Wrapped == String {
     
     var toFileName: String {
         switch self {
         case .some(let value): return String(value.split(separator: "/").last!)
         case .none: return "no file information"
+        }
+    }
+}
+
+extension Optional where Wrapped == UInt {
+    
+    var toLineName: String {
+        switch self {
+        case .some(let value): return "\(value)"
+        case .none: return "no line information"
         }
     }
 }
