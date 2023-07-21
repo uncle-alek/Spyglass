@@ -7,7 +7,6 @@ struct CatalogView: View {
     
     var body: some View {
         Table(
-            viewStore.tableView.rows,
             selection: Binding(
                 get: { selected },
                 set: {
@@ -19,17 +18,38 @@ struct CatalogView: View {
         ) {
             TableColumn(viewStore.tableView.column1.name) {
                 Text($0.info1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background($0.background != nil ? $0.background!.toSwiftUIColor : .clear)
                     .textSelection(.enabled)
             }
             TableColumn(viewStore.tableView.column2.name) {
                 Text($0.info2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background($0.background != nil ? $0.background!.toSwiftUIColor : .clear)
                     .textSelection(.enabled)
             }
             TableColumn(viewStore.tableView.column3.name) {
                 Text($0.info3)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background($0.background != nil ? $0.background!.toSwiftUIColor : .clear)
                     .textSelection(.enabled)
+            }
+        } rows: {
+            ForEach(viewStore.tableView.rows, id: \.id) {
+                TableRow($0)
             }
         }
         .animation(.easeInOut, value: viewStore.tableView.rows.count)
+    }
+}
+
+extension LensView.TableView.Row.Color {
+    
+    var toSwiftUIColor: SwiftUI.Color {
+        Color(
+            red: Double(red) / 255,
+            green: Double(green) / 255,
+            blue:  Double(blue) / 255
+        )
     }
 }

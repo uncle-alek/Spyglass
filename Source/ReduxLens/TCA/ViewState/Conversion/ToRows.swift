@@ -9,6 +9,7 @@ extension Array where Element == ReduxEvent {
                 info1: item.name,
                 info2: item.leadTime.toString,
                 info3: item.toFileAndLine,
+                background: item.toBackgroundColor,
                 id: item.id
             )
         }
@@ -41,6 +42,12 @@ extension ReduxEvent {
     
     var toFileAndLine: String {
         file.toFileName + ":" + line.toLineName
+    }
+    
+    var toBackgroundColor: LensView.TableView.Row.Color? {
+        leadTime * 1000 > 15
+        ? LensView.TableView.Row.Color(red: 100, green: 39, blue: 28)
+        : nil
     }
 }
 
