@@ -20,12 +20,21 @@ struct TreeView: View {
                 ]).setup()
             } else {
                 return NSStackView(views: [
-                    NSImageView(image: NSImage(systemSymbolName: "folder.fill", accessibilityDescription: nil)!.setup(.systemYellow)),
+                    NSImageView(image: NSImage(systemSymbolName: child.toFolderImage, accessibilityDescription: nil)!.setup(.systemYellow)),
                     NSTextField(string: child.name).setup()
                 ]).setup()
             }
         }
         .outlineViewIndentation(20)
+    }
+}
+
+extension LensView.TabView.TreeNode {
+    
+    var toFolderImage: String {
+        children == nil || children?.isEmpty == true
+        ? "folder"
+        : "folder.fill"
     }
 }
 
