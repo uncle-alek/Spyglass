@@ -5,9 +5,16 @@ enum LensView {
     struct TableView: Equatable {
         
         struct Row: Identifiable, Equatable {
+            struct Color: Equatable {
+                let red: Int
+                let green: Int
+                let blue: Int
+            }
+            
             let info1: String
             let info2: String
             let info3: String
+            let background: Color?
             let id: String
         }
         
